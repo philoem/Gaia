@@ -29,20 +29,23 @@ class AdvertController extends Controller
      *@Route("/{id}")
      * 
      */
-    //public function advert($id, Request $request)
-    //{
-//
-    //    $tag = $request->query->get('tag');
-//
-    //    return $this->render('Advert.html.twig', array(
-    //    'id'  => $id,
-    //    'tag' => $tag,
-    //    ));
-//
-    //}
+    public function advert($id, Request $request)
+    {
+
+        $tag = $request->query->get('tag');
+
+        return $this->render('Advert.html.twig', array(
+        'id'  => $id,
+        'tag' => $tag,
+        ));
+        if ($id == "test") {
+            return $this->memberAction();
+        }
+
+    }
     /**
      * 
-     *@Route("/test")
+     *@Route("/add/test")
      * 
      */
     public function memberAction()
