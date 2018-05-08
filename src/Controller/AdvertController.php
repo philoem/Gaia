@@ -14,7 +14,7 @@ class AdvertController extends Controller
 
     /**
      * 
-     *@Route("/")
+     *@Route("/", name="home")
      * 
      */
     public function homepage()
