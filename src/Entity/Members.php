@@ -254,4 +254,28 @@ class Members
 
         return $this;
     }
+
+    /**
+     * Get the value of idAdvert
+     *
+     * @return  \Doctrine\Common\Collections\Collection
+     */ 
+    public function getIdAdvert()
+    {
+        return $this->idAdvert;
+    }
+
+    /**
+     * Set the value of idAdvert
+     *
+     * @param  \Doctrine\Common\Collections\Collection  $idAdvert
+     *
+     * @return  self
+     */ 
+    public function setIdAdvert(\Doctrine\Common\Collections\Collection $idAdvert)
+    {
+        $this->idAdvert = $idAdvert;
+
+        return $this;
+    }
 }

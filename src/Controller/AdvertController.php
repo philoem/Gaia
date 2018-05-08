@@ -26,7 +26,7 @@ class AdvertController extends Controller
 
     /**
      * 
-     *@Route("/{id}")
+     *@Route("/advert/{id}")
      * 
      */
     public function advert($id, Request $request)
