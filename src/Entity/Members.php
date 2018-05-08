@@ -59,7 +59,7 @@ class Members
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_register", type="datetime", nullable=true)
+     * @ORM\Column(name="date_register", type="datetime", nullable=false)
      */
     private $dateRegister;
 

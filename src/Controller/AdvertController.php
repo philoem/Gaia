@@ -38,35 +38,10 @@ class AdvertController extends Controller
         'id'  => $id,
         'tag' => $tag,
         ));
-        if ($id == "test") {
-            return $this->memberAction();
-        }
+       
 
     }
-    /**
-     * 
-     *@Route("/add/test")
-     * 
-     */
-    public function memberAction()
-    {
-        $member = new Members();
-        $member->setIdMember(1)
-            ->setFirstname('Philippe')
-            ->setLastname('Cham')
-            ->setPseudo('Philou')
-            ->setMail('philoem@nexgate.ch')
-            ->setPw('aze');
-            
-            
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($member);
-        $em->flush();
-
-        return new Response('prénom créé avec : ' .$member->getFirstname());
-
-    }
-
-
+    
+    
 
 }
