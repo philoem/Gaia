@@ -60,6 +60,7 @@ class Members
      * @var \DateTime
      *
      * @ORM\Column(name="date_register", type="datetime", nullable=false)
+     * @ORM\GeneratedValue
      */
     private $dateRegister;
 
@@ -84,6 +85,7 @@ class Members
     public function __construct()
     {
         $this->idAdvert = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateRegister = new \DateTime('NOW');
     }
 
 
