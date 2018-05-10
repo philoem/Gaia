@@ -23,7 +23,7 @@ class RegisterType extends AbstractType
             ->add('pseudo', TextType::class)
             ->add('mail',EmailType::class)
             ->add('pw', PasswordType::class)
-            //->add('dateRegister', DateType::class)
+            ->add('dateRegister', DateType::class)
             ->add('submit', SubmitType::class)
         ;
     }

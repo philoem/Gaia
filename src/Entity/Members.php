@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Members
@@ -78,6 +79,11 @@ class Members
      * )
      */
     private $idAdvert;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $repeat_pw;
 
     /**
      * Constructor
@@ -277,6 +283,18 @@ class Members
     public function setIdAdvert(\Doctrine\Common\Collections\Collection $idAdvert)
     {
         $this->idAdvert = $idAdvert;
+
+        return $this;
+    }
+
+    public function getRepeatPw(): ?string
+    {
+        return $this->repeat_pw;
+    }
+
+    public function setRepeatPw(string $repeat_pw): self
+    {
+        $this->repeat_pw = $repeat_pw;
 
         return $this;
     }
