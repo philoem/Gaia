@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Members;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-//use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -24,7 +23,6 @@ class RegisterType extends AbstractType
             ->add('mail',EmailType::class)
             ->add('pw', PasswordType::class)
             ->add('repeat_pw', PasswordType::class)
-            //->add('dateRegister', DateType::class)
             ->add('submit', SubmitType::class)
         ;
     }

@@ -26,7 +26,7 @@ class AdvertController extends Controller
 
     /**
      * 
-     *@Route("/advert/{id}", requirements={"id" = "\d+"})
+     *@Route("/advert/{id}", name="annonce", requirements={"id" = "\d+"})
      * 
      */
     public function advert($id, Request $request)

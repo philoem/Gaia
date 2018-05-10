@@ -9,6 +9,10 @@
 {
     color: white;
 }
+.nav, a:hover
+{
+    color:  #bb86fc;
+}
 
 .form-group
 {
