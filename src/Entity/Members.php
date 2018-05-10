@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Members
@@ -26,6 +27,7 @@ class Members
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=60, nullable=false)
+     * @Assert\NotBlank(message="Le prénom est obligatoire !")
      */
     private $firstname;
 
@@ -33,6 +35,7 @@ class Members
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=60, nullable=false)
+     * @Assert\NotBlank(message="Le nom est obligatoire !")
      */
     private $lastname;
 
@@ -40,6 +43,7 @@ class Members
      * @var string
      *
      * @ORM\Column(name="pseudo", type="string", length=60, nullable=false)
+     * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
      */
     private $pseudo;
 
@@ -47,6 +51,8 @@ class Members
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="L'email est impératif !")
+     * @Assert\Email(message="L'email '{{ value }}' n'est pas un format valide")
      */
     private $mail;
 
@@ -54,6 +60,7 @@ class Members
      * @var string
      *
      * @ORM\Column(name="pw", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Choisissez un mot de passe !")
      */
     private $pw;
 
@@ -82,6 +89,11 @@ class Members
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Répétez votre mot de passe ")
+     * @Assert\EqualTo(
+     *  propertyPath="pw",
+     *  message="Le mot de passe doit être identique à celui tapé au-dessus")
+     * 
      */
     private $repeat_pw;
 

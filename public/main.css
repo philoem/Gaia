@@ -1,0 +1,29 @@
+/*  Pour les headers, les bannières hautes dans les pages */
+.navbar
+{
+    background-color: #016359;
+    height: 60px;
+    
+}
+.nav, a
+{
+    color: white;
+}
+
+.form-group
+{
+    background-color: #82cc9f;
+    margin-top: 15px;
+    padding-bottom: 1px;
+
+}
+.form-group, h3
+{
+    color: #01453f;
+    
+}
+.btn
+{
+    background-color: #bb86fc;
+
+}

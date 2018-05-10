@@ -6,30 +6,33 @@
     <title>Inscription</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>-->
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!--<script src="main.js"></script>-->
 </head>
 <body>
     <div class="container">
+        <header>
+            <nav class="navbar navbar">
+                <a class="navbar-brand navbar-toggler" href="#"><strong class="nameGaia">GAIA</strong><em>, le site d'échanges et de partages des jardiniers</em></a>
+                <img src="../assets/img/tournesol2.png" alt="image d'un tournesol">
+            </nav>
+        </header>
+       
         <div class="form-group">
-            <div class="col-sm-10">
-                <h3>Formulaire d'inscription</h3>
+            <div class="col-sm-12 col-lg-12">
+                <h3 class="text-center">Formulaire d'inscription</h3>
 
-                <div class="well">
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                
-                    {# Les erreurs générales du formulaire. #}
-                    {{ form_errors(form) }}
+                <div class="form-group">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate':'novalidate'}}) }}
+                                    
                 
                     {# Génération manuelle et éclatée : #}
                     <div class="form-group">
                         {# Génération du label. #}
-                        {{ form_label(form.firstname, "Votre prénom :", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                        {{ form_label(form.firstname, "Votre prénom :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
                     
-                        {# Affichage des erreurs pour ce champ précis. #}
-                        {{ form_errors(form.firstname) }}
                     
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
                             {# Génération de l'input. #}
                             {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
                         </div>
@@ -37,44 +40,46 @@
                 
                     {# Idem pour un autre champ. #}
                     <div class="form-group">
-                        {{ form_label(form.lastname, "Votre nom :", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                        {{ form_errors(form.lastname) }}
-                        <div class="col-sm-10">
+                        {{ form_label(form.lastname, "Votre nom :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                        <div class="col-sm-12">
                             {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                            {{ form_label(form.pseudo, "Votre pseudo :", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                        {{ form_errors(form.pseudo) }}
-                        <div class="col-sm-10">
+                            {{ form_label(form.pseudo, "Votre pseudo :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                        <div class="col-sm-12">
                             {{ form_widget(form.pseudo, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                            {{ form_label(form.mail, "Votre mail :", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                        {{ form_errors(form.mail) }}
-                        <div class="col-sm-10">
+                            {{ form_label(form.mail, "Votre mail :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                        <div class="col-sm-12">
                             {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
 
                     <div class="form-group">
-                            {{ form_label(form.pw, "Votre mot de passe :", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-                        {{ form_errors(form.pw) }}
-                        <div class="col-sm-10">
+                            {{ form_label(form.pw, "Votre mot de passe :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                        <div class="col-sm-12">
                             {{ form_widget(form.pw, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.repeat_pw, "Retaper votre mot de passe :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                    <div class="col-sm-12">
+                        {{ form_widget(form.repeat_pw, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
                 
                     <div class="form-group">
-                        <div class="col-sm-10">
+                        <div class="row col-sm-12  justify-content-center">
                             {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
                             {{ form_widget(form.submit, {'label': 'Validez votre inscription','attr': {'class': 'btn btn-primary'}}) }}
                         </div>
                     </div>
-                                        
                     {# Génération automatique des champs pas encore écrits.
                         Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
                         et tous les champs cachés (type « hidden »). #}
@@ -85,6 +90,7 @@
                 </div>
             </div>
         </div>
+       
     </div>
 </body>
 </html>

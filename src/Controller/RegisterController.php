@@ -12,7 +12,7 @@ use App\Form\RegisterType;
 class RegisterController extends Controller
 {
     /**
-    * @Route("/register", name="register")
+    * @Route("/register", name="inscription")
     */
     public function addAction(Request $request)
     {
@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
 
             $em =$this->getDoctrine()->getManager();
             $em->persist($member);
@@ -36,10 +36,6 @@ class RegisterController extends Controller
         
         return $this->render('register/RegisterAddMember.html.twig', array('form'=>$formView));
   
-
-        
-
-
 
     }
 }
