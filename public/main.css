@@ -1,4 +1,13 @@
 /*  Pour les headers, les bannières hautes dans les pages */
+body{
+
+    background-image: url('../img/verdure2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    opacity: 0.9;
+    
+}
 .navbar
 {
     background-color: #016359;
@@ -12,6 +21,10 @@
 .nav, a:hover
 {
     color:  #bb86fc;
+}
+#logo
+{
+    margin-right: -15px;
 }
 
 .form-group

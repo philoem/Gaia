@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock title %}
+
+{% block body %}
+    {% block header %}
+            <header>
+                <nav class="navbar navbar">
+                    <a class="navbar-brand navbar-toggler" href="{{ path('home') }}" title="Cliquez ici pour retourner à l'accueil"><strong class="nameGaia">GAIA</strong><em>, le site d'échanges et de partages des jardiniers</em></a>
+                    <img src="{{ asset('img/tournesol2.png') }}" alt="image d'un tournesol">
+                </nav>
+            </header>
+    {% endblock header %}
+
+    <div class="container">
+        <div class="col-xs-12" id="slider">
+            <div class="row justify-content-center">
+                <h3 id="title_slider">Les différentes étapes</h3>
+            </div>
+            <div class="row justify-content-center" id="slide">
+                <img src={{ asset('img/couleur1.jpg') }} alt="Les différentes étapes pour découvrir GAIA" id="imageSlider" class="img-fluid " />
+            </div>
+            <div class="row justify-content-center" id="boutons">
+                <button type="button" class="btn btn-info btn-sm" id="prev">Prev</button>
+                <button type="button" class="btn btn-info btn-sm" id="next">Next</button>
+            </div>
+        </div>
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('App/assets/slider.js') }}"></script>
+    {% endblock javascripts %}
+    
+{% endblock body %}
