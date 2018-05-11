@@ -44,6 +44,7 @@ class Members
      *
      * @ORM\Column(name="pseudo", type="string", length=60, nullable=false)
      * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
+     * @Assert\Valid
      */
     private $pseudo;
 
@@ -61,6 +62,7 @@ class Members
      *
      * @ORM\Column(name="pw", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Choisissez un mot de passe !")
+     * @Assert\Valid
      */
     private $pw;
 
@@ -246,6 +248,7 @@ class Members
      */ 
     public function setPw(string $pw)
     {
+        $pw = sha1($pw);
         $this->pw = $pw;
 
         return $this;
@@ -306,6 +309,7 @@ class Members
 
     public function setRepeatPw(string $repeat_pw): self
     {
+        $repeat_pw = sha1($repeat_pw);
         $this->repeat_pw = $repeat_pw;
 
         return $this;

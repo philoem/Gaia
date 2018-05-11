@@ -10,6 +10,12 @@
             {{ parent() }}
         {% endblock header %}
 
+        {% for message in app.flashes('notice') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <div class="row justify-content-center">
             <div class="form-group col-sm-5">
                 <div class="col-sm-12 col-lg-12">
@@ -34,8 +40,9 @@
                         </div>
                     
                         <div class="form-group col-sm-12">
-                            <div class="row col-sm-12  justify-content-center">
-                                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+                            <div class="row col-sm-12  justify-content-center" >
+                                
+                                {{ form_widget(form.reset, {'label': 'Effacer','attr': {'class': 'btn btn-warning'}} ) }}
                                 {{ form_widget(form.submit, {'label': 'Connexion','attr': {'class': 'btn btn-primary'}}) }}
                             </div>
                         </div>
@@ -44,6 +51,7 @@
                     
                         
                         {{ form_end(form) }}
+                      
                     </div>
                 </div>
             </div>

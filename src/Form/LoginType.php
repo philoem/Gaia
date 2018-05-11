@@ -6,18 +6,20 @@ use App\Entity\Members;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class LoginType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder2, array $options)
     {
-        $builder
+        $builder2
             
-            ->add('pseudo')
-            ->add('pw')
+            ->add('pseudo', TextType::class)
+            ->add('pw', PasswordType::class)
+            ->add('reset', ResetType::class)
             ->add('submit', SubmitType::class)
         ;
     }

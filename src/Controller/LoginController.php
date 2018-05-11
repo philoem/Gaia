@@ -22,24 +22,25 @@ class LoginController extends Controller
         $form->handleRequest($request);
    
         $em =$this->getDoctrine()->getManager();
-        $pseudo = $em->createQuery(
+        $query = $em->createQuery(
             'SELECT a.pseudo FROM App:Members a'
         );
-
-        if($form->isSubmitted() && $form->isValid()){
-            if($pseudo){
-
+        $pseudo = $query->getResult();
+        
+        if($form->isSubmitted()){
+            
+            if(!$member->getPseudo()){
                 
-                return new Response('Bienvenu dans la communauté Gaia, votre profil a bien été inscrit');
-            
-            } elseif(!$pseudo){
-               
-                throw $this->createNotFoundException("L'utilisateur existe déjà !");
-            } 
+                $this->addFlash(
+                    'notice',
+                    'Bienvenu '.$member->getPseudo()
+                );
+            } else {
+                throw $this->createNotFoundException('Ce membre n\'existe pas !');
+            }
         }
-            
-            
-       
+
+         
 
         $formView = $form->createView();
         

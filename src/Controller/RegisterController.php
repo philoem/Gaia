@@ -25,14 +25,17 @@ class RegisterController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
 
+            
+
+            $em =$this->getDoctrine()->getManager();
+
             //$password = $passwordEncoder->encodePassword($member, $member->getPw());
             //$member->setRepeatPw($password);
 
-            $em =$this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
 
-            return new Response('Bienvenu'.$member->getPseudo() .'dans la communauté Gaia, votre profil a bien été inscrit');
+            return new Response('Bienvenu '.$member->getPseudo() .' dans la communauté Gaia, votre profil a bien été inscrit');
 
         }
 
