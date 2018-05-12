@@ -7,12 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Members
  *
  * @ORM\Table(name="members")
- * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
+ * @ORM\Entity
+ * @UniqueEntity(fields="username", message="Ce pseudonyme est déjà pris")
+ * @UniqueEntity(fields="mail", message="Cet email existe déjà")
  */
 class Members implements UserInterface, \Serializable
 {
@@ -44,7 +47,7 @@ class Members implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=60, nullable=false)
+     * @ORM\Column(name="username", type="string", length=60, nullable=false)
      * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
      * @Assert\Valid
      */
@@ -62,17 +65,17 @@ class Members implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=60, nullable=false)
      * @Assert\NotBlank(message="Choisissez un mot de passe !")
      * @Assert\Valid
      */
     private $password;
       
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="repeatPassword", type="string", length=60, nullable=false)
      * @Assert\NotBlank(message="Répétez votre mot de passe ")
      * @Assert\EqualTo(
-     *  propertyPath="pw",
+     *  propertyPath="password",
      *  message="Le mot de passe doit être identique à celui tapé au-dessus")
      * 
      */
@@ -186,8 +189,7 @@ class Members implements UserInterface, \Serializable
 
         return $this;
     }
-
-   
+  
 
     /**
      * Get the value of mail
@@ -212,9 +214,6 @@ class Members implements UserInterface, \Serializable
 
         return $this;
     }
-
-    
-
     
 
     /**
@@ -263,7 +262,6 @@ class Members implements UserInterface, \Serializable
     }
 
       
-
     /**
      * Get the value of roles
      */ 
@@ -352,7 +350,7 @@ class Members implements UserInterface, \Serializable
     }
 
     /**
-     * Get propertyPath="pw",
+     * Get propertyPath="password",
      */ 
     public function getRepeatPassword()
     {
@@ -360,7 +358,7 @@ class Members implements UserInterface, \Serializable
     }
 
     /**
-     * Set propertyPath="pw",
+     * Set propertyPath="password",
      *
      * @return  self
      */ 

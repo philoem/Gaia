@@ -23,7 +23,7 @@ class LoginController extends Controller
    
         $em =$this->getDoctrine()->getManager();
         $query = $em->createQuery(
-            'SELECT a.pseudo FROM App:Members a'
+            'SELECT a.username FROM App:Members a'
         );
         $pseudo = $query->getResult();
         

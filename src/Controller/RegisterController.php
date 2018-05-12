@@ -28,11 +28,13 @@ class RegisterController extends Controller
             
             $this->passwordEncoder = $passwordEncoder;
             
-            $em =$this->getDoctrine()->getManager();
-            $member->setPassword($this->passwordEncoder->encodePassword($member, $member->getPassword()));
-            $member->setRepeatPassword($this->passwordEncoder->encodePassword($member, $member->getRepeatPassword()));
+            $password = $passwordEncoder->encodePassword($member, $member->getPassword());
+            $member->setPassword($password);
+            $member->setRepeatPassword($password);
 
-            
+            //$member->setRepeatPassword($this->passwordEncoder->encodePassword($member, $member->getRepeatPassword()));
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
 

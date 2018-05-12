@@ -22,9 +22,9 @@ class LoadData extends Fixture
             $member = new Members();
             $member->setFirstname($faker->firstName)
                 ->setLastname($faker->lastName)
-                ->setPseudo($faker->suffix)
+                ->setUsername($faker->suffix)
                 ->setMail($faker->email)
-                ->setPw($faker->ean13);
+                ->setPassword($faker->ean13);
                 
             //$em = $this->getDoctrine()->getManager();
             $manager->persist($member);
