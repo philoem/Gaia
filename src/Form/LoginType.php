@@ -17,8 +17,8 @@ class LoginType extends AbstractType
     {
         $builder2
             
-            ->add('pseudo', TextType::class)
-            ->add('pw', PasswordType::class)
+            ->add('username', TextType::class)
+            ->add('password', PasswordType::class)
             ->add('reset', ResetType::class)
             ->add('submit', SubmitType::class)
         ;

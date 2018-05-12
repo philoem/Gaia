@@ -20,10 +20,10 @@ class RegisterType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('pseudo', TextType::class)
+            ->add('username', TextType::class)
             ->add('mail',EmailType::class)
-            ->add('pw', PasswordType::class)
-            ->add('repeat_pw', PasswordType::class)
+            ->add('password', PasswordType::class)
+            ->add('repeatPassword', PasswordType::class)
             ->add('submit', SubmitType::class)
         ;
     }

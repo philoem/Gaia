@@ -2,17 +2,19 @@
 
 namespace App\Entity;
 
+use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Members
  *
  * @ORM\Table(name="members")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
  */
-class Members
+class Members implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -46,7 +48,7 @@ class Members
      * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
      * @Assert\Valid
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @var string
@@ -60,11 +62,31 @@ class Members
     /**
      * @var string
      *
-     * @ORM\Column(name="pw", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Choisissez un mot de passe !")
      * @Assert\Valid
      */
-    private $pw;
+    private $password;
+      
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Répétez votre mot de passe ")
+     * @Assert\EqualTo(
+     *  propertyPath="pw",
+     *  message="Le mot de passe doit être identique à celui tapé au-dessus")
+     * 
+     */
+    private $repeatPassword;
+
+    /**
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
+     */
+    private $salt;
+
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = [];
 
     /**
      * @var \DateTime
@@ -74,30 +96,7 @@ class Members
      */
     private $dateRegister;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Adverts", inversedBy="idMember")
-     * @ORM\JoinTable(name="ecrire_annonce",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="id_member", referencedColumnName="id_member")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_advert", referencedColumnName="id_advert")
-     *   }
-     * )
-     */
-    private $idAdvert;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Répétez votre mot de passe ")
-     * @Assert\EqualTo(
-     *  propertyPath="pw",
-     *  message="Le mot de passe doit être identique à celui tapé au-dessus")
-     * 
-     */
-    private $repeat_pw;
 
     /**
      * Constructor
@@ -106,6 +105,13 @@ class Members
     {
         $this->idAdvert = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateRegister = new \DateTime('NOW');
+    }
+
+    public function eraseCredentials(): void
+    {
+        //pas d'utilisation de 'plainpassword' donc pas besoin de 'eraseCreadentials()';
+        // $this->plainPassword = null;
+        
     }
 
 
@@ -181,29 +187,7 @@ class Members
         return $this;
     }
 
-    /**
-     * Get the value of pseudo
-     *
-     * @return  string
-     */ 
-    public function getPseudo()
-    {
-        return $this->pseudo;
-    }
-
-    /**
-     * Set the value of pseudo
-     *
-     * @param  string  $pseudo
-     *
-     * @return  self
-     */ 
-    public function setPseudo(string $pseudo)
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
+   
 
     /**
      * Get the value of mail
@@ -229,30 +213,9 @@ class Members
         return $this;
     }
 
-    /**
-     * Get the value of pw
-     *
-     * @return  string
-     */ 
-    public function getPw()
-    {
-        return $this->pw;
-    }
+    
 
-    /**
-     * Set the value of pw
-     *
-     * @param  string  $pw
-     *
-     * @return  self
-     */ 
-    public function setPw(string $pw)
-    {
-        $pw = sha1($pw);
-        $this->pw = $pw;
-
-        return $this;
-    }
+    
 
     /**
      * Get the value of dateRegister
@@ -278,40 +241,134 @@ class Members
         return $this;
     }
 
+    
     /**
-     * Get the value of idAdvert
-     *
-     * @return  \Doctrine\Common\Collections\Collection
+     * Get the value of salt
      */ 
-    public function getIdAdvert()
+    public function getSalt(): ? string
     {
-        return $this->idAdvert;
+        return $this->salt;
     }
 
     /**
-     * Set the value of idAdvert
-     *
-     * @param  \Doctrine\Common\Collections\Collection  $idAdvert
+     * Set the value of salt
      *
      * @return  self
      */ 
-    public function setIdAdvert(\Doctrine\Common\Collections\Collection $idAdvert)
+    public function setSalt($salt)
     {
-        $this->idAdvert = $idAdvert;
+        $this->salt = $salt;
 
         return $this;
     }
 
-    public function getRepeatPw(): ?string
+      
+
+    /**
+     * Get the value of roles
+     */ 
+    public function getRoles(): array
     {
-        return $this->repeat_pw;
+        $roles = $this->roles;
+        // Un 'USER' aura toujours un rôle par défaut
+        if(empty($roles)){
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
     }
 
-    public function setRepeatPw(string $repeat_pw): self
+    /**
+     * Set the value of roles
+     *
+     * @return  self
+     */ 
+    public function setRoles($roles)
     {
-        $repeat_pw = sha1($repeat_pw);
-        $this->repeat_pw = $repeat_pw;
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function serialize(): string
+    {
+        return serialize([$this->id, $this->username, $this->password]);
+    }
+ 
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized): void
+    {
+        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * Get the value of username
+     *
+     * @return  string
+     */ 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set the value of username
+     *
+     * @param  string  $username
+     *
+     * @return  self
+     */ 
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     *
+     * @return  string
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param  string  $password
+     *
+     * @return  self
+     */ 
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get propertyPath="pw",
+     */ 
+    public function getRepeatPassword()
+    {
+        return $this->repeatPassword;
+    }
+
+    /**
+     * Set propertyPath="pw",
+     *
+     * @return  self
+     */ 
+    public function setRepeatPassword($repeatPassword)
+    {
+        $this->repeatPassword = $repeatPassword;
 
         return $this;
     }
 }
+

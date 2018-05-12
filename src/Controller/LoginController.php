@@ -29,12 +29,15 @@ class LoginController extends Controller
         
         if($form->isSubmitted()){
             
-            if(!$member->getPseudo()){
+            if($member->getUsername()){
                 
                 $this->addFlash(
                     'notice',
-                    'Bienvenu '.$member->getPseudo()
+                    'Bienvenu '.$member->getUsername()
                 );
+                
+                //return $this->redirectToRoute('home');
+                
             } else {
                 throw $this->createNotFoundException('Ce membre n\'existe pas !');
             }
