@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -72,16 +73,6 @@ class Members implements UserInterface, \Serializable
     private $password;
       
     /**
-     * @ORM\Column(name="repeatPassword", type="string", length=60, nullable=false)
-     * @Assert\NotBlank(message="Répétez votre mot de passe ")
-     * @Assert\EqualTo(
-     *  propertyPath="password",
-     *  message="Le mot de passe doit être identique à celui tapé au-dessus")
-     * 
-     */
-    private $repeatPassword;
-
-    /**
      * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
@@ -107,7 +98,7 @@ class Members implements UserInterface, \Serializable
     public function __construct()
     {
         $this->idAdvert = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateRegister = new \DateTime('NOW');
+        $this->dateRegister = new \DateTime('now');
     }
 
     public function eraseCredentials(): void
@@ -349,24 +340,6 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Get propertyPath="password",
-     */ 
-    public function getRepeatPassword()
-    {
-        return $this->repeatPassword;
-    }
-
-    /**
-     * Set propertyPath="password",
-     *
-     * @return  self
-     */ 
-    public function setRepeatPassword($repeatPassword)
-    {
-        $this->repeatPassword = $repeatPassword;
-
-        return $this;
-    }
+    
 }
 

@@ -29,7 +29,7 @@ class LoginController extends Controller
         
         if($form->isSubmitted()){
             
-            if($member->getUsername()){
+            if('username'){
                 
                 $this->addFlash(
                     'notice',

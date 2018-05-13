@@ -26,8 +26,9 @@ class RegisterType extends AbstractType
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'password'),
-                'second_options' => array('label' => 'repeatPassword')))
-            //->add('repeatPassword', PasswordType::class)
+                'second_options' => array('label' => 'repeatPassword'),
+                'invalid_message' => 'Mot de passe non conforme à celui taper avant'
+                ))
             ->add('submit', SubmitType::class)
         ;
     }

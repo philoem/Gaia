@@ -30,9 +30,9 @@ class RegisterController extends Controller
             
             $password = $passwordEncoder->encodePassword($member, $member->getPassword());
             $member->setPassword($password);
-            $member->setRepeatPassword($password);
+            
 
-            //$member->setRepeatPassword($this->passwordEncoder->encodePassword($member, $member->getRepeatPassword()));
+            $member->setRoles(['ROLE_USER']);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($member);
