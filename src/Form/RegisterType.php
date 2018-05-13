@@ -22,6 +22,7 @@ class RegisterType extends AbstractType
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
             ->add('username', TextType::class)
+            //->add('username_login', TextType::class)
             ->add('mail',EmailType::class)
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,

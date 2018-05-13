@@ -14,7 +14,7 @@ class LoginController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function index(Request $request)
+    public function login(Request $request)
     {
         $member = new Members();
 
@@ -23,20 +23,16 @@ class LoginController extends Controller
    
         $em =$this->getDoctrine()->getManager();
         $query = $em->createQuery(
-            'SELECT a.username FROM App:Members a'
+            'SELECT a.username_login FROM App:Members a'
         );
         $pseudo = $query->getResult();
         
         if($form->isSubmitted()){
             
-            if('username'){
+            if($member->getUsernameLogin()){
                 
-                $this->addFlash(
-                    'notice',
-                    'Bienvenu '.$member->getUsername()
-                );
-                
-                //return $this->redirectToRoute('home');
+                               
+                return $this->redirectToRoute('tableau_de_bord');
                 
             } else {
                 throw $this->createNotFoundException('Ce membre n\'existe pas !');
@@ -49,5 +45,23 @@ class LoginController extends Controller
         
         return $this->render('login/Login.html.twig', array('form'=>$formView));
   
+    }
+
+    /**
+     * 
+     *@Route("/dashboard", name="tableau_de_bord")
+     * 
+     */
+    public function dashboard()
+    {
+        $member = new Members();
+              
+        $this->addFlash(
+            'notice',
+            'Bienvenu '.$member->getUsernameLogin()
+        );
+        
+        return $this->render('Dashboard.html.twig');
+
     }
 }
