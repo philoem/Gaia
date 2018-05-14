@@ -32,14 +32,14 @@ class LoginController extends Controller
         
         if($form->isSubmitted()){
             
-            if($member->getUsernameLogin()){
+            //if($member->getUsernameLogin()){
                 
                                
-                return $this->redirectToRoute('tableau_de_bord');
+                return $this->redirectToRoute('admin');
                 
-            } else {
-                throw $this->createNotFoundException('Ce membre n\'existe pas !');
-            }
+            //} else {
+                //throw $this->createNotFoundException('Ce membre n\'existe pas !');
+            //}
         }
 
          

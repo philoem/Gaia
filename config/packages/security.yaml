@@ -1,7 +1,15 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        in_memory:
+            memory:
+                users:
+                    philou:
+                        password: aze
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: aze
+                        roles: 'ROLE_ADMIN'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,6 +17,7 @@ security:
         main:
             pattern: ^/
             anonymous: ~
+            http_basic: ~
             form_login:
                 login_path: login
                 check_path: login_check
@@ -31,11 +40,13 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
 
     encoders:
+        Symfony\Component\Security\Core\User\Members: plaintext
         App\Entity\Members: 
             algorithm: bcrypt  
             cost: 12
     
     access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    #- { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    #- { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
