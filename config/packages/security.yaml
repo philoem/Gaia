@@ -31,7 +31,9 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
 
     encoders:
-        App\Entity\Members: bcrypt  
+        App\Entity\Members: 
+            algorithm: bcrypt  
+            cost: 12
     
     access_control:
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

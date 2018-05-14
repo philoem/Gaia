@@ -19,8 +19,8 @@ class LoginType extends AbstractType
             
             ->add('usernameLogin', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('reset', ResetType::class)
-            ->add('submit', SubmitType::class)
+            //->add('reset', ResetType::class)
+            //->add('submit', SubmitType::class)
         ;
     }
 

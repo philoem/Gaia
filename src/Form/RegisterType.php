@@ -31,7 +31,7 @@ class RegisterType extends AbstractType
                 'second_options' => array('label' => 'repeatPassword'),
                 'invalid_message' => 'Mot de passe non conforme à celui taper avant'
                 ))
-            ->add('submit', SubmitType::class)
+            
         ;
     }
 

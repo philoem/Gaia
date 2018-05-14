@@ -42,8 +42,9 @@
                         <div class="form-group col-sm-12">
                             <div class="row col-sm-12  justify-content-center" >
                                 
-                                {{ form_widget(form.reset, {'label': 'Effacer','attr': {'class': 'btn btn-warning'}} ) }}
-                                {{ form_widget(form.submit, {'label': 'Connexion','attr': {'class': 'btn btn-primary'}}) }}
+                                <button type="reset" class="btn btn-warning">Effacer</button>
+                                <button type="submit" class="btn btn-success">Connexion <span class="fa fa-lock"></span></button>
+                                
                             </div>
                         </div>
                     
