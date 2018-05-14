@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Members;
 use App\Form\RegisterType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends Controller
@@ -16,7 +17,7 @@ class RegisterController extends Controller
     /**
     * @Route("/register", name="inscription")
     */
-    public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
         $member = new Members();
         
@@ -32,11 +33,10 @@ class RegisterController extends Controller
             $member->setPassword($password);
 
             $username = $member->getUsername();
-            $username_login = $member->setUsername_login($username);
+            $username_login = $member->setUsernameLogin($username);
             
             $member->setRoles(['ROLE_USER']);
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($member);
             $em->flush();
 

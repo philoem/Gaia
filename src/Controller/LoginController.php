@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Members;
 use App\Form\LoginType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class LoginController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils, EntityManagerInterface $em)
     {
         
         $member = new Members();
@@ -23,7 +24,7 @@ class LoginController extends Controller
         $form = $this->createForm(LoginType::class, $member);
         $form->handleRequest($request);
    
-        $em =$this->getDoctrine()->getManager();
+       
         $query = $em->createQuery(
             'SELECT a.username_login FROM App:Members a'
         );

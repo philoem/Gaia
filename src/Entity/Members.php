@@ -106,7 +106,7 @@ class Members implements UserInterface, \Serializable
     public function __construct()
     {
         $this->idAdvert = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateRegister = new \DateTime('now');
+        $this->dateRegister = new \DateTime('NOW');
     }
 
     public function eraseCredentials(): void
