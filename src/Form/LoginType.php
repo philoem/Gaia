@@ -17,17 +17,17 @@ class LoginType extends AbstractType
     {
         $builder2
             
-            ->add('usernameLogin', TextType::class)
+            ->add('username_login', TextType::class)
             ->add('password', PasswordType::class)
-            //->add('reset', ResetType::class)
-            //->add('submit', SubmitType::class)
+           
         ;
+        
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => Members::class,
-        ]);
-    }
+    //public function configureOptions(OptionsResolver $resolver)
+    //{
+    //    $resolver->setDefaults([
+    //        'data_class' => Members::class,
+    //    ]);
+    //}
 }

@@ -35,12 +35,12 @@ class RegisterController extends Controller
             $username = $member->getUsername();
             $username_login = $member->setUsernameLogin($username);
             
-            $member->setRoles(['ROLE_USER']);
+            $member->setRoles(['ROLE_ADMIN']);
 
             $em->persist($member);
             $em->flush();
 
-            return new Response('Bienvenu '.$member->getUsername() .' dans la communauté Gaia, votre profil a bien été inscrit');
+            return new Response('<h1>Bienvenu  '.$member->getUsername() .'  dans la communauté Gaia, votre profil a bien été inscrit</h1>');
 
         }
 

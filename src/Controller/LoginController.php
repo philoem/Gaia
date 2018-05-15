@@ -14,39 +14,48 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends Controller
 {
     /**
-     * @Route("/login", name="login")
+     * 
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils, EntityManagerInterface $em)
     {
-        
-        $member = new Members();
-
-        $form = $this->createForm(LoginType::class, $member);
-        $form->handleRequest($request);
-   
-       
-        $query = $em->createQuery(
-            'SELECT a.username_login FROM App:Members a'
-        );
-        $pseudo = $query->getResult();
-        
-        if($form->isSubmitted()){
-            
-            //if($member->getUsernameLogin()){
                 
-                               
-                return $this->redirectToRoute('admin');
-                
-            //} else {
-                //throw $this->createNotFoundException('Ce membre n\'existe pas !');
-            //}
-        }
+        $authenticationUtils = $this->get('security.authentication_utils');
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-         
-
-        $formView = $form->createView();
+        return $this->render('login/login.html.twig', array(
+            'username_login' => $authenticationUtils->getLastUsername(),
+            'error'         => $authenticationUtils->getLastAuthenticationError(),
+          ));
         
-        return $this->render('login/Login.html.twig', array('form'=>$formView));
+        //$member = new Members();
+//
+        //$form = $this->createForm(LoginType::class, $member);
+        //$form->handleRequest($request);
+   //
+        //$formView = $form->createView();
+        //return $this->render('login/Login.html.twig', array('form'=>$formView));
+        //
+        //$query = $em->createQuery(
+        //    'SELECT a.username_login FROM App:Members a)'
+        //);
+        //$username_login = $query->getResult();
+        //
+        //if($form->isSubmitted() && $form->handleRequest($request)->isValid()){
+        //    
+        //    if($username_login === "ROLE_USER"){
+        //        
+        //        return $this->redirectToRoute('admin');
+        //        
+        //    } else {
+        //        
+        //        throw $this->createNotFoundException('Ce membre n\'existe pas !');
+        //    }
+        //}
+
+             
   
     }
 

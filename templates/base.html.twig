@@ -23,6 +23,11 @@
         <header>
             <nav class="navbar navbar">
                 <a class="navbar-brand navbar-toggler" href="{{ path('home') }}" title="Cliquez ici pour retourner à l'accueil"><span style="color: white", class="fas fa-feather fa-2x"></span><strong class="nameGaia">GAIA</strong><em> le site d'échanges et de partages des jardiniers</em></a>
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('security_logout') }}">Logout</a>
+                    {% else %}
+                    <a href="{{ path('security_login') }}">Login</a>
+                    {% endif %}
                 <img src="{{ asset('img/logo.png') }}" alt="image d'un tournesol" id="logo">
             </nav>
         </header>

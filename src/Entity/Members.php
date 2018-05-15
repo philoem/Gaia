@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @UniqueEntity(fields="username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity(fields="mail", message="Cet email existe déjà")
+ * 
  */
 class Members implements UserInterface, \Serializable
 {
@@ -87,6 +88,7 @@ class Members implements UserInterface, \Serializable
      *
      * @ORM\Column(name="date_register", type="datetime", nullable=false)
      * @ORM\GeneratedValue
+     * @Assert\DateTime()
      */
     private $dateRegister;
 
@@ -94,7 +96,7 @@ class Members implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username_login", type="string", length=60, nullable=true)
-     * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
+     * @Assert\NotBlank(message="Le login est obligatoire !")
      * @Assert\Valid
      */
     private $username_login;
@@ -348,11 +350,23 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * Get the value of username_login
+     *
+     * @return  string
+     */ 
     public function getUsernameLogin(): ?string
     {
         return $this->username_login;
     }
 
+    /**
+     * Set the value of username_login
+     *
+     * @param  string  $username_login
+     *
+     * @return  self
+     */ 
     public function setUsernameLogin(?string $username_login): self
     {
         $this->username_login = $username_login;
