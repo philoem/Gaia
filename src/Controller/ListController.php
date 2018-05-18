@@ -26,6 +26,6 @@ class ListController extends Controller
            'Lord Varys'         => 'Conleth Hill'
          ];
  
-         return $this->render('default/index.html.twig', array('character' => $characters));
+         return $this->render('admin.html.twig', array('character' => $characters));
      }
 }

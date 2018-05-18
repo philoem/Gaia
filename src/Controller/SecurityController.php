@@ -66,9 +66,9 @@ class SecurityController extends Controller
      */
      public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
      {
-        //$helper = $this->get('security.authentication_utils');
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         
         $login = new Login();
         $form = $this->createForm(LoginType::class, $login);
@@ -96,9 +96,8 @@ class SecurityController extends Controller
      */
     public function loginCheckAction(Request $request)
     {
-        return $this->render(
-            'admin.html.twig');
-        //throw new \Exception('This should never be reached!');           
+        
+        throw new \Exception('This should never be reached!');           
 
     }
 
@@ -107,8 +106,10 @@ class SecurityController extends Controller
      */
     public function logoutAction()
     {
-
+        throw new \Exception('This should never be reached!');
     }
+
+    
 
     
 }

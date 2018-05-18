@@ -23,7 +23,7 @@
                         <div class="form-group col-sm-12">
                             {{ form_label(form.username_login, "Votre pseudo :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
                             <div class="col-sm-12">
-                                {{ form_widget(form.username_login, value="{{ username_login }}", {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.username_login, name="username_login", value="{{ username_login }}", {'attr': {'class': 'form-control'}}) }}
                                
                             </div>
                         </div>
