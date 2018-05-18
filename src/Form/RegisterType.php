@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Members;
+use App\Entity\Login;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -38,6 +39,7 @@ class RegisterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Members::class,
+           
         ]);
     }
 }

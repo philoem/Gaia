@@ -1,38 +1,33 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory:
-                users:
-                    philou:
-                        password: aze
-                        roles: 'ROLE_USER'
-                    admin:
-                        password: aze
-                        roles: 'ROLE_ADMIN'
+        philippe:
+            entity: { class: App\Entity\Login, property: username_login }
+        #in_memory:
+            #memory:
+                #users:
+                    #admin:
+                        #password: $2y$12$xIVM8wRtdTsuA2hjxk4rhO7idJ6CWQlIbp//TRzMUwhxEvs187vXK
+                        #roles: ['ROLE_ADMIN']
+        
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern: ^/
-            anonymous: true
-            #http_basic: ~
-            logout:
-                path: /logout
-            guard:
-                authenticators:
-                    - security.LoginFormAuthenticator
-            #form_login:
-            #    login_path: security_login
-            #    check_path: login_check
-            #    
+            provider: philippe
+            anonymous: ~
+                     
+            form_login:
+                login_path: security_login
+                check_path: security_login_check
+                username_parameter: username_login
+                password_parameter: password_login
             #logout:
             #    path:       logout
             #    target:     login
             # field names for the username and password fields
-            #username_parameter: username
-            #password_parameter: password
+            
             # by default, the login form *must* be a POST, not a GET
             #post_only:      true
             #remember_me:    false
@@ -45,21 +40,19 @@ security:
             # form_login: true
             # https://symfony.com/doc/current/security/form_login_setup.html
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    # access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+      
 
     encoders:
         #Symfony\Component\Security\Core\User\Members: plaintext
         App\Entity\Members: 
             algorithm: bcrypt  
             cost: 12
+        App\Entity\Login: 
+            algorithm: bcrypt  
+            cost: 12
     
     access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/dashboard, roles: ROLE_ADMIN }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,4 +1,4 @@
-/*  Pour les headers, les bannières hautes dans les pages */
+/*  HEADER */
 body{
 
     background-image: url('../img/verdure2.jpg');
@@ -26,7 +26,7 @@ body{
 {
     margin-right: -15px;
 }
-
+/* PAGE REGISTER */
 .form-group
 {
     background-color: #82cc9f;

@@ -70,8 +70,7 @@
                 
                 <div class="form-group">
                     <div class="row col-sm-12  justify-content-center">
-                        {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-                        <button type="submit" class="btn btn-primary"><span style="color: white" class="fas fa-check fa-2x"> </span>Validez votre inscription </button>
+                        <button type="submit" class="btn btn-primary"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
                         
                     </div>
                     
@@ -79,13 +78,44 @@
                 {# Génération automatique des champs pas encore écrits.
                     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
                     et tous les champs cachés (type « hidden »). #}
-                   
+                
                 
                     {# Fermeture de la balise <form> du formulaire HTML #}
                     {{ form_end(form) }}
                 </div>
             </div>
         </div>
+        {# Fenêtre modale Bootstrap #}
+        <div class="col-sm-12">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Page d'inscription pour les nouveaux !</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <p>Bienvenu sur la page d'inscription de la communauté GAIA.</p>
+                        <p>Rempli tous les champs du formulaire et valide ensuite.</p>
+                        <p>Tu seras redirigé vers la page de ta 1ère connexion.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     </div>
+    
+    {% block javascripts %}
+        {{ parent() }}
+        {# Activation de la fenêtre modale Bootstrap #}
+        <script type="text/javascript" src="{{ asset('Functions.js') }}"></script>
+    {% endblock javascripts %}
+
 {% endblock body %}

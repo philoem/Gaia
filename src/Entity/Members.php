@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -52,6 +53,7 @@ class Members implements UserInterface, \Serializable
      * @ORM\Column(name="username", type="string", length=60, nullable=false)
      * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
      * @Assert\Valid
+     * @ORM\OneToOne(targetEntity="App\Entity\Login", cascade={"persist"})
      */
     private $username;
 
@@ -67,9 +69,10 @@ class Members implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Choisissez un mot de passe !")
      * @Assert\Valid
+     * @ORM\OneToOne(targetEntity="App\Entity\Login", cascade={"persist"})
      */
     private $password;
       
@@ -80,6 +83,7 @@ class Members implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(name="roles", type="array")
+     * @ORM\OneToOne(targetEntity="App\Entity\Login", cascade={"persist"})
      */
     private $roles = [];
 
@@ -107,8 +111,8 @@ class Members implements UserInterface, \Serializable
      */
     public function __construct()
     {
-        $this->idAdvert = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateRegister = new \DateTime('NOW');
+        $this->idAdvert = new ArrayCollection();
+        $this->dateRegister = new \DateTime();
     }
 
     public function eraseCredentials(): void
@@ -326,6 +330,7 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
+    
     /**
      * Get the value of password
      *

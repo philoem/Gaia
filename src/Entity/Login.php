@@ -6,12 +6,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LoginRepository")
- * @UniqueEntity(fields="username_login", message="Ce pseudonyme est déjà pris")
+ * 
  */
-class Login
+class Login 
 {
     /**
      * @ORM\Id()
@@ -21,16 +22,17 @@ class Login
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="username_login",type="string", length=60)
      * @Assert\NotBlank(message="Veuillez taper votre pseudonyme")
-     * @Assert\Valid
+     * Assert\Valid
      */
     private $username_login;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="password_login",type="string", length=255)
      * @Assert\NotBlank(message="Veuillez taper votre mot de passe")
      * @Assert\Valid
+     * 
      */
     private $password_login;
 
@@ -38,17 +40,30 @@ class Login
      * @ORM\Column(type="array", nullable=true)
      */
     private $role_login;
-
+	
+        
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Get the value of username_login
+     *
+     * @return  string
+     */
     public function getUsernameLogin(): ?string
     {
         return $this->username_login;
     }
 
+    /**
+     * Set the value of username_login
+     *
+     * @param  string  $username_login
+     *
+     * @return  self
+     */
     public function setUsernameLogin(string $username_login): self
     {
         $this->username_login = $username_login;
@@ -56,12 +71,24 @@ class Login
         return $this;
     }
 
-    public function getPassword_login(): ?string
+    /**
+     * Get the value of password_login
+     *
+     * @return  string
+     */
+    public function getPasswordLogin(): ?string
     {
         return $this->password_login;
     }
 
-    public function setPassword_login(string $password_login): self
+    /**
+     * Set the value of password_login
+     *
+     * @param  string  $password_login
+     *
+     * @return  self
+     */ 
+    public function setPasswordLogin(string $password_login): self
     {
         $this->password_login = $password_login;
 
@@ -83,4 +110,5 @@ class Login
 
         return $this;
     }
+    
 }

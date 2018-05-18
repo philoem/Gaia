@@ -5,6 +5,10 @@ parameters:
     env(DATABASE_HOST): localhost
 
 services:
+    app.security.login_authenticator:
+        class: App\Security\LoginAuthenticator
+        autowire: true
+        arguments: ["@router", "@security.password_encoder"]
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -15,9 +19,7 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    security.LoginFormAuthenticator:
-        class: Security\LoginFormAuthenticator
-        autowire: true
+    
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
