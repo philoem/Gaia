@@ -76,6 +76,7 @@ class SecurityController extends Controller
         $formView2 = $form->createView();
 
         if($form->isSubmitted() && $form->isValid()){
+            
             return $this->redirectToRoute('admin');
         } 
         return $this->render(
