@@ -16,8 +16,8 @@ class LoginType extends AbstractType
     {
         $builder2
             
-            ->add('username_login', TextType::class)
-            ->add('password_login', PasswordType::class, ['mapped' => true])
+            ->add('username', TextType::class)
+            ->add('password', PasswordType::class, ['mapped' => true])
            
         ;
         

@@ -1,35 +1,37 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        #philippe:
-        #    entity: { class: App\Entity\Login, property: username_login }
-        in_memory:
-            memory:
-                users:
-                    user:
-                        password: user
-                        roles: ['ROLE_USER']
-                    admin:
-                        password: admin
-                        roles: ['ROLE_ADMIN']
-        
+        projet:
+            entity: { class: App\Entity\Login, property: username }
+        #in_memory:
+        #    memory:
+        #        users:
+        #            user:
+        #                password: user
+        #                roles: ['ROLE_USER']
+        #            admin:
+        #                password: admin
+        #                roles: ['ROLE_ADMIN', 'ROLE_USER']
+        #
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            #provider: philippe
-            anonymous: ~
-            http_basic: ~
+            pattern: ^/
+            #http_basic: ~
+            provider: projet
+            anonymous: true
                      
             form_login:
                 login_path: security_login
                 check_path: security_login
-                username_parameter: login[username_login]
-                password_parameter: login[password_login]
-            #logout:
-            #    path:       logout
-            #    target:     login
+                username_parameter: login[username]
+                password_parameter: login[password]
+            logout:
+                path:       logout
+                target:     login
+            #default_target_path: /home
             # field names for the username and password fields
             
             # by default, the login form *must* be a POST, not a GET
@@ -47,7 +49,9 @@ security:
       
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        #Symfony\Component\Security\Core\User\User:
+        #    algorithm: bcrypt  
+        #    cost: 12
             
         App\Entity\Members: 
             algorithm: bcrypt  

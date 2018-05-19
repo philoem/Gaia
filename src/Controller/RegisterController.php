@@ -39,9 +39,9 @@ class RegisterController extends Controller
             
             $member->setRoles(['ROLE_ADMIN']);
                         
-            $login->setUsernameLogin($member->getUsername());
-            $login->setPasswordLogin($member->getPassword());
-            $login->setRoleLogin($member->getRoles());
+            $login->setUsername($member->getUsername());
+            $login->setPassword($member->getPassword());
+            $login->setRoles($member->getRoles());
 
             $em = $this->getDoctrine()->getManager();
                         

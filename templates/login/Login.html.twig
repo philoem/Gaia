@@ -9,6 +9,9 @@
         {% block header %}
             {{ parent() }}
         {% endblock header %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error.message }}</div>
+        {% endif %}
 
               
         <div class="row justify-content-center">
@@ -21,18 +24,18 @@
                                         
                             
                         <div class="form-group col-sm-12">
-                            {{ form_label(form.username_login, "Votre pseudo :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                            {{ form_label(form.username, "Votre pseudo :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
                             <div class="col-sm-12">
-                                {{ form_widget(form.username_login, name="username_login", value="{{ username_login }}", {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.username, name="username", value="{{ username }}", {'attr': {'class': 'form-control'}}) }}
                                
                             </div>
                         </div>
                         
                         <div class="form-group col-sm-12">
                                 
-                            {{ form_label(form.password_login, "Votre mot de passe :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
+                            {{ form_label(form.password, "Votre mot de passe :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
                             <div class="col-sm-12">
-                                {{ form_widget(form.password_login, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
                                 
                             </div>
                         </div>
