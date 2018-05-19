@@ -48,6 +48,6 @@ class Slider {
 	}
 }
 const imageSlider = document.querySelector('#imageSlider');
-const imagesTab = ['../public/img/couleur1.jpg', '../public/img/couleur2.jpg', '../public/img/couleur3.jpg', '../public/img/couleur4.jpg']; 
+const imagesTab = ['./img/couleur1.jpg', './img/couleur2.jpg', './img/couleur3.jpg', './img/couleur4.jpg']; 
 		
 const slider = new Slider(imageSlider, imagesTab);

@@ -5,11 +5,11 @@
 {% endblock title %}
 
 {% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
+
     <div class="container">
-        {% block header %}
-            {{ parent() }}
-        {% endblock header %}
-        
         <div class="form-group">
             <div class="col-sm-12 col-lg-12">
                 <h3 class="text-center">Formulaire d'inscription</h3>

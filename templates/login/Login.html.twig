@@ -5,15 +5,15 @@
 {% endblock title %}
 
 {% block body %}
-    <div class="container">
-        {% block header %}
-            {{ parent() }}
-        {% endblock header %}
-        {% if error %}
-            <div class="alert alert-danger">{{ error.message }}</div>
-        {% endif %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
 
-              
+    {% if error %}
+        <div class="alert alert-danger">{{ error.message }}</div>
+    {% endif %}
+
+    <div class="container">
         <div class="row justify-content-center">
             <div class="form-group col-sm-5">
                 <div class="col-sm-12 col-lg-12">
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        
     </div>
+    
 {% endblock body %}
 

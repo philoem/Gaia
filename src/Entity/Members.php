@@ -96,16 +96,7 @@ class Members implements UserInterface, \Serializable
      */
     private $dateRegister;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username_login", type="string", length=60, nullable=true)
-     * @Assert\NotBlank(message="Le login est obligatoire !")
-     * @Assert\Valid
-     */
-    private $username_login;
-
-
+    
     /**
      * Constructor
      */
@@ -355,31 +346,6 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Get the value of username_login
-     *
-     * @return  string
-     */ 
-    public function getUsernameLogin(): ?string
-    {
-        return $this->username_login;
-    }
-
-    /**
-     * Set the value of username_login
-     *
-     * @param  string  $username_login
-     *
-     * @return  self
-     */ 
-    public function setUsernameLogin(?string $username_login): self
-    {
-        $this->username_login = $username_login;
-
-        return $this;
-    }
-
-
-    
+        
 }
 

@@ -15,7 +15,7 @@
                 <h3 id="title_slider">Les différentes étapes</h3>
             </div>
             <div class="row justify-content-center" id="slide">
-                <img src={{ asset('img/couleur1.jpg') }} alt="Les différentes étapes pour découvrir GAIA" id="imageSlider" class="img-fluid " />
+                <img src="{{ asset('img/couleur1.jpg') }}" alt="Les différentes étapes pour découvrir GAIA" id="imageSlider" class="img-fluid " />
             </div>
             <div class="row justify-content-center" id="boutons">
                 <button type="button" class="btn btn-info btn-sm" id="prev">Prev</button>
@@ -24,7 +24,7 @@
         </div>
     </div>
     {% block javascripts %}
-        <script src="{{ asset('App/assets/slider.js') }}"></script>
+        <script src="{{ asset('slider.js') }}"></script>
     {% endblock javascripts %}
     
 {% endblock body %}
