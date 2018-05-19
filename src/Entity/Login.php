@@ -2,16 +2,20 @@
 
 namespace App\Entity;
 
+use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * Login
+ * @ORM\Table(name="login")
  * @ORM\Entity(repositoryClass="App\Repository\LoginRepository")
+ *
  * 
  */
 class Login implements AdvancedUserInterface, \Serializable
@@ -26,7 +30,7 @@ class Login implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(name="username",type="string", length=60)
      * @Assert\NotBlank(message="Veuillez taper votre pseudonyme")
-     * Assert\Valid
+     * @Assert\Valid
      */
     private $username;
 
