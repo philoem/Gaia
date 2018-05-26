@@ -29,8 +29,8 @@ security:
                 username_parameter: login[username]
                 password_parameter: login[password]
             logout:
-                path:       logout
-                target:     login
+                path:       /logout
+                target:     /login
             #default_target_path: /home
             # field names for the username and password fields
             
@@ -60,9 +60,10 @@ security:
             algorithm: bcrypt  
             cost: 12
     
-    #role_hierachy:
-    #    ROLE_USER: ROLE_USER
-    #    ROLE_ADMIN: [ROLE_ADMIN, ROLE_USER]
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_ADMIN: [ROLE_ADMIN, ROLE_USER]
+
     access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
