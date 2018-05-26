@@ -60,6 +60,9 @@ security:
             algorithm: bcrypt  
             cost: 12
     
+    #role_hierachy:
+    #    ROLE_USER: ROLE_USER
+    #    ROLE_ADMIN: [ROLE_ADMIN, ROLE_USER]
     access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
