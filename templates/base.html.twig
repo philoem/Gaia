@@ -26,32 +26,35 @@
         
         {% block header %}
         <header>
-                <nav class="navbar navbar">
+            <nav class="navbar navbar">
+            
+                <div class="col" id="logo_name_text">
+                    <div class="col">
+                        <p><img src="{{ asset('img/logo.png') }}" alt="image d'un tournesol" id="logo"></p>
+                    </div>
                 
-                        <div class="col">
-                            <p ><img src="{{ asset('img/logo.png') }}" alt="image d'un tournesol" id="logo"></p>
-                        </div>
-                        <div class="col">
-                            <p class="logo_name"><strong class="nameGaia">GAIA</strong></p><p class="logo_name"><em> le site d'échanges et de partages des jardiniers</em></p>
-                        </div>
-                        
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="{{ path('home') }}" title="Cliquez ici pour retourner à l'accueil">Accueil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('inscription') }}" title="Cliquez ici pour vous enregistrer">Inscription</a>
-                            </li>
-                            <li class="nav-item">
-                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                    <a class="nav-link" href="{{ path('security_logout') }}" title="Cliquez ici pour vous déconnecter">Logout</a>
-                                {% else %}
-                                    <a class="nav-link" href="{{ path('security_login') }}" title="Cliquez ici pour vous connecter">Login</a>
-                                {% endif %}
-                            </li>
-                        </ul>
-                        
-                    </nav>
+                    <div class="col">
+                        <p class="logo_name"><strong class="nameGaia">GAIA</strong></p><p class="logo_name"><em> le site d'échanges et de partages des jardiniers</em></p>
+                    </div>
+                </div>
+                
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('home') }}" title="Cliquez ici pour retourner à l'accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('inscription') }}" title="Cliquez ici pour vous enregistrer">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <a class="nav-link" href="{{ path('security_logout') }}" title="Cliquez ici pour vous déconnecter">Logout</a>
+                        {% else %}
+                            <a class="nav-link" href="{{ path('security_login') }}" title="Cliquez ici pour vous connecter">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                
+            </nav>
         </header>
         {% endblock header %}
 
