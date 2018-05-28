@@ -53,7 +53,7 @@ class Members implements UserInterface, \Serializable
      * @ORM\Column(name="username", type="string", length=60, nullable=false)
      * @Assert\NotBlank(message="Le pseudonyme est obligatoire !")
      * @Assert\Valid
-     * @ORM\OneToOne(targetEntity="App\Entity\Login", cascade={"persist"})
+     * 
      */
     private $username;
 
@@ -72,7 +72,7 @@ class Members implements UserInterface, \Serializable
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Choisissez un mot de passe !")
      * @Assert\Valid
-     * @ORM\OneToOne(targetEntity="App\Entity\Login", cascade={"persist"})
+     * 
      */
     private $password;
       
@@ -83,9 +83,14 @@ class Members implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(name="roles", type="array")
-     * @ORM\OneToOne(targetEntity="App\Entity\Login", cascade={"persist"})
+     * 
      */
     private $roles = [];
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+     private $isActive;
 
     /**
      * @var \DateTime
@@ -104,6 +109,7 @@ class Members implements UserInterface, \Serializable
     {
         $this->idAdvert = new ArrayCollection();
         $this->dateRegister = new \DateTime();
+        $this->isActive = true;
     }
 
     public function eraseCredentials(): void
@@ -284,18 +290,52 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
-    public function serialize(): string
+    public function isAccountNonExpired()
     {
-        return serialize([$this->id, $this->username, $this->password]);
+        return true;
     }
- 
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized): void
+
+    public function isAccountNonLocked()
     {
-        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
+        return true;
     }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
+    // serialize and unserialize must be updated - see below
+    public function serialize()
+    {
+        return serialize(array(
+            $this->idMember,
+            $this->firstname,
+            $this->lastname,                        
+            $this->username,
+            $this->mail,
+            $this->password,
+            $this->isActive,
+        ));
+    }
+    public function unserialize($serialized)
+    {
+        list (
+            $this->idMember,
+            $this->firstname,
+            $this->lastname,
+            $this->username,
+            $this->mail,
+            $this->password,
+            $this->isActive,
+        ) = unserialize($serialized);
+    }
+
 
     /**
      * Get the value of username

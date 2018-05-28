@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Login;
+use App\Entity\Members;
 use App\Form\LoginType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +23,8 @@ class SecurityController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         
-        $login = new Login();
-        $form = $this->createForm(LoginType::class, $login);
+        $member = new Members();
+        $form = $this->createForm(LoginType::class, $member);
         $form->handleRequest($request);
         $formView2 = $form->createView();
 

@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         projet:
-            entity: { class: App\Entity\Login, property: username }
+            entity: { class: App\Entity\Members, property: username }
         #in_memory:
         #    memory:
         #        users:
@@ -56,10 +56,7 @@ security:
         App\Entity\Members: 
             algorithm: bcrypt  
             cost: 12
-        App\Entity\Login: 
-            algorithm: bcrypt  
-            cost: 12
-    
+            
     role_hierarchy:
         ROLE_USER: ROLE_USER
         ROLE_ADMIN: [ROLE_ADMIN, ROLE_USER]

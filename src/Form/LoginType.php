@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Login;
 use App\Entity\Members;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +25,7 @@ class LoginType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Login::class,
+            'data_class' => Members::class,
         ]);
     }
 }

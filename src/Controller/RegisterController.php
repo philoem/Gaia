@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Members;
-use App\Entity\Login;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +20,7 @@ class RegisterController extends Controller
     public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
         $member = new Members();
-        $login = new Login();
-                      
+                             
         $form = $this->createForm(RegisterType::class, $member);
         
         $form->handleRequest($request);
@@ -35,18 +33,12 @@ class RegisterController extends Controller
             $member->setPassword($password);
 
             $username = $member->getUsername();
-            $username_login = $member->setUsernameLogin($username);
-            
+                        
             $member->setRoles(['ROLE_ADMIN']);
                         
-            $login->setUsername($member->getUsername());
-            $login->setPassword($member->getPassword());
-            $login->setRoles($member->getRoles());
-
             $em = $this->getDoctrine()->getManager();
                         
             $em->persist($member);
-            $em->persist($login);
             $em->flush();
             
                        
