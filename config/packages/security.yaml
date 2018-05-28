@@ -31,6 +31,13 @@ security:
             logout:
                 path:       /logout
                 target:     /login
+            
+            # Checkbox "Se souvenir de moi" du formulaire login
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 semaine en secondes
+                path:     /
+            
             #default_target_path: /home
             # field names for the username and password fields
             
