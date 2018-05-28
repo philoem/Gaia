@@ -14,18 +14,22 @@ body{
     height: 65px;
     
 }
+nav > ul > li
+{
+    float: left;
+    position: relative;
+}
 .nav a
 {
     color: white;
     text-transform: capitalize;
     letter-spacing: 1.5px;
     
-    
 }
 .nav a:hover
 {
     color:  #bb86fc;
-    border-bottom: 1px solid #bb86fc;
+    border-bottom: 2px solid #bb86fc;
     transition: color 0.3s linear;
     
 }
@@ -35,34 +39,57 @@ body{
     font-size: larger;
     font-weight: bold;
 }
-
+.submenu
+{
+    list-style-type: none;
+    display: none;
+    margin-left: -28px;
+    background-color: #0e6a5c;
+    width: 150%;
+    
+}
+nav > ul::after
+{
+    content: "";
+    display: block;
+    clear: both;
+    
+}
+nav li:hover .submenu
+{
+    display: inline-block;
+    position: absolute;
+    z-index: 10000;
+    
+    
+}
 /* Logo */
 #logo_name_text
 {
     margin-left: -15px;
-    margin-top: -22px;
+    margin-top: -14px;
 }
 #logo
 {
     float: left;
     margin-left: -30px;
-    margin-bottom: -21px;
+    margin-top: 5px;
     
 }
 .logo_name
 {
     color:white;
     margin-bottom: -10px;
-    line-height: 30px;
+    line-height: 33px;
     letter-spacing: 0.8px;
     font-size: 120%;
-    font-family: arial;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .nameGaia
 {
     font-size: 160%;
     letter-spacing: 1px;
-    font-family: arial;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 /* PAGE REGISTER */
 .form-group
