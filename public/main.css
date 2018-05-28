@@ -18,13 +18,26 @@ body{
 {
     color: white;
 }
-.nav, a:hover
+.nav a:hover
 {
     color:  #bb86fc;
+    border-bottom: 1px solid #bb86fc;
 }
+/* Logo */
 #logo
 {
-    margin-right: -15px;
+    margin-left: -30px;
+    margin-bottom: -21px;
+}
+.logo_name
+{
+    color:white;
+}
+.nameGaia
+{
+    font-size: 150%;
+    
+
 }
 /* PAGE REGISTER */
 .form-group
