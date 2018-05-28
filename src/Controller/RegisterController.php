@@ -48,7 +48,7 @@ class RegisterController extends Controller
 
         $formView = $form->createView();
         
-        return $this->render('register/RegisterAddMember.html.twig', array('form'=>$formView));
+        return $this->render('Frontend/register/RegisterAddMember.html.twig', array('form'=>$formView));
   
 
     }

@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function homepage()
     {
-        return $this->render('home.html.twig');
+        return $this->render('Frontend/Home.html.twig');
 
     }
 

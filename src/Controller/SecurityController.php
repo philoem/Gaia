@@ -33,7 +33,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('admin');
         } 
         return $this->render(
-            'login/Login.html.twig',
+            'Frontend/login/Login.html.twig',
             array(
                 'username' => $lastUsername,
                 'error'         => $error,
