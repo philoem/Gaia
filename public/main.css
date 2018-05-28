@@ -11,18 +11,35 @@ body{
 .navbar
 {
     background-color: #016359;
-    height: 60px;
+    height: 65px;
     
 }
-.nav, a
+.nav a
 {
     color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    
 }
 .nav a:hover
 {
     color:  #bb86fc;
     border-bottom: 1px solid #bb86fc;
+    transition: color 0.3s linear;
+    
 }
+.nav a:focus
+{
+    color:  #bb86fc;
+}
+.nav a:active
+{
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+
 /* Logo */
 #logo_name_text
 {
@@ -34,15 +51,22 @@ body{
     float: left;
     margin-left: -30px;
     margin-bottom: -21px;
+    
 }
 .logo_name
 {
     color:white;
     margin-bottom: -10px;
+    line-height: 30px;
+    letter-spacing: 0.8px;
+    font-size: 120%;
+    font-family: arial;
 }
 .nameGaia
 {
     font-size: 160%;
+    letter-spacing: 1px;
+    font-family: arial;
 }
 /* PAGE REGISTER */
 .form-group
@@ -62,4 +86,17 @@ body{
     background-color: #bb86fc;
     color: white;
 
+}
+@media screen and (max-width: 720px)
+{
+    #text_logo, #logo_name_text
+    {
+        display: none;
+    }
+    nav.navbar
+    {
+        display: flex;
+        justify-content: center;
+        
+    }
 }
