@@ -12,7 +12,6 @@ body{
 {
     background-color: #016359;
     height: 65px;
-    
 }
 nav > ul > li
 {
@@ -24,14 +23,11 @@ nav > ul > li
     color: white;
     text-transform: capitalize;
     letter-spacing: 1.5px;
-    
 }
 .nav a:hover
 {
     color:  #bb86fc;
-    border-bottom: 2px solid #bb86fc;
     transition: color 0.3s linear;
-    
 }
 
 .nav a:active
@@ -46,7 +42,6 @@ nav > ul > li
     margin-left: -28px;
     background-color: #0e6a5c;
     width: 150%;
-    
 }
 nav > ul::after
 {
@@ -60,8 +55,6 @@ nav li:hover .submenu
     display: inline-block;
     position: absolute;
     z-index: 10000;
-    
-    
 }
 /* Logo */
 #logo_name_text
@@ -110,6 +103,7 @@ nav li:hover .submenu
     color: white;
 
 }
+/* Responsive  */
 @media screen and (max-width: 720px)
 {
     #text_logo, #logo_name_text
