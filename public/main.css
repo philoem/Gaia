@@ -91,7 +91,7 @@ nav li:hover .submenu
 .btn
 {
     background-color: #bb86fc;
-    color: white;000000
+    color: white;
 
 }
 /* PAGE CONTACT */
@@ -117,6 +117,54 @@ nav li:hover .submenu
     font-weight: bold;
 }
 
+/* HOMEPAGE  */
+/* Images, en fond d'écran, animées */ 
+#slider
+{
+    width: 1920px;
+    overflow-x: hidden;
+}
+#pictures_homepage
+{
+    width: calc(1923px * 2);
+    animation: slide 15s infinite;
+    
+
+}
+@keyframes slide
+{
+    0%
+    {
+        transform: translateX(0);
+    }
+    20%
+    {
+        transform: translateX(0px);
+    }
+    50%
+    {
+        transform: translateX(-1920px);
+    }
+    75%
+    {
+        transform: translateX(-1920px);
+    }
+    100%
+    {
+        transform: translateX(0px);
+    }
+    
+}
+#page_accueil1
+{
+   float: left;
+
+}
+#page_accueil2
+{
+    float: left;
+ 
+}
 
 /* RESPONSIVE  */
 @media screen and (max-width: 720px)

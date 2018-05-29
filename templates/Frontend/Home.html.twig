@@ -4,27 +4,47 @@
     Accueil - {{ parent() }}
 {% endblock title %}
 
-{% block body %}
-    {% block header %}
-        {{ parent() }}
-    {% endblock header %}
+{% block body  %}
+    
+        {% block header %}
+            {{ parent() }}
+        {% endblock header %}
 
-    <div class="container">
-        <div class="col-xs-12" id="slider">
-            <div class="row justify-content-center">
-                <h3 id="title_slider">Les différentes étapes</h3>
-            </div>
-            <div class="row justify-content-center" id="slide">
-                <img src="{{ asset('img/couleur1.jpg') }}" alt="Les différentes étapes pour découvrir GAIA" id="imageSlider" class="img-fluid " />
-            </div>
-            <div class="row justify-content-center" id="boutons">
-                <button type="button" class="btn btn-info btn-sm" id="prev">Prev</button>
-                <button type="button" class="btn btn-info btn-sm" id="next">Next</button>
+        <div id="slider">
+            <div id="pictures_homepage">
+                <div id="page_accueil1" >
+
+                    {# Titre personnalisé #}
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <div class="text-center" id="title_homepage_pumped">
+                            <h1>Bienvenu à vous "{{ app.user.username|title }}"</h1>
+                        </div>
+                    {% endif %}
+                    <img src="./img/verdurebis.jpg" alt="fond" />
+
+                </div>
+                <div id="page_accueil2" >
+                    <img src="./img/jardinage3bis.jpg" alt="fond" />
+
+                </div>
             </div>
         </div>
-    </div>
-    {% block javascripts %}
-        <script src="{{ asset('slider.js') }}"></script>
-    {% endblock javascripts %}
+
+           {# <div class="col-xs-12" id="slider">
+                <div class="row justify-content-center">
+                    <h3 id="title_slider">Les différentes étapes</h3>
+                </div>
+                <div class="row justify-content-center" id="slide">
+                    <img src="{{ asset('img/jardinage3.jpg') }}" alt="Les différentes étapes pour découvrir GAIA" id="imageSlider" class="img-fluid " />
+                </div>
+                <div class="row justify-content-center" id="boutons">
+                    <button type="button" class="btn btn-info btn-sm" id="prev">Prev</button>
+                    <button type="button" class="btn btn-info btn-sm" id="next">Next</button>
+                </div>
+            </div>
+        </div>
+        {% block javascripts %}
+            <script src="{{ asset('slider.js') }}"></script>
+        {% endblock javascripts %}#}
     
 {% endblock body %}
