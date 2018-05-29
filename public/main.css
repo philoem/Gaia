@@ -100,10 +100,34 @@ nav li:hover .submenu
 .btn
 {
     background-color: #bb86fc;
-    color: white;
+    color: white;000000
 
 }
-/* Responsive  */
+/* PAGE CONTACT */
+/* Message de confirmation d'envoi du message du formulaire contact */
+#return_home
+{
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration-style: none;
+}
+#return_home:hover
+{
+    color:  #000000;
+    transition: color 0.3s linear;
+    text-decoration-style: none;
+    font-weight: bold;
+    
+}
+#return_home:active
+{
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+/* RESPONSIVE  */
 @media screen and (max-width: 720px)
 {
     #text_logo, #logo_name_text
