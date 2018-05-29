@@ -10,82 +10,86 @@
     {% endblock header %}
 
     <div class="container">
-        <div class="form-group">
-            <div class="col-sm-12 col-lg-12">
-                <h3 class="text-center">Formulaire d'inscription</h3>
+        <form class="form-horizontal" role="form" method="POST" action="{{ path('inscription') }}">
+            <div class="row justify-content-center">
+                <div class="form-group col-sm-6 col-lg-6">
+                    <div class="col-sm-12 col-lg-12 ">
+                        <h3 class="text-center">Formulaire d'inscription</h3>
 
-                <div class="form-group">
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate':'novalidate'}}) }}
-                                    
-                
-                    {# Génération manuelle et éclatée : #}
-                    <div class="form-group">
-                        {# Génération du label. #}
-                        {{ form_label(form.firstname, "Votre prénom :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
-                    
-                    
-                        <div class="col-sm-12">
-                            {# Génération de l'input. #}
-                            {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate':'novalidate'}}) }}
+                  
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col col-sm-6">
+                                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                           
+                                <div class="col col-sm-6">
+                                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                
-                    {# Idem pour un autre champ. #}
-                    <div class="form-group">
-                        {{ form_label(form.lastname, "Votre nom :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
-                        <div class="col-sm-12">
-                            {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                            {{ form_label(form.username, "Votre pseudo :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
-                        <div class="col-sm-12">
-                            {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                                
+                            <div class="col-sm-12">
+                                {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                                
+                            <div class="col-sm-12 col-lg-12">
+                                {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                       
+                            <div class="col-sm-12 col-lg-12">
+                                {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form) }}
+                            </div>
+                        
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="row col-sm-12  justify-content-center">
+                                <button type="submit" class="btn btn-primary"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
+                                
+                            </div>
                             
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                            {{ form_label(form.mail, "Votre mail :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
-                        <div class="col-sm-12">
-                            {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                            {{ form_label(form.password.first, "Votre mot de passe :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
-                        <div class="col-sm-12">
-                            {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_label(form.password.second, "Retaper votre mot de passe :", {'label_attr': {'class': 'col-sm-10 control-label'}}) }}
-                    <div class="col-sm-12">
-                        {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form) }}
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="row col-sm-12  justify-content-center">
-                        <button type="submit" class="btn btn-primary"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
+                                                
+                        {# Fermeture de la balise <form> du formulaire HTML #}
+                        {{ form_end(form) }}
                         
                     </div>
-                    
-                </div>
-                {# Génération automatique des champs pas encore écrits.
-                    Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-                    et tous les champs cachés (type « hidden »). #}
-                
-                
-                    {# Fermeture de la balise <form> du formulaire HTML #}
-                    {{ form_end(form) }}
                 </div>
             </div>
-        </div>
-        {# Fenêtre modale Bootstrap #}
+        </form>
+        {# Message de confirmation d'inscription #}
+        <div class="container">
+                <div class="row justify-content-center">
+                    {% for message in app.flashes('notice') %}
+                        <div class="flash-notice">
+                            <h1>{{ message }}</h1>
+                            <div class="row justify-content-center">
+                                <a href="{{ path('security_login') }}" title="Connexion" id="return_home">Allez vous connecter</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {# Fenêtre modale Bootstrap 
         <div class="col-sm-12">
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -114,8 +118,8 @@
     
     {% block javascripts %}
         {{ parent() }}
-        {# Activation de la fenêtre modale Bootstrap #}
-        <script type="text/javascript" src="{{ asset('Functions.js') }}"></script>
-    {% endblock javascripts %}
+         Activation de la fenêtre modale Bootstrap #}
+        {#<script type="text/javascript" src="{{ asset('Functions.js') }}"></script>
+    {% endblock javascripts %}#}
 
 {% endblock body %}

@@ -40,9 +40,15 @@ class RegisterController extends Controller
                         
             $em->persist($member);
             $em->flush();
+
+            /* Ici affichage d'un message confirmant l'enregistrement du message */
+            $this->addFlash(
+                'notice',
+                'Votre inscription a bien été enregistrée !'
+            );
             
                        
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('inscription');
         
         }
 

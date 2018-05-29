@@ -1,13 +1,4 @@
 /*  HEADER */
-body{
-
-    background-image: url('../img/verdure2.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    opacity: 0.9;
-    
-}
 .navbar
 {
     background-color: #016359;
@@ -107,14 +98,14 @@ nav li:hover .submenu
 /* Message de confirmation d'envoi du message du formulaire contact */
 #return_home
 {
-    color: white;
+    color: black;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     text-decoration-style: none;
 }
 #return_home:hover
 {
-    color:  #000000;
+    color:  #bb86fc;
     transition: color 0.3s linear;
     text-decoration-style: none;
     font-weight: bold;

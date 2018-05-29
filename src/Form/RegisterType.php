@@ -21,15 +21,15 @@ class RegisterType extends AbstractType
     {
        
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('username', TextType::class)
+            ->add('firstname', TextType::class, ['label' => ' ', 'attr' => ['placeholder' => 'Votre prénom']])
+            ->add('lastname', TextType::class, ['label' => ' ', 'attr' => ['placeholder' => 'Votre nom']])
+            ->add('username', TextType::class, ['label' => ' ', 'attr' => ['placeholder' => 'Votre pseudonyme']])
             
-            ->add('mail',EmailType::class)
+            ->add('mail',EmailType::class, ['label' => ' ', 'attr' => ['placeholder' => 'Votre email']])
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'password'),
-                'second_options' => array('label' => 'repeatPassword'),
+                'first_options'  => array('label' => 'password', 'attr' => ['placeholder' => 'Votre mot de passe']),
+                'second_options' => array('label' => 'repeatPassword', 'attr' => ['placeholder' => 'Répétez votre mot de passe']),
                 'invalid_message' => 'Mot de passe non conforme à celui taper avant'
             ));
     }

@@ -30,14 +30,13 @@ class ContactController extends Controller
             $em->persist($contact);
             $em->flush();
 
-            /* Ici envoi d'un mail de confirmation */
+            /* Ici envoi du message dans ma boîte mail */
             $message = (new \Swift_Message('Contact GAIA'))
-                ->setSubject('Contact')
-                ->setFrom('philoem24@gmail.com')
-                ->setTo($contact->getEmail())
+                ->setSubject($contact->getSubject())
+                ->setFrom($contact->getEmail())
+                ->setTo('philoem24@gmail.com')
                 ->setBody($contact->getMessage());
 
- 
             $mailer->send($message);
 
             /* Ici affichage d'un message confirmant l'enregistrement du message */

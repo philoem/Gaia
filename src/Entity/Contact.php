@@ -32,6 +32,12 @@ class Contact
     private $email;
 
     /**
+     * @ORM\Column(type="text", length=60, nullable=false)
+     * @Assert\NotBlank(message="Vous devez remplir le champs sujet")
+     */
+     private $subject;
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Vous devez remplir le champs text")
      */
@@ -81,6 +87,18 @@ class Contact
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): self
+    {
+        $this->subject = $subject;
 
         return $this;
     }
