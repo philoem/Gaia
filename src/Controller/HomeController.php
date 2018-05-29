@@ -2,19 +2,18 @@
 
 namespace App\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use App\Entity\Members;
+
 
 class HomeController extends Controller
 {
 
     /**
      * 
-     *@Route("/", name="home")
+     * @Route("/", name="home")
      * 
      */
     public function homepage()
@@ -23,12 +22,5 @@ class HomeController extends Controller
 
     }
 
-    
-
-
-
-
-    
-    
 
 }
