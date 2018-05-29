@@ -32,7 +32,8 @@ nav > ul > li
     display: none;
     margin-left: -28px;
     background-color: #0e6a5c;
-    width: 150%;
+    width: 240%;
+    
 }
 nav > ul::after
 {
@@ -118,6 +119,45 @@ nav li:hover .submenu
 }
 
 /* HOMEPAGE  */
+/* Titre personnalisé */
+.title_name_pimped
+{
+    border: 1px solid white;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.title_home_pimped
+{
+    position: absolute;
+    
+    letter-spacing: 1.5px;
+    top: 15%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    z-index: 10000;
+}
+/* Villes principales */
+#title_cities
+{
+    color:#505050;
+}
+#cities
+{
+    display: flex;
+    margin-left: 4%;
+    margin-top: 20px;
+}
+
+.list_cities
+{
+    list-style-type: none;
+    line-height: 2.5px;
+    text-transform: capitalize;
+    letter-spacing: 1.5px;
+}
+
 /* Images, en fond d'écran, animées */ 
 #slider
 {
@@ -126,10 +166,9 @@ nav li:hover .submenu
 }
 #pictures_homepage
 {
-    width: calc(1923px * 2);
-    animation: slide 15s infinite;
-    
-
+    width: calc(1925px * 2);
+    animation: slide 20s infinite;
+ 
 }
 @keyframes slide
 {

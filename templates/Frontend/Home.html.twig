@@ -10,24 +10,55 @@
             {{ parent() }}
         {% endblock header %}
 
+        {# Titre personnalisé #}
+        <div class="title_home_pimped">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <div class="text-center" id="title_homepage_pimped">
+                    <h1 class="title_name_pimped">Bienvenu "{{ app.user.username|title }}"</h1>
+                </div>
+            {% endif %}
+        </div>
+
         <div id="slider">
             <div id="pictures_homepage">
                 <div id="page_accueil1" >
 
-                    {# Titre personnalisé #}
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                        <div class="text-center" id="title_homepage_pumped">
-                            <h1>Bienvenu à vous "{{ app.user.username|title }}"</h1>
-                        </div>
-                    {% endif %}
-                    <img src="./img/verdurebis.jpg" alt="fond" />
+                    
+                    <img src="./img/verdurebis.jpg" alt="Image en rotation 1" />
 
                 </div>
                 <div id="page_accueil2" >
-                    <img src="./img/jardinage3bis.jpg" alt="fond" />
+                    <img src="./img/jardinage3bis.jpg" alt="Image en rotation 2" />
 
                 </div>
             </div>
+        </div>
+
+        <div id="cities">
+            <h2 id="title_cities">
+                Villes principales
+            </h2>
+            <ul class="list_cities">
+                <li><a class="nav-link" href="#">Paris</a></li>
+                <li><a class="nav-link" href="#">Saint-Germain-En-Laye</a></li>
+                <li><a class="nav-link" href="#">Poissy</a></li>
+                <li><a class="nav-link" href="#">Marly Le Roi</a></li>
+                <li><a class="nav-link" href="#">Le Vésinet</a></li>
+            </ul>
+            <ul class="list_cities">
+                <li><a class="nav-link" href="#">Paris</a></li>
+                <li><a class="nav-link" href="#">Saint-Germain-En-Laye</a></li>
+                <li><a class="nav-link" href="#">Poissy</a></li>
+                <li><a class="nav-link" href="#">Marly Le Roi</a></li>
+                <li><a class="nav-link" href="#">Le Vésinet</a></li>
+            </ul>
+            <ul class="list_cities">
+                <li><a class="nav-link" href="#">Paris</a></li>
+                <li><a class="nav-link" href="#">Saint-Germain-En-Laye</a></li>
+                <li><a class="nav-link" href="#">Poissy</a></li>
+                <li><a class="nav-link" href="#">Marly Le Roi</a></li>
+                <li><a class="nav-link" href="#">Le Vésinet</a></li>
+            </ul>
         </div>
 
            {# <div class="col-xs-12" id="slider">
