@@ -15,7 +15,7 @@ class ContactController extends Controller
     /**
      * @Route("/contact", name="contact")
      */
-    public function addMessageAction(Request $request, EntityManagerInterface $em)
+    public function addMessageAction(Request $request, EntityManagerInterface $em, \Swift_Mailer $mailer)
     {
         $contact = new Contact();
                              
@@ -25,13 +25,22 @@ class ContactController extends Controller
         
         if($form->isSubmitted() && $form->isValid()){
             
-            
-                        
             $em = $this->getDoctrine()->getManager();
                         
             $em->persist($contact);
             $em->flush();
-            
+
+            /* Ici envoi d'un mail de confirmation */
+            $message = (new \Swift_Message('Contact GAIA'))
+                ->setSubject('Contact')
+                ->setFrom('philoem24@gmail.com')
+                ->setTo($contact->getEmail())
+                ->setBody($contact->getMessage());
+
+ 
+            $mailer->send($message);
+
+            /* Ici affichage d'un message confirmant l'enregistrement du message */
             $this->addFlash(
                 'notice',
                 'Votre message a bien été envoyé !'
