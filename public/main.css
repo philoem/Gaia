@@ -120,6 +120,16 @@ nav li:hover .submenu
 
 /* HOMEPAGE  */
 /* Titre personnalisé */
+.title_gaia_pimped
+{
+    border: 1px solid white;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 4.5em;
+}
 .title_name_pimped
 {
     border: 1px solid white;
@@ -152,10 +162,15 @@ nav li:hover .submenu
 
 .list_cities
 {
+    display: flex;
+    flex-direction: column;
     list-style-type: none;
     line-height: 2.5px;
     text-transform: capitalize;
     letter-spacing: 1.5px;
+    word-wrap: break-word; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 /* Images, en fond d'écran, animées */ 
@@ -217,5 +232,9 @@ nav li:hover .submenu
         display: flex;
         justify-content: center;
         
+    }
+    .title_gaia_pimped
+    {
+        font-size: 2em;
     }
 }

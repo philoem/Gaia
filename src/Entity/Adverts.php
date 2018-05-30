@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,11 +54,28 @@ class Adverts
     private $idMember;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateAdverts", type="datetime", nullable=false)
+     * @ORM\GeneratedValue
+     * @Assert\DateTime()
+     */
+    private $dateAdverts;
+
+    /**
+     * @var BLOB
+     * @ORM\Column(name="picturesAdverts", type="blob", nullable=true)
+     * 
+     */
+    private $picturesAdverts;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->idMember = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateAdverts = new \DateTime();
     }
 
 
@@ -153,4 +174,28 @@ class Adverts
 
         return $this;
     }
+
+    /**
+     * Get the value of dateAdverts
+     *
+     * @return  \DateTime
+     */ 
+     public function getDateAdverts()
+     {
+         return $this->dateAdverts;
+     }
+ 
+     /**
+      * Set the value of dateAdverts
+      *
+      * @param  \DateTime  $dateRegister
+      *
+      * @return  self
+      */ 
+     public function setDateAdverts(\DateTime $dateAdverts)
+     {
+         $this->dateAdverts = $dateAdverts;
+ 
+         return $this;
+     }
 }

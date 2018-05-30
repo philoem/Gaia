@@ -16,6 +16,10 @@
                 <div class="text-center" id="title_homepage_pimped">
                     <h1 class="title_name_pimped">Bienvenu "{{ app.user.username|title }}"</h1>
                 </div>
+            {% else %}
+            <div class="text-center" id="title_homepage_pimped">
+                <h1 class="title_gaia_pimped">GAIA</h1>
+            </div>
             {% endif %}
         </div>
 
@@ -33,7 +37,7 @@
                 </div>
             </div>
         </div>
-
+        {# Liens affichés sous forme de liste listant les principales villes des membres #}
         <div id="cities">
             <h2 id="title_cities">
                 Villes principales
