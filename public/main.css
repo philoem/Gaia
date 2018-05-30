@@ -133,7 +133,7 @@ nav li:hover .submenu
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-size: 4.5em;
+    font-size: 6.5em;
 }
 .title_name_pimped
 {
@@ -149,10 +149,11 @@ nav li:hover .submenu
     position: absolute;
     
     letter-spacing: 1.5px;
-    top: 15%; left: 50%; /* à 50%/50% du parent référent */
+    top: 25%; left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
     z-index: 10000;
 }
+
 /* Villes principales */
 #title_cities
 {
