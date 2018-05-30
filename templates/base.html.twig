@@ -40,44 +40,44 @@
                 
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('home') }}" title="Cliquez ici pour retourner à l'accueil">Accueil</a>
+                        <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" title="Cliquez ici pour gérer votre compte">Mon compte</a>
+                        <a class="nav-link active" href="#">Mon compte</a>
                     
                             <ul class="submenu">
                                 <li>
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                        <a class="nav-link" href="{{ path('security_logout') }}" title="Cliquez ici pour vous déconnecter">Se déconnecter</a>
+                                        <a class="nav-link" href="{{ path('security_logout') }}" >Se déconnecter</a>
                                     {% else %}
-                                        <a class="nav-link" href="{{ path('security_login') }}" title="Cliquez ici pour vous connecter">Se connecter</a>
+                                        <a class="nav-link" href="{{ path('security_login') }}" >Se connecter</a>
                                     {% endif %}
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{ path('inscription') }}" title="Cliquez ici pour vous inscrire">Inscription</a>
+                                    <a class="nav-link" href="{{ path('inscription') }}" >Inscription</a>
                                 </li>
                                 <li>
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                        <a class="nav-link" href="{{ path('admin') }}" title="Cliquez ici pour gérer votre profil">Mon profil</a>
+                                        <a class="nav-link" href="{{ path('admin') }}" >Mon profil</a>
                                     {% else %}
-                                        <a class="nav-link" href="{{ path('security_login') }}" title="Cliquez ici pour vous connecter">Mon profil</a>
+                                        <a class="nav-link" href="{{ path('security_login') }}">Mon profil</a>
                                     {% endif %}
                                 </li>
                             </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" title="Cliquez ici pour accéder aux annonces">Annonces</a>
+                        <a class="nav-link active" href="#" >Annonces</a>
                         <ul class="submenu">
                             <li>
-                                <a class="nav-link" href="#" title="Cliquez ici pour publier une annonce">Publier une annonce</a>
+                                <a class="nav-link" href="#" >Publier une annonce</a>
                             </li>
                             <li>
-                                <a class="nav-link" href="#" title="Cliquez ici pour voir les annonces">Accéder aux annonces</a>
+                                <a class="nav-link" href="{{ path('adverts') }}">Accéder aux annonces</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('contact') }}" title="Pour venir nous parler, c'est par ici !">Contact</a>
+                        <a class="nav-link active" href="{{ path('contact') }}" >Contact</a>
                     </li>
                 </ul>
                 

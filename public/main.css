@@ -1,4 +1,9 @@
 /*  HEADER */
+body
+{
+    margin: 0;
+    padding: 0;
+}
 .navbar
 {
     background-color: #016359;
@@ -33,8 +38,9 @@ nav > ul > li
     margin-left: -28px;
     background-color: #0e6a5c;
     box-shadow: 8px 8px 12px #aaa;
-    width: 240%;
-    
+    width: 220%;
+    font-size: 0.9em;
+    padding-left: -10px;
 }
 nav > ul::after
 {
@@ -100,6 +106,7 @@ nav li:hover .submenu
     color: white;
 
 }
+
 /* PAGE CONTACT */
 /* Message de confirmation d'envoi du message du formulaire contact */
 #return_home
@@ -133,7 +140,7 @@ nav li:hover .submenu
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-size: 6.5em;
+    font-size: 4.5em;
 }
 .title_name_pimped
 {
@@ -226,6 +233,19 @@ nav li:hover .submenu
     float: left;
  
 }
+/* PAGE ADVERTS  */
+.project_image
+{
+    width: 100%;
+    height: auto;
+}
+h1, h2, h3
+{
+    padding: 0;
+    color: #505050;
+    margin: 10px 0 3px ;
+}
+
 
 /* RESPONSIVE  */
 @media screen and (max-width: 720px)
