@@ -32,6 +32,7 @@ nav > ul > li
     display: none;
     margin-left: -28px;
     background-color: #0e6a5c;
+    box-shadow: 8px 8px 12px #aaa;
     width: 240%;
     
 }
@@ -77,6 +78,10 @@ nav li:hover .submenu
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 /* PAGE REGISTER */
+#form_shadow_register, #form_shadow_login, #form_shadow_contact
+{
+    box-shadow: 8px 8px 12px #aaa;
+}
 .form-group
 {
     background-color: #82cc9f;
@@ -151,21 +156,22 @@ nav li:hover .submenu
 /* Villes principales */
 #title_cities
 {
+   
     color:#505050;
+    border-bottom: 1px solid #505050;
+    padding-bottom: 10px;
 }
 #cities
 {
-    display: flex;
-    margin-left: 4%;
     margin-top: 20px;
+    
 }
 
 .list_cities
 {
-    display: flex;
-    flex-direction: column;
+    margin-top: 20px;
     list-style-type: none;
-    line-height: 2.5px;
+    line-height: 10px;
     text-transform: capitalize;
     letter-spacing: 1.5px;
     word-wrap: break-word; 
