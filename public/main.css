@@ -320,7 +320,7 @@ h1, h2, h3
     background-repeat: no-repeat;
     box-shadow: 8px 8px 12px #aaa;
 }
-h1, h2
+aside > h1, aside >h2
 {
     color: white;
     text-shadow: 5px 5px 5px #01453f;
