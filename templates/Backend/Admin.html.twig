@@ -4,6 +4,10 @@
     Admin - {{ parent() }}
 {% endblock title %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css"> - {{ parent()}}
+{% endblock stylesheets %}
+
 {% block body %}
 
     {% block header %}
@@ -11,8 +15,24 @@
     {% endblock header %}
 
     <div class="container-fluid">
+        <div class="row">
+            <aside class="col-sm-3 col-lg-3" id="aside_weather">
+                <h1>
+                    <span id="town">Paris</span>
+                    <span id="info_town">Tapez ici votre ville</span>
+                </h1>
+                <i></i>
+                <h2>
+                    <span id="temp"></span> C° (<span id="conditions">Ciel dégagé</span>)
+                </h2>
+
+            </aside>
+            <section class="col-sm-9 col-lg-9" id="section_profil"></section>
+        </div>
+
+
         <div class="container">
-            <div class="row justify-content-center">
+            {#<div class="row justify-content-center">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-success">
                         <div class="panel-heading">List of Game of Thrones Characters</div>
@@ -38,8 +58,12 @@
                         <a href="/login" class="btn btn-info"> You need to login to see the list 😜😜 >></a>
                     {% endif %}
                 </div>
-            </div>
+            </div>#}
         </div>
     </div>
-    
+
+    {% block javascripts %}
+        <script src="{{ asset('js/Weather.js') }}"></script>
+    {% endblock javascripts %}
+
 {% endblock body %}
