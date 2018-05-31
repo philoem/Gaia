@@ -27,6 +27,7 @@
         {% block header %}
         <header>
             <nav class="navbar navbar">
+                
             
                 <div class="col" id="logo_name_text">
                     <div class="col">
@@ -38,32 +39,34 @@
                     </div>
                 </div>
                 
+                {# Ici le menu en forme de "hamburger" lorsque l'écran est petit #}
+                
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Mon compte</a>
-                    
-                            <ul class="submenu">
-                                <li>
-                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                        <a class="nav-link" href="{{ path('security_logout') }}" >Se déconnecter</a>
-                                    {% else %}
-                                        <a class="nav-link" href="{{ path('security_login') }}" >Se connecter</a>
-                                    {% endif %}
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="{{ path('inscription') }}" >Inscription</a>
-                                </li>
-                                <li>
-                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                        <a class="nav-link" href="{{ path('admin') }}" >Mon profil</a>
-                                    {% else %}
-                                        <a class="nav-link" href="{{ path('security_login') }}">Mon profil</a>
-                                    {% endif %}
-                                </li>
-                            </ul>
+                        
+                        <ul class="submenu">
+                            <li>
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                <a class="nav-link" href="{{ path('security_logout') }}" >Se déconnecter</a>
+                                {% else %}
+                                <a class="nav-link" href="{{ path('security_login') }}" >Se connecter</a>
+                                {% endif %}
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ path('inscription') }}" >Inscription</a>
+                            </li>
+                            <li>
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                <a class="nav-link" href="{{ path('admin') }}" >Mon profil</a>
+                                {% else %}
+                                <a class="nav-link" href="{{ path('security_login') }}">Mon profil</a>
+                                {% endif %}
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#" >Annonces</a>
@@ -80,7 +83,7 @@
                         <a class="nav-link active" href="{{ path('contact') }}" >Contact</a>
                     </li>
                 </ul>
-                
+              
             </nav>
         </header>
         {% endblock header %}

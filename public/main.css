@@ -4,11 +4,13 @@ body
     margin: 0;
     padding: 0;
 }
+
 .navbar
 {
     background-color: #016359;
     height: 65px;
 }
+
 nav > ul > li
 {
     float: left;
@@ -162,6 +164,7 @@ nav li:hover .submenu
 }
 
 /* Villes principales */
+
 #title_cities
 {
    
@@ -274,25 +277,53 @@ h1, h2, h3
 
 
 /* RESPONSIVE  */
-@media screen and (max-width: 720px)
+@media screen and (max-width: 768px)
 {
     #text_logo, #logo_name_text
     {
         display: none;
     }
-    nav.navbar
-    {
-        display: flex;
-        justify-content: center;
-        
-    }
+    
     .title_gaia_pimped
     {
+        display: flex;
         font-size: 2em;
+        color: black;
+    }
+    .title_name_pimped
+    {
+        display: flex;
+        justify-content: start;
+        color: black;
+        border: 1px solid black;
+        font-size: 1.8em;
+    }
+    #slider
+    {
+        display: none;
+    }
+    #form
+    {
+       padding: 7px;
+    }
+    #list_towns
+    {
+        height: 1300px;
+        
+    }
+    #cities
+    {
+        margin-top: 30%;
+    }
+    .title_name_pimped, .title_home_pimped
+    {
+       margin-top: -15%;
     }
     
+    
+  
 }
-@media screen and (min-width: 720px)
+@media screen and (min-width: 768px)
 {
     .portfolio
     {
