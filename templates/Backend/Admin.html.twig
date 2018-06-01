@@ -14,10 +14,10 @@
     {% block header %}
         {{ parent() }}
     {% endblock header %}
-    {# Ici affichage de la météo #}
+    {# Ici affichage de la météo et des détails du profil #}
     <div class="container-fluid">
         <div class="row" id="weather">
-            <aside class="col-sm-3 col-lg-3" id="aside_weather">
+            {#<aside class="col-sm-3 col-lg-3" id="aside_weather">
                 <h1>
                     <span id="town">Paris</span>
                     <span id="info_town">Tapez ici votre ville</span>
@@ -30,43 +30,20 @@
                     Taux d'humidité 
                 </h3>
                 <h4><span id="humidity"></span>%</h4>
-            </aside>
+            </aside>#}
 
             <section class="col-sm-9 col-lg-9" id="section_profil">
+                
+                <div class="col-sm-2 col-lg-2" id="picture_avatar">
+
+                </div>
+                <div class="col-sm-7 col-lg-7"id="profil">
+
+                </div>
                 
             </section>
         </div>
 
-
-        <div class="container">
-            {#<div class="row justify-content-center">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">List of Game of Thrones Characters</div>
-
-                        {% if app.user != null %}
-                            <table class="table">
-                                <tr>
-                                    <th>Character</th>
-                                    <th>Real Name</th>
-                                </tr>
-
-                                {% for key, item in character %}
-                                    <tr>
-                                    <td>{{ key }}</td><td>{{ item }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        {% endif %}
-
-                    </div>
-
-                    {% if app.user == null %}
-                        <a href="/login" class="btn btn-info"> You need to login to see the list 😜😜 >></a>
-                    {% endif %}
-                </div>
-            </div>#}
-        </div>
     </div>
 
     {% block javascripts %}

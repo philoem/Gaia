@@ -80,6 +80,11 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <a class="nav-link" href="{{ path('members') }}" >Membres</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="{{ path('contact') }}" >Contact</a>
                     </li>
                 </ul>

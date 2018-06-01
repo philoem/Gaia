@@ -236,7 +236,7 @@ nav li:hover .submenu
     float: left;
  
 }
-/* PAGE ADVERTS  */
+/* PAGE MEMBERS  */
 .project
 {
     margin-bottom: 20px;
@@ -255,6 +255,11 @@ nav li:hover .submenu
 {
     width: 100%;
     height: auto;
+    
+}
+.project > img
+{
+    box-shadow: 8px 8px 12px #aaa;
 }
 h1, h2, h3
 {
@@ -306,7 +311,6 @@ h1, h2, h3
 }
 #aside_weather, #section_profil
 {
-    
     margin-top: 2%;
     height: 650px;
 }
@@ -362,7 +366,30 @@ i.wi
     margin-top: 25%;
     font-size: 2.5em;
 }
-
+/* Section gestion du profil */
+#picture_avatar, #profil
+{
+    position: relative;
+    border: 1px solid black;
+    
+}
+#picture_avatar
+{
+    padding-top: 20%;
+    margin-left: -5%;
+    height: 20%;
+}
+#profil
+{
+    width: 110%;
+    height: 80%;
+}
+#section_profil
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
 
 
