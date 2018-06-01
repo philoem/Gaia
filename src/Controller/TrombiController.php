@@ -12,6 +12,6 @@ class TrombiController extends Controller
      */
     public function index()
     {
-        return $this->render('Backend/members/Trombi.html.twig');
+        return $this->render('Backend/Trombi.html.twig');
     }
 }
