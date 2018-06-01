@@ -101,6 +101,24 @@ class Members implements UserInterface, \Serializable
      */
     private $dateRegister;
 
+    /**
+     * @ORM\Column(name="address", type="string", length=80, nullable=true)
+     */
+     private $address;
+    
+    /**
+     * @ORM\Column(name="lat", type="decimal", precision=6, scale=6,  nullable=true)
+     */
+     private $lat;
+
+    /**
+     * @ORM\Column(name="lng", type="decimal", precision=6, scale=6, nullable=true)
+     */
+     private $lng;
+
+    
+    
+
     
     /**
      * Constructor
@@ -321,6 +339,10 @@ class Members implements UserInterface, \Serializable
             $this->mail,
             $this->password,
             $this->isActive,
+            $this->address,
+            $this->lat,
+            $this->lng,
+
         ));
     }
     public function unserialize($serialized)
@@ -333,6 +355,9 @@ class Members implements UserInterface, \Serializable
             $this->mail,
             $this->password,
             $this->isActive,
+            $this->address,
+            $this->lat,
+            $this->lng,
         ) = unserialize($serialized);
     }
 
@@ -382,6 +407,78 @@ class Members implements UserInterface, \Serializable
     public function setPassword(string $password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+    * Get the value of address
+    *
+    * @return  string
+    */ 
+    public function getAddress()
+    {
+        return $this->address;
+    }
+ 
+    /**
+    * Set the value of address
+    *
+    * @param  string  $address
+    *
+    * @return  self
+    */ 
+    public function setAddress(string $address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+    * Get the value of lat
+    *
+    * @return  float
+    */ 
+    public function getLat()
+    {
+        return $this->lat;
+    }
+ 
+    /**
+    * Set the value of lat
+    *
+    * @param  float  $lat
+    *
+    * @return  self
+    */ 
+    public function setLat(string $lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+    * Get the value of lng
+    *
+    * @return  float
+    */ 
+    public function getLng()
+    {
+        return $this->lng;
+    }
+ 
+    /**
+    * Set the value of lng
+    *
+    * @param  float  $lng
+    *
+    * @return  self
+    */ 
+    public function setLng(string $lng)
+    {
+        $this->lng = $lng;
 
         return $this;
     }
