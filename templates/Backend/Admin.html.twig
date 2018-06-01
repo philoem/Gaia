@@ -14,9 +14,9 @@
     {% block header %}
         {{ parent() }}
     {% endblock header %}
-
+    {# Ici affichage de la météo #}
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" id="weather">
             <aside class="col-sm-3 col-lg-3" id="aside_weather">
                 <h1>
                     <span id="town">Paris</span>
@@ -26,9 +26,15 @@
                 <h2>
                     <span id="temp"></span> C° (<span id="conditions">Ciel dégagé</span>)
                 </h2>
-
+                <h3>
+                    Taux d'humidité 
+                </h3>
+                <h4><span id="humidity"></span>%</h4>
             </aside>
-            <section class="col-sm-9 col-lg-9" id="section_profil"></section>
+
+            <section class="col-sm-9 col-lg-9" id="section_profil">
+                
+            </section>
         </div>
 
 

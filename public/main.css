@@ -306,9 +306,13 @@ h1, h2, h3
 }
 #aside_weather, #section_profil
 {
-    border: 1px solid black;
+    
     margin-top: 2%;
     height: 650px;
+}
+#section_profil
+{
+    border: 1px solid black;
 }
 #aside_weather
 {
@@ -320,11 +324,11 @@ h1, h2, h3
     background-repeat: no-repeat;
     box-shadow: 8px 8px 12px #aaa;
 }
-aside > h1, aside >h2
+aside > h1, aside >h2, aside >h3, aside > h4
 {
     color: white;
     text-shadow: 5px 5px 5px #01453f;
-    margin-top: 30%;
+    margin-top: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -361,7 +365,9 @@ i.wi
 
 
 
+
 /* RESPONSIVE  */
+/* Format Ipad */
 @media screen and (max-width: 768px)
 {
     #text_logo, #logo_name_text
@@ -404,9 +410,30 @@ i.wi
     {
        margin-top: -15%;
     }
+    aside > h1, aside >h2, aside >h3, aside > h4
+    {
+        font-size: 1.5em;
+    }
+    #aside_weather, #section_profil
+    {
+        margin: 0 auto;
+        margin-top: 2%;
+        height: 10%;
+        width: 50%;
+    }
     
     
   
+}
+/* Format IphoneX */
+@media screen and (max-width: 375px)
+{
+    #weather
+    {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2%;
+    }
 }
 @media screen and (min-width: 768px)
 {

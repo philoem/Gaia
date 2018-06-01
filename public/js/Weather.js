@@ -12,8 +12,6 @@ const icons  = {
     "Mist": "wi wi-day-fog",
     "Drizzle": "wi wi-day-sleet",
     "Thunderstorm": "wi wi-day-thunderstorm",
-    
-    
 }
 /**
  * Permet de mettre la 1ère lettre en majuscule
@@ -37,9 +35,6 @@ const icons  = {
     } else {
         town = document.querySelector('#town').textContent;
     }
-
-    
-
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${town}&APPID=aae6a97a81d3f58554d00f5292788a79&lang=fr&units=metric`)
         .then(result => result.json())
         .then(json => json)
@@ -59,17 +54,22 @@ function show (data) {
     const temp = data.main.temp
     const description = data.weather[0].description
     const conditions = data.weather[0].main
+    const humidity = data.main.humidity
 
     document.querySelector('#town').textContent = name
     document.querySelector('#temp').textContent = Math.round(temp)
     document.querySelector('#conditions').textContent = capitalize(description)
+    document.querySelector('#humidity').textContent = humidity
     
     document.querySelector('i.wi').className = icons[conditions]
     document.querySelector('#aside_weather').classList = conditions.toLowerCase()
 
 
 }
-
+/**
+ * Affichage d'une autre ville possible
+ * 
+ */
 const town = document.querySelector('#town')
 town.addEventListener('click', (e) => {
     town.contentEditable = true
