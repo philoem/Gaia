@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AdminController extends Controller
+class TrombiController extends Controller
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/members", name="members")
      */
     public function index()
     {
-        return $this->render('Backend/admin/Admin.html.twig');
+        return $this->render('Backend/members/Trombi.html.twig');
     }
 }

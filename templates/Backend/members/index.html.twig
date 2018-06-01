@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Members index{% endblock %}
+
+{% block body %}
+    <h1>Members index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdMember</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Username</th>
+                <th>Mail</th>
+                <th>Password</th>
+                <th>Salt</th>
+                <th>Roles</th>
+                <th>IsActive</th>
+                <th>DateRegister</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for member in members %}
+            <tr>
+                <td>{{ member.idMember }}</td>
+                <td>{{ member.firstname }}</td>
+                <td>{{ member.lastname }}</td>
+                <td>{{ member.username }}</td>
+                <td>{{ member.mail }}</td>
+                <td>{{ member.password }}</td>
+                <td>{{ member.salt }}</td>
+                <td>{{ member.roles ? member.roles|join(', ') : '' }}</td>
+                <td>{{ member.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ member.dateRegister ? member.dateRegister|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('members_show', {'idMember': member.idMember}) }}">show</a>
+                    <a href="{{ path('members_edit', {'idMember': member.idMember}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('members_new') }}">Create new</a>
+{% endblock %}
