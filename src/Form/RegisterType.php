@@ -30,8 +30,10 @@ class RegisterType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'password', 'attr' => ['placeholder' => 'Votre mot de passe']),
                 'second_options' => array('label' => 'repeatPassword', 'attr' => ['placeholder' => 'Répétez votre mot de passe']),
-                'invalid_message' => 'Mot de passe non conforme à celui taper avant'
-            ));
+                'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
+            ->add('address', TextType::class, ['label' => 'Votre adresse : ', 'attr' => ['placeholder' => 'Ex : N° et nom de rue, Nom de votre ville']])
+            
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

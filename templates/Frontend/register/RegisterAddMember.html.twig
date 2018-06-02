@@ -4,6 +4,11 @@
     Inscription - {{ parent() }}
 {% endblock title %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.css"/>
+{% endblock stylesheets %}
+
 {% block body %}
     {% block header %}
         {{ parent() }}
@@ -31,44 +36,54 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-sm-12">
-                                
-                                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-                                
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                                
-                            <div class="col-sm-12">
-                                {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                                
-                            <div class="col-sm-12 col-lg-12">
-                                {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                            <div class="row">   
+                                <div class="col col-sm-6">
+                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="col col-sm-6">
+                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(form) }}
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                       
-                            <div class="col-sm-12 col-lg-12">
-                                {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form) }}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                                </div>
                             </div>
-                        
                         </div>
                         
                         <div class="form-group">
                             <div class="row col-sm-12  justify-content-center">
-                                <button type="submit" class="btn btn-primary"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
-                                
+                                <button type="submit" class="btn btn-primary" id="btn_submit_register"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
                             </div>
-                            
+                        </div> 
+                        
+                        <div class="address">
+                            <ul>
+                                {% for adresse in addresse %}
+                                <li>{{ adresse.address }}</li>
+                                {% endfor %}
+                            </ul>
                         </div>
-                                                
                         {# Fermeture de la balise <form> du formulaire HTML #}
                         {{ form_end(form) }}
                         
@@ -89,37 +104,12 @@
                     {% endfor %}
                 </div>
             </div>
-        {# Fenêtre modale Bootstrap 
-        <div class="col-sm-12">
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">Page d'inscription pour les nouveaux !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                        <p>Bienvenu sur la page d'inscription de la communauté GAIA.</p>
-                        <p>Rempli tous les champs du formulaire et valide ensuite.</p>
-                        <p>Tu seras redirigé vers la page de ta 1ère connexion.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         
-    </div>
     
     {% block javascripts %}
-        {{ parent() }}
-         Activation de la fenêtre modale Bootstrap #}
-        {#<script type="text/javascript" src="{{ asset('js/Functions.js') }}"></script>
-    {% endblock javascripts %}#}
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js"></script>
+    <script src="{{ asset('js/ConvertAdd.js') }}"></script>
+        
+    {% endblock javascripts %}
 
 {% endblock body %}

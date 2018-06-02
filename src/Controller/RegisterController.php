@@ -25,6 +25,7 @@ class RegisterController extends Controller
         
         $form->handleRequest($request);
         
+        $em = $this->getDoctrine()->getManager();
         if($form->isSubmitted() && $form->isValid()){
             
             $this->passwordEncoder = $passwordEncoder;
@@ -33,10 +34,9 @@ class RegisterController extends Controller
             $member->setPassword($password);
 
             $username = $member->getUsername();
-                        
+
             $member->setRoles(['ROLE_ADMIN']);
-                        
-            $em = $this->getDoctrine()->getManager();
+
                         
             $em->persist($member);
             $em->flush();
@@ -49,12 +49,15 @@ class RegisterController extends Controller
             
                        
             return $this->redirectToRoute('inscription');
-        
+            
         }
+        
+        $products = $this->getDoctrine()->getRepository(Members::class)->findAll();
 
         $formView = $form->createView();
         
-        return $this->render('Frontend/register/RegisterAddMember.html.twig', array('form'=>$formView));
+        return $this->render('Frontend/register/RegisterAddMember.html.twig', array('form'=>$formView,
+    'addresse' => $products));
   
 
     }

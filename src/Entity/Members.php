@@ -82,7 +82,7 @@ class Members implements UserInterface, \Serializable
     private $salt;
 
     /**
-     * @ORM\Column(name="roles", type="array")
+     * @ORM\Column(name="roles", type="array", nullable=true)
      * 
      */
     private $roles = [];
@@ -115,10 +115,6 @@ class Members implements UserInterface, \Serializable
      * @ORM\Column(name="lng", type="decimal", precision=6, scale=6, nullable=true)
      */
      private $lng;
-
-    
-    
-
     
     /**
      * Constructor
@@ -308,6 +304,30 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * Get the value of isActive
+     *
+     * @return  booleen
+     */ 
+     public function getIsActive()
+     {
+         return $this->isActive;
+     }
+ 
+     /**
+      * Set the value of isActive
+      *
+      * @param  booleen  $isActive
+      *
+      * @return  self
+      */ 
+     public function setIsActive(string $isActive)
+     {
+         $this->isActive = $isActive;
+ 
+         return $this;
+     }
+
     public function isAccountNonExpired()
     {
         return true;
@@ -339,6 +359,7 @@ class Members implements UserInterface, \Serializable
             $this->mail,
             $this->password,
             $this->isActive,
+            $this->roles,
             $this->address,
             $this->lat,
             $this->lng,
@@ -355,6 +376,7 @@ class Members implements UserInterface, \Serializable
             $this->mail,
             $this->password,
             $this->isActive,
+            $this->roles,
             $this->address,
             $this->lat,
             $this->lng,
