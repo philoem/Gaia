@@ -2,7 +2,7 @@ L.mapquest.key = '8UdpqosaDre44rrPWLERXinlPeAMLeM0'
 
 
 let element = document.getElementById('btn_submit_register')
-let address = document.getElementsByName('address')
+let address = document.getElementById('address')
 
 element.addEventListener('click', (e) => {
     L.mapquest.map('map', {

@@ -75,15 +75,9 @@
                             <div class="row col-sm-12  justify-content-center">
                                 <button type="submit" class="btn btn-primary" id="btn_submit_register"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
                             </div>
-                        </div> 
-                        
-                        <div class="address">
-                            <ul>
-                                {% for adresse in addresse %}
-                                <li>{{ adresse.address }}</li>
-                                {% endfor %}
-                            </ul>
                         </div>
+
+                        
                         {# Fermeture de la balise <form> du formulaire HTML #}
                         {{ form_end(form) }}
                         
@@ -93,23 +87,17 @@
         </form>
         {# Message de confirmation d'inscription #}
         <div class="container">
-                <div class="row justify-content-center">
-                    {% for message in app.flashes('notice') %}
-                        <div class="flash-notice">
-                            <h1>{{ message }}</h1>
-                            <div class="row justify-content-center">
-                                <a href="{{ path('security_login') }}" title="Connexion" id="return_home">Allez vous connecter</a>
-                            </div>
+            <div class="row justify-content-center">
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice">
+                        <h1>{{ message }}</h1>
+                        <div class="row justify-content-center">
+                            <a href="{{ path('security_login') }}" title="Connexion" id="return_home">Allez vous connecter</a>
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             </div>
-        
+        </div>
     
-    {% block javascripts %}
-    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js"></script>
-    <script src="{{ asset('js/ConvertAdd.js') }}"></script>
-        
-    {% endblock javascripts %}
 
 {% endblock body %}

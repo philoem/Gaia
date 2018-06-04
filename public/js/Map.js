@@ -3,28 +3,33 @@
  * Carte des membres
  * 
  */
-/*let town = [];
-class Map {
+/*let town = [];*/
 
+// Permet de mettre la 1ère lettre en majuscule
+function capitalize (str) {
 
-	constructor() {
-		this.initMap();
-	}
-	initMap() {
-		this.map = new google.maps.Map(document.querySelector('#map'), { 
-			zoom: 12,
-			center:{lat: 48.8671, lng: 2.09941 }
-		});
-	}
-}*/
+  return str[0].toUpperCase() + str.slice(1)
 
-/*let town = ['le port-marly', 'le vesinet', 'le pecq','marly-le-roi' ]
-let town = L.mapquest.geocoding().geocode(['le port-marly', 'le vesinet', 'le pecq','marly-le-roi', 'saint-germain-en-laye', 'maisons-laffitte', 'sartrouville', 'le mesnil-le-roi']);*/
-
-/*let resp = []*/
-
+}
 L.mapquest.key = '8UdpqosaDre44rrPWLERXinlPeAMLeM0'
-L.mapquest.geocoding().geocode(['le port-marly', 'le vesinet', 'le pecq','marly-le-roi', 'saint-germain-en-laye', 'maisons-laffitte', 'sartrouville', 'le mesnil-le-roi'], createMap)
+
+let address = document.getElementsByClassName('address')
+
+for (var i = 0; i < address.length; i++) {
+    console.log(address[i].textContent)
+}
+
+let usernameAddress = address[2].textContent
+let split = usernameAddress.split(',')
+console.log(address)
+
+/*let town = ['le port-marly', 'le vesinet', 'le pecq','marly-le-roi' ]*/
+/*let town = L.mapquest.geocoding().geocode(['le port-marly', 'le vesinet', 'le pecq','marly-le-roi', 'saint-germain-en-laye', 'maisons-laffitte', 'sartrouville', 'le mesnil-le-roi']);
+
+let resp = []*/
+
+
+L.mapquest.geocoding().geocode([usernameAddress], createMap)
 
 function createMap(error, response) {
     // Initialize the Map
@@ -50,7 +55,7 @@ function createMap(error, response) {
 
       // Create a marker for each location
       let marker = L.marker(locationLatLng, {icon: L.mapquest.icons.marker()})
-        .bindPopup(location.adminArea5 + ', ' + location.adminArea3)
+        .bindPopup(capitalize(split[0]) + ', ' + location.adminArea5 + ', ' + location.adminArea3)
 
       group.push(marker)
     }

@@ -33,7 +33,9 @@ class RegisterController extends Controller
             $password = $passwordEncoder->encodePassword($member, $member->getPassword());
             $member->setPassword($password);
 
-            $username = $member->getUsername();
+            $username = json_encode($member->getUsername());
+            $address = json_encode($member->getAddress());
+            $member->setAddress($address);
 
             $member->setRoles(['ROLE_ADMIN']);
 
@@ -52,12 +54,10 @@ class RegisterController extends Controller
             
         }
         
-        $products = $this->getDoctrine()->getRepository(Members::class)->findAll();
 
         $formView = $form->createView();
         
-        return $this->render('Frontend/register/RegisterAddMember.html.twig', array('form'=>$formView,
-    'addresse' => $products));
+        return $this->render('Frontend/register/RegisterAddMember.html.twig', array('form'=>$formView));
   
 
     }

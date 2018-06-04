@@ -24,7 +24,13 @@
     </div>
     <div id="map"></div>
 </div>
-<div style="height:50px; color:black">{{ username }}</div>
+<div id="addresses">
+        <ul>
+            {% for adresse in addresses %}
+            <li class="address">{{ adresse.username|capitalize }}, {{ adresse.address }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
     
     
