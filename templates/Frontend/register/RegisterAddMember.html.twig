@@ -15,7 +15,7 @@
     {% endblock header %}
 
     <div class="container" >
-        <form class="form-horizontal" role="form" method="POST" action="{{ path('inscription') }}" id="form">
+        <form class="form-horizontal" role="form" method="POST" action="{{ path('inscription') }}" id="form_register">
             <div class="row justify-content-center">
                 <div class="form-group col-sm-6 col-lg-6" id="form_shadow_register">
                     <div class="col-sm-12 col-lg-12 ">
@@ -26,11 +26,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col col-sm-6">
-                                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.firstname, 'Votre prénom :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
                                 </div>
                            
                                 <div class="col col-sm-6">
-                                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.lastname, 'Votre nom :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -38,7 +40,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.username, 'Votre pseudonyme :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Votre pseudo'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -46,7 +49,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_widget(form.mail, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.mail, 'Votre email :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.mail, {'attr': {'class': 'form-control', 'placeholder': 'Votre email'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -54,10 +58,12 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col col-sm-6">
-                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.password.first, 'Votre mot de passe :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
                                 </div>
                                 <div class="col col-sm-6">
-                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.password.second, 'Répétez votre mot de passe :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Retapez votre mot de passe'}}) }}
                                     {{ form_errors(form) }}
                                 </div>
                             </div>
@@ -66,7 +72,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form.address, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Ex : N° et nom de rue, Nom de votre ville'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -76,8 +83,6 @@
                                 <button type="submit" class="btn btn-primary" id="btn_submit_register"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
                             </div>
                         </div>
-
-                        
                         {# Fermeture de la balise <form> du formulaire HTML #}
                         {{ form_end(form) }}
                         

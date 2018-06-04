@@ -11,7 +11,7 @@
     
 
     <div class="container">
-        <div class="row justify-content-center" id="form">
+        <div class="row justify-content-center" id="form_contact">
             <div class="form-group col-sm-5" id="form_shadow_contact">
                 <div class="col-sm-12 col-lg-12">
                     <h3 class="text-center">Laissez-nous votre message, nous vous répondrons dans les plus brefs délais</h3>
@@ -19,7 +19,38 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ path('contact') }}">
 
                             {{ form_start(form) }}
-                            {{ form_widget(form) }}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.name, 'Votre nom :', {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.email, 'Votre email :', {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre email'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.subject, "L'objet de votre mail :", {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Sujet'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.message, "Votre message :", {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Tapez ici votre message...', 'rows': 10}}) }}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group col-sm-12">
                                 <div class="row col-sm-12  justify-content-center" >
                                     
