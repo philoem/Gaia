@@ -5,6 +5,7 @@ namespace App\Entity;
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,7 +56,7 @@ class Members implements UserInterface, \Serializable
      * @Assert\Valid
      * 
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
@@ -102,19 +103,27 @@ class Members implements UserInterface, \Serializable
     private $dateRegister;
 
     /**
-     * @ORM\Column(name="address", type="string", length=80, nullable=true)
-     */
-     private $address;
+    * @ORM\Column(name="address", type="string", length=80, nullable=true)
+    */
+    private $address;
     
     /**
-     * @ORM\Column(name="lat", type="decimal", precision=6, scale=6,  nullable=true)
-     */
-     private $lat;
+    * @ORM\Column(name="lat", type="decimal", precision=6, scale=6,  nullable=true)
+    */
+    private $lat;
 
     /**
-     * @ORM\Column(name="lng", type="decimal", precision=6, scale=6, nullable=true)
-     */
-     private $lng;
+    * @ORM\Column(name="lng", type="decimal", precision=6, scale=6, nullable=true)
+    */
+    private $lng;
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="image", type="string", length=255, nullable=true)
+    * @Assert\Image(mimeTypes={ "image/jpg" })
+    */
+    private $image;
     
     /**
      * Constructor
@@ -501,6 +510,30 @@ class Members implements UserInterface, \Serializable
     public function setLng(string $lng)
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+    * Get the value of image
+    *
+    * @return  string
+    */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+ 
+    /**
+    * Set the value of image
+    *
+    * @param  string  $image
+    *
+    * @return  self
+    */ 
+    public function setImage(string $image)
+    {
+        $this->image = $image;
 
         return $this;
     }

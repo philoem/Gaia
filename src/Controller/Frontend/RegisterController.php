@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Entity\Members;
 use App\Form\RegisterType;
@@ -33,8 +33,8 @@ class RegisterController extends Controller
             $password = $passwordEncoder->encodePassword($member, $member->getPassword());
             $member->setPassword($password);
 
-            $username = json_encode($member->getUsername());
-            $address = json_encode($member->getAddress());
+            $username = $member->getUsername();
+            $address = $member->getAddress();
             $member->setAddress($address);
 
             $member->setRoles(['ROLE_ADMIN']);
