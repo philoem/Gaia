@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création annonce - {{ parent()}}{% endblock title %}
+
+{% block stylesheets %}  
+<link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+{{ parent()}} 
+{% endblock stylesheets %}
+
+{% block body %}
+{% block header %} {{ parent() }} {% endblock header %}
+<div class="container">    
+    <h1>Modification de l'annonce</h1>
+
+    {{ include('Backend/adverts/_form.html.twig', {'button_label': 'Modification'}) }}
+
+    <a href="{{ path('adverts_index') }}">Retour à la liste des annonces</a>
+
+    {{ include('Backend/adverts/_delete_form.html.twig') }}
+</div>
+{% endblock body %}

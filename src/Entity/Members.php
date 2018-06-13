@@ -121,7 +121,10 @@ class Members implements UserInterface, \Serializable
     * @var string
     *
     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-    * @Assert\Image(mimeTypes={ "image/jpg" })
+    * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png"})
+    * @Assert\Valid()
+    * @Assert\Type(type="App\Entity\Image")
+    * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
     */
     private $image;
     
@@ -527,11 +530,11 @@ class Members implements UserInterface, \Serializable
     /**
     * Set the value of image
     *
-    * @param  string  $image
+    * @param  \App\Entity\Image $image
     *
-    * @return  self
+    * @return  Members
     */ 
-    public function setImage(string $image)
+    public function setImage(\App\Entity\Image $image = null)
     {
         $this->image = $image;
 

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création annonce - {{ parent()}}{% endblock %}
+
+{% block stylesheets %}  {{ parent() }} {% endblock stylesheets %}
+
+{% block body %}
+{% block header %} {{ parent() }} {% endblock header %}
+<div class="container">      
+    <h1>Créer votre annonce</h1>
+
+    {{ include('Backend/adverts/_form.html.twig') }}
+
+    <a href="{{ path('adverts_index') }}">Retour à la liste des annonces</a>
+</div>
+{% endblock body %}

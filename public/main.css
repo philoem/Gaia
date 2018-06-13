@@ -393,8 +393,7 @@ i.wi
 /* Section gestion du profil */
 #picture_avatar
 {
-    position: relative;
-    border: 1px solid black;
+    margin-top: -40%;
 }
 #picture_avatar
 {
@@ -415,6 +414,27 @@ i.wi
     justify-content: space-around;
     align-items: center;
 }
+/* PAGE ADVERTS */
+/* Icônes FontAwesome */
+#icon_new
+{
+    
+}
+#icon_file
+{
+    color: #bb86fc;
+   
+}
+#icon_plus
+{
+    position: relative;
+    margin-left: -20px;
+    padding-bottom: 20px;
+    font-size: 50%;
+    color: white;
+    
+}
+
 
 
 /* RESPONSIVE  */
@@ -467,10 +487,23 @@ i.wi
     }
     #aside_weather, #section_profil
     {
+        display: flex;
+        flex-direction: column;
         margin: 0 auto;
         margin-top: 2%;
         height: 10%;
-        width: 50%;
+    }
+    #aside_weather
+    {
+        width: 70%;
+    }
+    #picture_avatar, #profil
+    {
+        margin-top: -1%;
+        
+        margin-bottom: 10%;
+        
+       
     }
     
     

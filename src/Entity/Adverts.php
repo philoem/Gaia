@@ -58,13 +58,13 @@ class Adverts
      *
      * @ORM\Column(name="dateAdverts", type="datetime", nullable=false)
      * @ORM\GeneratedValue
-     * @Assert\DateTime()
+     * @Assert\Type(type="\DateTime")
      */
     private $dateAdverts;
 
     /**
-     * @var BLOB
-     * @ORM\Column(name="picturesAdverts", type="blob", nullable=true)
+     * @var string
+     * @ORM\Column(name="picturesAdverts", type="string", nullable=true)
      * 
      */
     private $picturesAdverts;
@@ -176,26 +176,50 @@ class Adverts
     }
 
     /**
-     * Get the value of dateAdverts
-     *
-     * @return  \DateTime
-     */ 
-     public function getDateAdverts()
-     {
-         return $this->dateAdverts;
-     }
+    * Get the value of dateAdverts
+    *
+    * @return  \DateTime
+    */ 
+    public function getDateAdverts()
+    {
+        return $this->dateAdverts;
+    }
  
      /**
-      * Set the value of dateAdverts
-      *
-      * @param  \DateTime  $dateRegister
-      *
-      * @return  self
-      */ 
-     public function setDateAdverts(\DateTime $dateAdverts)
-     {
-         $this->dateAdverts = $dateAdverts;
- 
-         return $this;
-     }
+    * Set the value of dateAdverts
+    *
+    * @param  \DateTime  $dateRegister
+    *
+    * @return  self
+    */ 
+    public function setDateAdverts(\DateTime $dateAdverts)
+    {
+        $this->dateAdverts = $dateAdverts;
+
+        return $this;
+    }
+
+    /**
+    * Get the value of picturesAdverts
+    *
+    * @return  string
+    */ 
+    public function getPicturesAdverts()
+    {
+        return $this->picturesAdverts;
+    }
+
+    /**
+    * Set the value of picturesAdverts
+    *
+    * @param  string  $picturesAdverts
+    *
+    * @return  self
+    */ 
+    public function setPicturesAdverts($picturesAdverts)
+    {
+        $this->picturesAdverts = $picturesAdverts;
+
+        return $this;
+    }
 }

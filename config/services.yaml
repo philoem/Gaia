@@ -3,7 +3,7 @@
 parameters:
     locale: 'fr'
     env(DATABASE_HOST): localhost
-    images_directory: '%kernel.project_dir%/public/img/profil'
+    images_directory: '%kernel.project_dir%/../public/img/profil'
 
 services:
     app.security.login_authenticator:
@@ -18,8 +18,6 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     
     App\:
         resource: '../src/*'
@@ -33,4 +31,22 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    
+    #image_uploader:
+    #    class: App\Entity\Image
+    #    arguments: ['%images_directory%']
+    App\Service\ImageUploader:
+        arguments:
+            $targetDirectory: '%images_directory%'
+
+    App\EventListener\ImageUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            #- { name: doctrine.event_listener, event: postLoad }
+
+    #image_listener:
+    #    class: App\EventListener\ImageUploadListener
+    #    arguments: ['@image_uploader']
+    #    tags:
+    #        - { name: doctrine.event_listener, event: prePersist }
+    #        - { name: doctrine.event_listener, event: preUpdate }

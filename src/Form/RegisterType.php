@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Members;
+use App\Form\Admin\UploadImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -31,6 +33,7 @@ class RegisterType extends AbstractType
                 'second_options' => array('label' => 'repeatPassword'),
                 'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
             ->add('address', TextType::class)
+            ->add('image', UploadImageType::class, array('label' => 'Ci-dessous insérez votre image :', 'required' => false))
         ;
     }
 

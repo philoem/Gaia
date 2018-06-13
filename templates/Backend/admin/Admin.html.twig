@@ -35,7 +35,7 @@
             <section class="col-sm-9 col-lg-9" id="section_profil">
                 
                 <div class="col-sm-2 col-lg-2" id="picture_avatar">
-                    {{ user.image }}
+                    <img src="{{ asset('img/profil' ~ user.image )  }}" width="250" height="300">
                     <h6>Votre photo de profil</h6>
 
                 </div>
@@ -45,7 +45,7 @@
                             <div class="col-sm-12 col-lg-12">
                                 <h3 class="text-center">Votre profil</h3>
                                 <div class="form-group">
-                                    <form class="form-horizontal" role="form" method="POST" action="{{ path('admin') }}" novalidate="novalidate">
+                                    <form class="form-horizontal" role="form" method="POST" action="{{ path('admin_index') }}" novalidate="novalidate">
             
                                         {{ form_start(form, {'attr': {'novalidate': 'novalidate','class':'form-horizontal'}}) }}
                                         <div class="form-group">
@@ -108,8 +108,6 @@
                             </div>
                         </div>
                     </div>
-                      {{ user.idMember }}
-
                 </div>
             </section>
             {# Message de confirmation d'inscription #}

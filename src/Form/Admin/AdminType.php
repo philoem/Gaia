@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use App\Entity\Members;
+use App\Form\Admin\UploadImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,7 +28,7 @@ class AdminType extends AbstractType
             //    'second_options' => array('label' => 'repeatPassword'),
             //    'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
             ->add('address', TextType::class)
-            ->add('image', FileType::class, array('label' => 'Pour changer ou ajouter une photo à votre profil sélectionnez une image au format .jpg :'))
+            ->add('image', UploadImageType::class, array('label' => 'Ci-dessous insérez votre image :'))
             
         ;
     }
