@@ -3,15 +3,16 @@
 namespace App\Form\Admin;
 
 use App\Entity\Members;
-use App\Form\Admin\UploadImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Vich\UploaderBundle\Entity\File;
 
 class AdminType extends AbstractType
 {
@@ -27,8 +28,14 @@ class AdminType extends AbstractType
             //    'first_options'  => array('label' => 'password'),
             //    'second_options' => array('label' => 'repeatPassword'),
             //    'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
-            ->add('address', TextType::class)
-            ->add('image', UploadImageType::class, array('label' => 'Ci-dessous insérez votre image :'))
+            ->add('locations', TextType::class)
+            ->add('imageName', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_label' => 'Ci-dessous insérez votre image :',
+                'download_uri' => true,
+                'image_uri' => true,
+            ])
             
         ;
     }

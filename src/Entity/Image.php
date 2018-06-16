@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Table(name="image")
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * 
  */
 class Image
 {
@@ -29,7 +29,7 @@ class Image
     */
     private $alt;
 
-    private $file;
+    private $image;
 
     private $tempFilename;
 
@@ -43,14 +43,14 @@ class Image
         return $this->id;
     }
 
-    public function getFile()
+    public function getImage()
     {
-    return $this->file;
+    return $this->image;
     }
 
-    public function setFile(string $file)
+    public function setImage(string $image)
     {
-        $this->file = $file;
+        $this->image = $image;
 
         return $this;
     }
@@ -201,6 +201,8 @@ class Image
 
         return $this;
     }
+
+    
   
   
 }

@@ -48,32 +48,12 @@
                 <div class="row">
                     <div class="col">
                         <ul class="list_cities">
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Paris</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Saint-Germain-En-Laye</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Poissy</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Marly Le Roi</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Le Vésinet</a></li>
+                            {% for advert in adverts %}
+                                <li><a class="nav-link" href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}">{{ advert.town }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
-                    <div class="col">
-                        <ul class="list_cities">
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Paris</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Saint-Germain-En-Laye</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Poissy</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Marly Le Roi</a></li>
-                            <li><a class="nav-link" href="{{ path('adverts_index')}}">Le Vésinet</a></li>
-                        </ul>
-                    </div>
-                        <div class="col">
-                            <ul class="list_cities">
-                                <li><a class="nav-link" href="{{ path('adverts_index')}}">Paris</a></li>
-                                <li><a class="nav-link" href="{{ path('adverts_index')}}">Saint-Germain-En-Laye</a></li>
-                                <li><a class="nav-link" href="{{ path('adverts_index')}}">Poissy</a></li>
-                                <li><a class="nav-link" href="{{ path('adverts_index')}}">Marly Le Roi</a></li>
-                                <li><a class="nav-link" href="{{ path('adverts_index')}}">Le Vésinet</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

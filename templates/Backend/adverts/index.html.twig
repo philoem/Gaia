@@ -7,7 +7,7 @@
 {% block body %}
 {% block header %} {{ parent() }} {% endblock header %}
 <div class="container">  
-    <h1>Liste des annonces</h1>
+    <h1>Liste de vos annonces</h1>
 
     <table class="table">
         <thead>
@@ -17,6 +17,7 @@
                 <th>Descriptif</th>
                 <th>Prix</th>
                 <th>Date de publication</th>
+                <th>Ville</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>
@@ -28,11 +29,12 @@
                 <td>{{ advert.title }}</td>
                 <td>{{ advert.content }}</td>
                 <td>{{ advert.price }} <i class="fas fa-euro-sign fa-sm" style="color: #6c6a6e"></i></td>
-                <td>{{ advert.dateAdverts ? advert.dateAdverts|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</td>
+                <td>{{ advert.town|capitalize }}</td>
                 <td>{{ advert.picturesAdverts }}</td>
                 <td>
-                    <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce"><i class="far fa-eye fa-lg" style="color: #bb86fc"></i></a>
-                    <a href="{{ path('adverts_edit', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg"style="color: #bb86fc"></i></a>
+                    <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce"><i class="far fa-eye fa-lg" id="icon_show"></i></a>
+                    <a href="{{ path('adverts_edit', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg" id="icon_edit"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -44,7 +46,7 @@
     </table>
 
     <div>
-        <a href="{{ path('adverts_new') }}"><span class="fa-layers fa-fw fa-3x" id="icon_new"><i class="fas fa-file" id="icon_file"></i><i class="fas fa-plus-circle fa-xs" id="icon_plus"></i></span>  Créer une nouvelle annonce</a>
+        <a href="{{ path('adverts_new') }}"><span class="fa-layers fa-fw fa-3x" id="icon_new"><i class="fas fa-leaf" id="icon_file"></i><i class="fas fa-plus-circle fa-xs" id="icon_plus"></i></span>  Créer une nouvelle annonce</a>
     </div>
 </div>  
 {% endblock body %}

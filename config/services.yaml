@@ -3,7 +3,21 @@
 parameters:
     locale: 'fr'
     env(DATABASE_HOST): localhost
-    images_directory: '%kernel.project_dir%/../public/img/profil'
+    #images_directory: '%kernel.project_dir%/public/img'
+    vich_uploader :
+        db_driver : orm
+        templating: true
+        twig: true
+        form: true
+
+    mappings:
+        product_image:
+            uri_prefix: /img
+            upload_destination: '%kernel.project_dir%/public/img'
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
 
 services:
     app.security.login_authenticator:
@@ -34,15 +48,15 @@ services:
     #image_uploader:
     #    class: App\Entity\Image
     #    arguments: ['%images_directory%']
-    App\Service\ImageUploader:
-        arguments:
-            $targetDirectory: '%images_directory%'
+    #App\Service\ImageUploader:
+    #    arguments:
+    #        $targetDirectory: '%images_directory%'
 
-    App\EventListener\ImageUploadListener:
-        tags:
-            - { name: doctrine.event_listener, event: prePersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            #- { name: doctrine.event_listener, event: postLoad }
+    #App\EventListener\ImageUploadListener:
+    #    tags:
+    #        - { name: doctrine.event_listener, event: prePersist }
+    #        - { name: doctrine.event_listener, event: preUpdate }
+    #         - { name: doctrine.event_listener, event: postLoad }
 
     #image_listener:
     #    class: App\EventListener\ImageUploadListener
@@ -50,3 +64,5 @@ services:
     #    tags:
     #        - { name: doctrine.event_listener, event: prePersist }
     #        - { name: doctrine.event_listener, event: preUpdate }
+    
+    

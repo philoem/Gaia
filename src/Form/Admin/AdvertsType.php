@@ -16,7 +16,7 @@ class AdvertsType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('price')
-            ->add('dateAdverts')
+            ->add('town')
             ->add('picturesAdverts', UploadImageType::class, ['required' => false, 'label' => 'Sélectionnez une image pour votre annonce :'])
         ;
     }

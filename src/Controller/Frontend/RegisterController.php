@@ -4,7 +4,6 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Members;
 use App\Form\RegisterType;
-use App\Service\ImageUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,15 +17,14 @@ class RegisterController extends Controller
     /**
     * @Route("/register", name="inscription")
     */
-    public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, ImageUploader $ImageUploader)
+    public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
         $member = new Members();
                              
         $form = $this->createForm(RegisterType::class, $member);
         
         $form->handleRequest($request);
-        dump($member);
-        
+                
         $em = $this->getDoctrine()->getManager();
         if($form->isSubmitted() && $form->isValid()){
             
@@ -34,15 +32,7 @@ class RegisterController extends Controller
             
             $password = $passwordEncoder->encodePassword($member, $member->getPassword());
             $member->setPassword($password);
-
-            //$file = $member->getImage();
-            //$fileName = $ImageUploader->upload($file);
-            //$member->setImage($fileName);
             
-            //$username = $member->getUsername();
-            //$address = $member->getAddress();
-            //$member->setAddress($address);
-
             $member->setRoles(['ROLE_ADMIN']);
                         
             $em->persist($member);

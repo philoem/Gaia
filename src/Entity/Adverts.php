@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Adverts
@@ -49,7 +50,8 @@ class Adverts
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Members", mappedBy="idAdvert")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Members", inversedBy="idMember")
+     * @ORM\Column(name="idMember", nullable=false)
      */
     private $idMember;
 
@@ -70,11 +72,18 @@ class Adverts
     private $picturesAdverts;
 
     /**
+     * @var string
+     * @ORM\Column(name="town", type="string", nullable=false)
+     * @Assert\NotBlank(message="La ville est obligatoire")
+     */
+     private $town;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idMember = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idMember = new ArrayCollection();
         $this->dateAdverts = new \DateTime();
     }
 
@@ -176,6 +185,30 @@ class Adverts
     }
 
     /**
+     * Get the value of idMember
+     *
+     * @return  int
+     */ 
+     public function getIdMember()
+     {
+         return $this->idMember;
+     }
+ 
+     /**
+      * Set the value of idMember
+      *
+      * @param  int  $idMember
+      *
+      * @return  self
+      */ 
+     public function setIdMember(int $idMember)
+     {
+         $this->idMember = $idMember;
+ 
+         return $this;
+     }
+
+    /**
     * Get the value of dateAdverts
     *
     * @return  \DateTime
@@ -219,6 +252,30 @@ class Adverts
     public function setPicturesAdverts($picturesAdverts)
     {
         $this->picturesAdverts = $picturesAdverts;
+
+        return $this;
+    }
+
+    /**
+    * Get the value of town
+    *
+    * @return  string
+    */ 
+    public function getTown()
+    {
+        return $this->town;
+    }
+
+    /**
+    * Set the value of town
+    *
+    * @param  string  $town
+    *
+    * @return  self
+    */ 
+    public function setTown($town)
+    {
+        $this->town = $town;
 
         return $this;
     }

@@ -108,18 +108,15 @@ nav li:hover .submenu
     background-color: #82cc9f;
     margin-top: 15px;
     padding-bottom: 1px;
-
 }
 .form-group, h3
 {
     color: #01453f;
-    
 }
 .btn
 {
     background-color: #bb86fc;
     color: white;
-
 }
 
 /* PAGE CONTACT */
@@ -177,10 +174,8 @@ nav li:hover .submenu
 }
 
 /* Villes principales */
-
 #title_cities
 {
-   
     color:#505050;
     border-bottom: 1px solid #505050;
     padding-bottom: 10px;
@@ -188,9 +183,7 @@ nav li:hover .submenu
 #cities
 {
     margin-top: 20px;
-    
 }
-
 .list_cities
 {
     margin-top: 20px;
@@ -242,12 +235,10 @@ nav li:hover .submenu
 #page_accueil1
 {
    float: left;
-
 }
 #page_accueil2
 {
     float: left;
- 
 }
 /* PAGE MEMBERS  */
 #map
@@ -263,12 +254,12 @@ nav li:hover .submenu
     color:#505050;
     padding-bottom: 10px;
 }
-/* PAGE ADVERTS  */
+/* PAGE ANNOUNCEMENT  */
 .project
 {
     margin-bottom: 20px;
     cursor: pointer;
-    counter-increment: portfolio;
+    
 }
 .portfolio
 {
@@ -276,13 +267,12 @@ nav li:hover .submenu
     grid-template-columns: 1fr;
     grid-column-gap: 20px;
     grid-auto-flow: row dense;
-    counter-reset: portfolio;
+    
 }
 .project_image
 {
     width: 100%;
     height: auto;
-    
 }
 .project > img
 {
@@ -293,10 +283,6 @@ h1, h2, h3
     padding: 0;
     color: #505050;
     margin: 10px 0 3px ;
-}
-.project_image::after
-{
-    content: counter(portfolio);
 }
 .project_body
 {
@@ -416,26 +402,25 @@ i.wi
 }
 /* PAGE ADVERTS */
 /* Icônes FontAwesome */
-#icon_new
-{
-    
-}
-#icon_file
+#icon_show, #icon_edit, #icon_file
 {
     color: #bb86fc;
-   
+    letter-spacing: 5px;
+}
+#icon_show:hover, #icon_edit:hover
+{
+    font-size: 150%;
+    transition: color 0.4s linear;
+    color: #0e6a5c;
 }
 #icon_plus
 {
     position: relative;
-    margin-left: -20px;
+    margin-left: -35px;
     padding-bottom: 20px;
     font-size: 50%;
     color: white;
-    
 }
-
-
 
 /* RESPONSIVE  */
 /* Format Ipad */

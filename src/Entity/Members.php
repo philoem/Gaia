@@ -3,14 +3,19 @@
 namespace App\Entity;
 
 use Serializable;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Valid;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 /**
  * Members
@@ -19,6 +24,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @UniqueEntity(fields="username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity(fields="mail", message="Cet email existe déjà")
+ * @Vich\Uploadable
  * 
  */
 class Members implements UserInterface, \Serializable
@@ -29,6 +35,7 @@ class Members implements UserInterface, \Serializable
      * @ORM\Column(name="id_member", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\OneToMany(targetEntity="App\Entity\Adverts", mappedBy="idMember")
      */
     private $idMember;
 
@@ -103,9 +110,9 @@ class Members implements UserInterface, \Serializable
     private $dateRegister;
 
     /**
-    * @ORM\Column(name="address", type="string", length=80, nullable=true)
+    * @ORM\Column(name="locations", type="string", length=80, nullable=true)
     */
-    private $address;
+    private $locations;
     
     /**
     * @ORM\Column(name="lat", type="decimal", precision=6, scale=6,  nullable=true)
@@ -118,22 +125,41 @@ class Members implements UserInterface, \Serializable
     private $lng;
 
     /**
-    * @var string
-    *
-    * @ORM\Column(name="image", type="string", length=255, nullable=true)
-    * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png"})
-    * @Assert\Valid()
-    * @Assert\Type(type="App\Entity\Image")
-    * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+    * NOTE: This is not a mapped field of entity metadata, just a simple property.
+    * 
+    * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+    * 
+    * @var File
     */
-    private $image;
+    private $imageFile;
+
+    /**
+    * @ORM\Column(type="string", length=255, nullable=true)
+    *
+    * @var string
+    */
+    private $imageName;
+
+    /**
+    * @ORM\Column(type="integer", nullable=true)
+    *
+    * @var integer
+    */
+    private $imageSize;
+
+    /**
+    * @ORM\Column(type="datetime", nullable=true)
+    *
+    * @var \DateTime
+    */
+    private $updatedAt;
     
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idAdvert = new ArrayCollection();
+        
         $this->dateRegister = new \DateTime();
         $this->isActive = true;
     }
@@ -372,7 +398,7 @@ class Members implements UserInterface, \Serializable
             $this->password,
             $this->isActive,
             $this->roles,
-            $this->address,
+            $this->locations,
             $this->lat,
             $this->lng,
 
@@ -389,7 +415,7 @@ class Members implements UserInterface, \Serializable
             $this->password,
             $this->isActive,
             $this->roles,
-            $this->address,
+            $this->locations,
             $this->lat,
             $this->lng,
         ) = unserialize($serialized);
@@ -446,25 +472,25 @@ class Members implements UserInterface, \Serializable
     }
 
     /**
-    * Get the value of address
+    * Get the value of locations
     *
     * @return  string
     */ 
-    public function getAddress()
+    public function getLocations()
     {
-        return $this->address;
+        return $this->locations;
     }
  
     /**
-    * Set the value of address
+    * Set the value of locations
     *
-    * @param  string  $address
+    * @param  string  $locations
     *
     * @return  self
     */ 
-    public function setAddress(string $address)
+    public function setLocations(string $locations)
     {
-        $this->address = $address;
+        $this->locations = $locations;
 
         return $this;
     }
@@ -518,29 +544,49 @@ class Members implements UserInterface, \Serializable
     }
 
     /**
-    * Get the value of image
+    * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+    * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+    * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+    * must be able to accept an instance of 'File' as the bundle will inject one here
+    * during Doctrine hydration.
     *
-    * @return  string
-    */ 
-    public function getImage()
+    * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+    */
+    public function setImageFile(?File $image = null): void
     {
-        return $this->image;
-    }
- 
-    /**
-    * Set the value of image
-    *
-    * @param  \App\Entity\Image $image
-    *
-    * @return  Members
-    */ 
-    public function setImage(\App\Entity\Image $image = null)
-    {
-        $this->image = $image;
+        $this->imageFile = $image;
 
-        return $this;
+        if (null !== $image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+    
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
         
 }
 

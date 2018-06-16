@@ -15,6 +15,10 @@ class AnnouncementController extends Controller
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
-        return $this->render('Backend/announcement/Announcement.html.twig');
+        $adverts = $this->getDoctrine()
+            ->getRepository(Adverts::class)
+            ->findAll();
+
+        return $this->render('Backend/announcement/Announcement.html.twig', ['adverts' => $adverts]);
     }
 }

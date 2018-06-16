@@ -35,7 +35,7 @@
             <section class="col-sm-9 col-lg-9" id="section_profil">
                 
                 <div class="col-sm-2 col-lg-2" id="picture_avatar">
-                    <img src="{{ asset('img/profil' ~ user.image )  }}" width="250" height="300">
+                    <img src="{{ asset('img' ~ user.imageFile )  }}" width="250" height="300">
                     <h6>Votre photo de profil</h6>
 
                 </div>
@@ -45,7 +45,7 @@
                             <div class="col-sm-12 col-lg-12">
                                 <h3 class="text-center">Votre profil</h3>
                                 <div class="form-group">
-                                    <form class="form-horizontal" role="form" method="POST" action="{{ path('admin_index') }}" novalidate="novalidate">
+                                    <form class="form-horizontal" role="form" method="POST" action="{{ path('admin_index') }}" novalidate="novalidate" onsubmit="return confirm('Etes-vous sûr de bien vouloir valider modifier vos données ?');">
             
                                         {{ form_start(form, {'attr': {'novalidate': 'novalidate','class':'form-horizontal'}}) }}
                                         <div class="form-group">
@@ -80,16 +80,16 @@
                                         <div class="form-group">
                                             <div class="row justify-content-center">
                                                 <div class="col-sm-10 col-lg-10">
-                                                    {% set userAddress = user.address|capitalize %}
-                                                    {{ form_label(form.address, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': userAddress}}) }}
+                                                    {% set userAddress = user.locations|capitalize %}
+                                                    {{ form_label(form.locations, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_widget(form.locations, {'attr': {'class': 'form-control', 'placeholder': userAddress}}) }}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="row justify-content-center">
                                                 <div class="col-sm-10 col-lg-10">
-                                                {{ form_row(form.image) }}
+                                                {{ form_row(form.imageFile) }}
                                                 </div>
                                             </div>
                                         </div>

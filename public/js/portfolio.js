@@ -1,3 +1,7 @@
+/**
+ * Classe pour afficher, de façon dynamique et ludique, toutes les annonces avec leurs photos et descriptifs 
+ * Accessible aux personnes non-membres également
+ */
 class Portfolio {
 
     /**
@@ -56,7 +60,6 @@ class Portfolio {
             this.activeProject = child
 
         }
-        
 
     }
 
@@ -68,7 +71,7 @@ class Portfolio {
 
         let height = element.offsetHeight
         element.style.height = '0px'
-        element.style.transitionDuration = '1.5s'
+        element.style.transitionDuration = '0.7s'
         element.offsetHeight
         element.style.height = height + 'px'
         window.setTimeout(function() {
@@ -105,11 +108,7 @@ class Portfolio {
             left: 0,
             top: element.offsetTop - offset
         })
-
-
     }
-
-
-
 }
+
 new Portfolio('.portfolio')

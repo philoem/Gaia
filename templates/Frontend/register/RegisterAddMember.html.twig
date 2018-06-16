@@ -72,13 +72,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_label(form.address, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Ex : N° et nom de rue, Nom de votre ville'}}) }}
+                                    {{ form_label(form.locations, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_widget(form.locations, {'attr': {'class': 'form-control', 'placeholder': 'Ex : N° et nom de rue, Nom de votre ville'}}) }}
                                 </div>
                             </div>
                         </div>
                         
-                        {{ form_row(form.image) }}
+                        {#{{ form_row(form.image) }}#}
                         <div class="form-group">
                             <div class="row col-sm-12  justify-content-center">
                                 <button type="submit" class="btn btn-primary" id="btn_submit_register"><span style="color: white" class="fas fa-check fa-2x"></span>Validez votre inscription </button>
