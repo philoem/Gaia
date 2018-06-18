@@ -16,6 +16,10 @@
                 <td>{{ advert.idAdvert }}</td>
             </tr>
             <tr>
+                <th>Membre</th>
+                <td>{{ username|capitalize }}</td>
+            </tr>
+            <tr>
                 <th>Ville</th>
                 <td>{{ advert.town|capitalize }}</td>
             </tr>
@@ -35,16 +39,18 @@
                 <th>Date de publication</th>
                 <td>{{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</td>
             </tr>
+            {% if advert.picturesAdverts %}
             <tr>
                 <th>Image</th>
                 <td>{{ advert.picturesAdverts }}</td>
             </tr>
+            {% endif %}
         </tbody>
     </table>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <div id="links_show_annonce">
         <a href="{{ path('adverts_index') }}">Retour à la liste des mes annonces</a>
-        {% if app.user.idMember == userAdvert %}
+        {% if app.user.username == username %}
         <a href="{{ path('adverts_edit', {'idAdvert': advert.idAdvert}) }}">/ Modification</a>
         {% endif %}
     </div>

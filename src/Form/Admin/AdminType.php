@@ -29,13 +29,7 @@ class AdminType extends AbstractType
             //    'second_options' => array('label' => 'repeatPassword'),
             //    'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
             ->add('locations', TextType::class)
-            ->add('imageName', VichImageType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'download_label' => 'Ci-dessous insérez votre image :',
-                'download_uri' => true,
-                'image_uri' => true,
-            ])
+            ->add('imageFile', FileType::class)
             
         ;
     }

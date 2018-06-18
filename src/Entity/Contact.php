@@ -3,43 +3,42 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
- * 
+ * Contact
+ *
+ * @ORM\Table(name="contact")
+ * @ORM\Entity
  */
-class Contact 
+class Contact
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
-     * @Assert\NotBlank(message="Le nom est obligatoire !")
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=60, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=60)
-     * @Assert\NotBlank(message="L'email est obligatoire !")
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=60, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="text", length=60, nullable=false)
-     * @Assert\NotBlank(message="Vous devez remplir le champs sujet")
-     */
-     private $subject;
-
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Vous devez remplir le champs text")
+     * @var string
+     *
+     * @ORM\Column(name="message", type="text", length=0, nullable=false)
      */
     private $message;
 
@@ -47,22 +46,17 @@ class Contact
      * @var \DateTime
      *
      * @ORM\Column(name="dateContact", type="datetime", nullable=false)
-     * @ORM\GeneratedValue
-     * @Assert\DateTime()
      */
-     private $dateContact;
+    private $datecontact;
 
     /**
-     * Constructor
+     * @var string
+     *
+     * @ORM\Column(name="subject", type="text", length=255, nullable=false)
      */
-     public function __construct()
-     {
-        
-        $this->dateContact = new \DateTime();
-        
-     }
+    private $subject;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -91,18 +85,6 @@ class Contact
         return $this;
     }
 
-    public function getSubject(): ?string
-    {
-        return $this->subject;
-    }
-
-    public function setSubject(string $subject): self
-    {
-        $this->subject = $subject;
-
-        return $this;
-    }
-
     public function getMessage(): ?string
     {
         return $this->message;
@@ -115,27 +97,29 @@ class Contact
         return $this;
     }
 
-    /**
-     * Get the value of dateContact
-     *
-     * @return  \DateTime
-     */ 
-     public function getDateContact()
-     {
-         return $this->dateContact;
-     }
- 
-     /**
-      * Set the value of dateContact
-      *
-      * @param  \DateTime  $dateContact
-      *
-      * @return  self
-      */ 
-     public function setDateContact(\DateTime $dateContact)
-     {
-         $this->dateContact = $dateContact;
- 
-         return $this;
-     }
+    public function getDatecontact(): ?\DateTimeInterface
+    {
+        return $this->datecontact;
+    }
+
+    public function setDatecontact(\DateTimeInterface $datecontact): self
+    {
+        $this->datecontact = $datecontact;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): self
+    {
+        $this->subject = $subject;
+
+        return $this;
+    }
+
+
 }

@@ -18,8 +18,10 @@ async function main () {
     .then(result => result.json())
     .then(json => json)
       
-  L.mapquest.geocoding().geocode(address[0].locations, createMap)
-  console.log(address[0].locations)
+  let geocoder = L.mapquest.geocoding()
+
+  geocoder.geocode('paris', createMap)
+  console.log(address)
  
 }
 

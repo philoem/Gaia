@@ -7,6 +7,7 @@ use App\Form\Admin\UploadImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AdvertsType extends AbstractType
 {
@@ -17,7 +18,7 @@ class AdvertsType extends AbstractType
             ->add('content')
             ->add('price')
             ->add('town')
-            ->add('picturesAdverts', UploadImageType::class, ['required' => false, 'label' => 'Sélectionnez une image pour votre annonce :'])
+            ->add('picturesAdverts', FileType::class, ['required' => false, 'label' => 'Sélectionnez une image pour votre annonce :'])
         ;
     }
 

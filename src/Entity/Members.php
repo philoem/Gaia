@@ -32,12 +32,23 @@ class Members implements UserInterface, \Serializable
     /**
      * @var int
      *
-     * @ORM\Column(name="id_member", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\OneToMany(targetEntity="App\Entity\Adverts", mappedBy="idMember")
+     * 
      */
-    private $idMember;
+    private $id;
+
+    /**
+     * @var Adverts[]|ArrayCollection
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Adverts",
+     *      mappedBy="members",
+     *      orphanRemoval=true,
+     *      cascade={"persist"}
+     * )
+     */
+    private $advert;
 
     /**
      * @var string
@@ -159,7 +170,7 @@ class Members implements UserInterface, \Serializable
      */
     public function __construct()
     {
-        
+        $this->advert = new ArrayCollection();
         $this->dateRegister = new \DateTime();
         $this->isActive = true;
     }
@@ -173,27 +184,45 @@ class Members implements UserInterface, \Serializable
 
 
     /**
-     * Get the value of idMember
+     * Get the value of id
      *
      * @return  int
      */ 
-    public function getIdMember()
+    public function getId()
     {
-        return $this->idMember;
+        return $this->id;
     }
-
     /**
-     * Set the value of idMember
+     * Set the value of id
      *
-     * @param  int  $idMember
+     * @param  int  $id
      *
      * @return  self
      */ 
-    public function setIdMember(int $idMember)
+    public function setId(int $id)
     {
-        $this->idMember = $idMember;
+        $this->id = $id;
 
         return $this;
+    }
+    
+    public function getAdvert(): ?Collection
+    {
+        return $this->advert;
+    }
+
+    public function addAdvert(?Adverts $adverts): void
+    {
+        $adverts->setMembers($this);
+        if (!$this->advert->contains($adverts)) {
+            $this->advert->add($adverts);
+        }
+    }
+
+    public function removeAdvert(adverts $adverts): void
+    {
+        $adverts->setMembers(null);
+        $this->advert->removeElement($adverts);
     }
 
     /**
@@ -390,7 +419,7 @@ class Members implements UserInterface, \Serializable
     public function serialize()
     {
         return serialize(array(
-            $this->idMember,
+            $this->id,
             $this->firstname,
             $this->lastname,                        
             $this->username,
@@ -407,7 +436,7 @@ class Members implements UserInterface, \Serializable
     public function unserialize($serialized)
     {
         list (
-            $this->idMember,
+            $this->id,
             $this->firstname,
             $this->lastname,
             $this->username,

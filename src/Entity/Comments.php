@@ -47,101 +47,46 @@ class Comments
      */
     private $idAdvert;
 
-
-
-    /**
-     * Get the value of idComment
-     *
-     * @return  int
-     */ 
-    public function getIdComment()
+    public function getIdComment(): ?int
     {
         return $this->idComment;
     }
 
-    /**
-     * Set the value of idComment
-     *
-     * @param  int  $idComment
-     *
-     * @return  self
-     */ 
-    public function setIdComment(int $idComment)
-    {
-        $this->idComment = $idComment;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of nameComments
-     *
-     * @return  string
-     */ 
-    public function getNameComments()
+    public function getNameComments(): ?string
     {
         return $this->nameComments;
     }
 
-    /**
-     * Set the value of nameComments
-     *
-     * @param  string  $nameComments
-     *
-     * @return  self
-     */ 
-    public function setNameComments(string $nameComments)
+    public function setNameComments(string $nameComments): self
     {
         $this->nameComments = $nameComments;
 
         return $this;
     }
 
-    /**
-     * Get the value of commentary
-     *
-     * @return  string
-     */ 
-    public function getCommentary()
+    public function getCommentary(): ?string
     {
         return $this->commentary;
     }
 
-    /**
-     * Set the value of commentary
-     *
-     * @param  string  $commentary
-     *
-     * @return  self
-     */ 
-    public function setCommentary(string $commentary)
+    public function setCommentary(string $commentary): self
     {
         $this->commentary = $commentary;
 
         return $this;
     }
 
-    /**
-     * Get the value of idAdvert
-     *
-     * @return  \Adverts
-     */ 
-    public function getIdAdvert()
+    public function getIdAdvert(): ?Adverts
     {
         return $this->idAdvert;
     }
 
-    /**
-     * Set the value of idAdvert
-     *
-     * @param  \Adverts  $idAdvert
-     *
-     * @return  self
-     */ 
-    public function setIdAdvert(\Adverts $idAdvert)
+    public function setIdAdvert(?Adverts $idAdvert): self
     {
         $this->idAdvert = $idAdvert;
 
         return $this;
     }
+
+
 }

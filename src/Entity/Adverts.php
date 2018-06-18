@@ -50,10 +50,10 @@ class Adverts
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Members", inversedBy="idMember")
-     * @ORM\Column(name="idMember", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Members", inversedBy="advert")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idMember;
+    private $members;
 
     /**
      * @var \DateTime
@@ -72,18 +72,25 @@ class Adverts
     private $picturesAdverts;
 
     /**
+    * @var string
+    * @ORM\Column(name="town", type="string", nullable=false)
+    * @Assert\NotBlank(message="La ville est obligatoire")
+    */
+    private $town;
+
+    /**
      * @var string
-     * @ORM\Column(name="town", type="string", nullable=false)
-     * @Assert\NotBlank(message="La ville est obligatoire")
+     *
+     * @ORM\Column(name="usernameMember", type="string", nullable=false)
      */
-     private $town;
+    private $usernameMember;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idMember = new ArrayCollection();
+        //$this->members = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateAdverts = new \DateTime();
     }
 
@@ -184,29 +191,15 @@ class Adverts
         return $this;
     }
 
-    /**
-     * Get the value of idMember
-     *
-     * @return  int
-     */ 
-     public function getIdMember()
-     {
-         return $this->idMember;
-     }
- 
-     /**
-      * Set the value of idMember
-      *
-      * @param  int  $idMember
-      *
-      * @return  self
-      */ 
-     public function setIdMember(int $idMember)
-     {
-         $this->idMember = $idMember;
- 
-         return $this;
-     }
+    public function getMembers(): ?Members
+    {
+        return $this->members;
+    }
+
+    public function setMembers(?Members $members)
+    {
+        $this->members = $members;
+    }
 
     /**
     * Get the value of dateAdverts
@@ -279,4 +272,30 @@ class Adverts
 
         return $this;
     }
+
+    /**
+    * Get the value of usernameMember
+    *
+    * @return  string
+    */ 
+    public function getUsernameMember()
+    {
+        return $this->usernameMember;
+    }
+
+    /**
+    * Set the value of usernameMember
+    *
+    * @param  string  $usernameMember
+    *
+    * @return  self
+    */ 
+    public function setUsernameMember($usernameMember)
+    {
+        $this->usernameMember = $usernameMember;
+
+        return $this;
+    }
+
+   
 }
