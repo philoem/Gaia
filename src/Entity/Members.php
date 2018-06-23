@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Valid;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -40,7 +41,7 @@ class Members implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @var Adverts[]|ArrayCollection
+     * 
      * @ORM\OneToMany(
      *      targetEntity="App\Entity\Adverts",
      *      mappedBy="members",
@@ -126,12 +127,12 @@ class Members implements UserInterface, \Serializable
     private $locations;
     
     /**
-    * @ORM\Column(name="lat", type="decimal", precision=6, scale=6,  nullable=true)
+    * @ORM\Column(name="lat", type="decimal", precision=10, scale=7,  nullable=true)
     */
     private $lat;
 
     /**
-    * @ORM\Column(name="lng", type="decimal", precision=6, scale=6, nullable=true)
+    * @ORM\Column(name="lng", type="decimal", precision=10, scale=7, nullable=true)
     */
     private $lng;
 
@@ -541,7 +542,7 @@ class Members implements UserInterface, \Serializable
     *
     * @return  self
     */ 
-    public function setLat(string $lat)
+    public function setLat($lat)
     {
         $this->lat = $lat;
 
@@ -565,7 +566,7 @@ class Members implements UserInterface, \Serializable
     *
     * @return  self
     */ 
-    public function setLng(string $lng)
+    public function setLng($lng)
     {
         $this->lng = $lng;
 

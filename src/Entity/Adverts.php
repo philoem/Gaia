@@ -90,7 +90,7 @@ class Adverts
      */
     public function __construct()
     {
-        //$this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateAdverts = new \DateTime();
     }
 

@@ -5,12 +5,14 @@ namespace App\Controller\Backend;
 use App\Entity\Adverts;
 use App\Entity\Members;
 use App\Form\Admin\AdvertsType;
+use App\Repository\AdvertsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/adverts")
@@ -22,13 +24,13 @@ class AdvertsController extends Controller
      */
     public function index(Security $security): Response
     {
-        $user = $security->getUser()->getId();
+        $user = $security->getUser();
         $adverts = $this->getDoctrine()
             ->getRepository(Adverts::class)
             ->findBy([
-                'idAdvert' => $user
+                'members' => $user->getId()
             ]);
-       
+        dump($user);
         return $this->render('Backend/adverts/index.html.twig', ['adverts' => $adverts]);
     }
 
@@ -73,7 +75,8 @@ class AdvertsController extends Controller
     
 
     /**
-     * @Route("/{idAdvert}/edit", name="adverts_edit", methods="GET|POST")
+     * @Route("/{advert}/edit", name="adverts_edit", methods="GET|POST")
+     * @ParamConverter("advert", class="App\Entity\Adverts")
      */
     public function edit(Request $request, Adverts $advert): Response
     {
@@ -84,9 +87,11 @@ class AdvertsController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            $advert = $form->getData();
+            
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('adverts_edit', ['idAdvert' => $advert->getIdAdvert()]);
+            
+            return $this->redirectToRoute('adverts_index');
         }
 
         return $this->render('Backend/adverts/edit.html.twig', [

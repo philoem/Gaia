@@ -36,7 +36,7 @@
                 <td>{{ advert.picturesAdverts }}</td>
                 <td>
                     <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce"><i class="far fa-eye fa-lg" id="icon_show"></i></a>
-                    <a href="{{ path('adverts_edit', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg" id="icon_edit"></i></a>
+                    <a href="{{ path('adverts_edit', {'advert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg" id="icon_edit"></i></a>
                 </td>
             </tr>
         {% else %}

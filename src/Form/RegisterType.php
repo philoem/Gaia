@@ -33,7 +33,8 @@ class RegisterType extends AbstractType
                 'second_options' => array('label' => 'repeatPassword'),
                 'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
             ->add('locations', TextType::class)
-            
+            ->add('lat', TextType::class, ['required' => false])
+            ->add('lng', TextType::class, ['required' => false])
         ;
     }
 

@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AnnouncementController extends Controller
 {
     /**
-     * @Route("/Announcement", name="announcement")
+     * @Route("/announcement", name="announcement")
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
