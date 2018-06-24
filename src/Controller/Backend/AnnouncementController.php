@@ -19,6 +19,6 @@ class AnnouncementController extends Controller
             ->getRepository(Adverts::class)
             ->findAll();
 
-        return $this->render('Backend/announcement/Announcement.html.twig', ['adverts' => $adverts]);
+        return $this->render('Backend/announcement/announcement.html.twig', ['adverts' => $adverts]);
     }
 }

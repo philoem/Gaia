@@ -47,7 +47,7 @@ class AdminController extends Controller
         
         $formView = $form->createView();
         
-        return $this->render('Backend/admin/Admin.html.twig', ['form'=>$formView, 'user' => $user]);
+        return $this->render('Backend/admin/admin.html.twig', ['form'=>$formView, 'user' => $user]);
     }
         
 }

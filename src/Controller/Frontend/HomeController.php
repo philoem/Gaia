@@ -25,7 +25,7 @@ class HomeController extends Controller
         $query = $em->createQuery('SELECT a.town, a.idAdvert FROM App\Entity\Adverts a');
         $adverts = $query->getResult();
 
-        return $this->render('Frontend/Home.html.twig', ['adverts' => $adverts]);
+        return $this->render('Frontend/home.html.twig', ['adverts' => $adverts]);
     }
 
 

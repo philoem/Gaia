@@ -9,7 +9,7 @@ console.log(town)
 
 async function geocoding() {
 
-    if (town) {
+    if (town != null) {
 
         address = await fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=8UdpqosaDre44rrPWLERXinlPeAMLeM0&location=${town}`)
             .then(results => results.json())
@@ -38,3 +38,7 @@ function display() {
     
 }
 geocoding()
+
+//document.getElementById('register_locations').addEventListener('change', (e) => {
+//    return address()
+//})

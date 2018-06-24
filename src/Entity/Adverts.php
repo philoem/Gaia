@@ -51,7 +51,7 @@ class Adverts
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Members", inversedBy="advert")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(nullable=false)
      */
     private $members;
 

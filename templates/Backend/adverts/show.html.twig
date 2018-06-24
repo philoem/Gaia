@@ -51,7 +51,7 @@
     <div id="links_show_annonce">
         <a href="{{ path('adverts_index') }}">Retour à la liste des mes annonces</a>
         {% if app.user.username == username %}
-        <a href="{{ path('adverts_edit', {'idAdvert': advert.idAdvert}) }}">/ Modification</a>
+        <a href="{{ path('adverts_edit', {'advert': advert.idAdvert}) }}">/ Modification</a>
         {% endif %}
     </div>
 

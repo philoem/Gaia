@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin - {{ parent() }}
+{% endblock title %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css"> 
+    {{ parent()}}
+{% endblock stylesheets %}
+
+{% block body %}
+
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
+    {# Ici affichage de la météo et des détails du profil #}
+    <div class="container-fluid">
+        <div class="row" id="weather">
+            <aside class="col-sm-3 col-lg-3" id="aside_weather">
+                <h1>
+                    <span id="town">Paris</span>
+                    <span id="info_town">Tapez ici votre ville</span>
+                </h1>
+                <i class="wi wi-day-rain" id="icon_weather"></i>
+                <h2>
+                    <span id="temp"></span> C° (<span id="conditions">Ciel dégagé</span>)
+                </h2>
+                <h3>
+                    Taux d'humidité 
+                </h3>
+                <h4><span id="humidity"></span>%</h4>
+            </aside>
+
+            <section class="col-sm-9 col-lg-9" id="section_profil">
+                
+                <div class="col-sm-2 col-lg-2" id="picture_avatar">
+                    <img src="{{ asset('img' ~ user.imageFile )  }}" width="250" height="300">
+                    <h6>Votre photo de profil</h6>
+
+                </div>
+                <div class="col-sm-7 col-lg-7" id="profil">
+                    <div class="row justify-content-center" id="form_admin">
+                        <div class="form-group col-sm-12 col-lg-12" id="form_shadow_contact">
+                            <div class="col-sm-12 col-lg-12">
+                                <h3 class="text-center">Votre profil</h3>
+                                <div class="form-group">
+                                    <form class="form-horizontal" role="form" method="POST" action="{{ path('admin_index') }}" novalidate="novalidate" onsubmit="return confirm('Etes-vous sûr de bien vouloir valider modifier vos données ?');">
+            
+                                        {{ form_start(form, {'attr': {'novalidate': 'novalidate','class':'form-horizontal'}}) }}
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="col-sm-10 col-lg-10">
+                                                    {% set userLastname = user.lastname|capitalize %}
+                                                    {{ form_label(form.lastname, 'Votre nom :', {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': userLastname}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="col-sm-10 col-lg-10">
+                                                    {% set userUsername = user.username|capitalize %}
+                                                    {{ form_label(form.username, 'Votre pseudonyme :', {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'pseudo'}}) }}
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="col-sm-10 col-lg-10">
+                                                    {% set userEmail = user.mail %}
+                                                    {{ form_label(form.mail, 'Votre email :', {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_widget(form.mail, {'attr': {'class': 'form-control', 'placeholder': userEmail}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="col-sm-10 col-lg-10">
+                                                    {% set userAddress = user.locations|capitalize %}
+                                                    {{ form_label(form.locations, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_widget(form.locations, {'attr': {'class': 'form-control', 'placeholder': userAddress}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="col-sm-10 col-lg-10">
+                                                {{ form_row(form.imageFile) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-12">
+                                            <div class="row col-sm-12  justify-content-center" >
+                                                
+                                                <button type="reset" class="btn btn-warning">Effacer</button>
+                                                <button type="submit" class="btn btn-success">Sauvegarder vos nouvelles données</button>
+                                                
+                                            </div>
+                                        </div>
+                                        {{ form_rest(form) }}
+                                        {{ form_end(form) }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {# Message de confirmation d'inscription #}
+            <div class="container">
+                <div class="row justify-content-center">
+                    {% for message in app.flashes('notice') %}
+                    <div class="flash-notice">
+                        <h1>{{ message }}</h1>
+                        <div class="row justify-content-center">
+                            <a href="{{ path('home') }}" title="Connexion" id="return_home">Retour à l'accueil</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    {% block javascripts %}
+        <script src="{{ asset('js/Weather.js') }}"></script>
+    {% endblock javascripts %}
+
+{% endblock body %}

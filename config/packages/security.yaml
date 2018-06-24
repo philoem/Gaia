@@ -71,8 +71,9 @@ security:
 
     access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/members, roles: ROLE_ADMIN }
+    - { path: ^/announcement, roles: ROLE_ADMIN }
     - { path: ^/adverts, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/members, roles: IS_AUTHENTICATED_ANONYMOUSLY }

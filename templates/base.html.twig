@@ -30,7 +30,6 @@
         {% block header %}
         <header>
             <nav class="navbar navbar">
-                
             
                 <div class="col" id="logo_name_text">
                     <div class="col">
@@ -42,7 +41,7 @@
                     </div>
                 </div>
                 
-                {# Ici le menu en forme de "hamburger" lorsque l'écran est petit #}
+                {# Ici le menu  #}
                 
                 <ul class="nav">
                     <li class="nav-item">
@@ -80,7 +79,7 @@
                                 {% endif %}
                             </li>
                             <li>
-                                <a class="nav-link" href="{{ path('announcement') }}">Accéder aux annonces</a>
+                                <a class="nav-link" href="{{ path('announcement') }}" >Accéder aux annonces</a>
                             </li>
                         </ul>
                     </li>
@@ -90,7 +89,7 @@
                         {% endif %}
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('contact') }}" >Contact</a>
+                        <a class="nav-link" href="{{ path('contact') }}" >Contact</a>
                     </li>
                 </ul>
               
