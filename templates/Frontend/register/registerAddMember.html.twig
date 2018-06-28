@@ -9,6 +9,8 @@
 <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.css"/>
 {% endblock stylesheets %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
     {% block header %}
         {{ parent() }}
@@ -26,13 +28,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col col-sm-6">
-                                    {{ form_label(form.firstname, 'Votre prénom :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
+                                    {{ form_label(form.firstname, 'Votre prénom :') }}
+                                    {{ form_widget(form.firstname, {'attr': {'placeholder': 'Votre prénom'}}) }}
                                 </div>
                            
                                 <div class="col col-sm-6">
-                                    {{ form_label(form.lastname, 'Votre nom :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+                                    {{ form_label(form.lastname, 'Votre nom :') }}
+                                    {{ form_widget(form.lastname, {'attr': {'placeholder': 'Votre nom'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -40,8 +42,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_label(form.username, 'Votre pseudonyme :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Votre pseudo'}}) }}
+                                    {{ form_label(form.username, 'Votre pseudonyme :') }}
+                                    {{ form_widget(form.username, {'attr': {'placeholder': 'Votre pseudo'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -49,8 +51,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_label(form.mail, 'Votre email :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.mail, {'attr': {'class': 'form-control', 'placeholder': 'Votre email'}}) }}
+                                    {{ form_label(form.mail, 'Votre email :') }}
+                                    {{ form_widget(form.mail, {'attr': {'placeholder': 'Votre email'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -58,12 +60,12 @@
                         <div class="form-group">
                             <div class="row">   
                                 <div class="col col-sm-6">
-                                    {{ form_label(form.password.first, 'Votre mot de passe :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
+                                    {{ form_label(form.password.first, 'Votre mot de passe :') }}
+                                    {{ form_widget(form.password.first, {'attr': {'placeholder': 'Votre mot de passe'}}) }}
                                 </div>
                                 <div class="col col-sm-6">
-                                    {{ form_label(form.password.second, 'Répétez votre mot de passe :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Retapez votre mot de passe'}}) }}
+                                    {{ form_label(form.password.second, 'Répétez votre mot de passe :') }}
+                                    {{ form_widget(form.password.second, {'attr': {'placeholder': 'Retapez votre mot de passe'}}) }}
                                     {{ form_errors(form) }}
                                 </div>
                             </div>
@@ -72,8 +74,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    {{ form_label(form.locations, 'Votre adresse :', {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_widget(form.locations, {'attr': {'class': 'form-control', 'placeholder': 'Ex : N° et nom de rue, Nom de votre ville'}}) }}
+                                    {{ form_label(form.locations, 'Votre adresse :') }}
+                                    {{ form_widget(form.locations, {'attr': {'placeholder': 'Ex : N° et nom de rue, Nom de votre ville'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -87,6 +89,7 @@
                         {# Champs input pour y placer les lat et lng de l'adresse géocodée #}
                         {{ form_widget(form.lat)}}
                         {{ form_widget(form.lng)}}
+                        
 
                         {# Fermeture de la balise <form> du formulaire HTML #}
                         {{ form_end(form) }}
@@ -110,7 +113,8 @@
         </div>
         
         {% block javascripts %}
-        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js"></script>
+        {#<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js"></script>#}
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDScYkZVXEttgDmYjC7kHCcWdmu8kp6Q08&libraries=places"></script>
         <script src="{{ asset('js/Geocoding.js') }}"></script>
         {% endblock javascripts %}
     

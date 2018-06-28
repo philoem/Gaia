@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Members;
+use App\Entity\Member;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Members|null find($id, $lockMode = null, $lockVersion = null)
- * @method Members|null findOneBy(array $criteria, array $orderBy = null)
- * @method Members[]    findAll()
- * @method Members[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Member|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Member|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Member[]    findAll()
+ * @method Member[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class MembersRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Members::class);
+        parent::__construct($registry, Member::class);
     }
 
     /**
-     * @return Members[] Returns an array of Members objects
+     * @return Member[] Returns an array of Member object
      */  
     public function findByExampleField($value)
     {
@@ -34,7 +34,7 @@ class MembersRepository extends ServiceEntityRepository
         ;
     }
    
-    public function findOneBySomeField($value): ?Members
+    public function findOneBySomeField($value): ?Member
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

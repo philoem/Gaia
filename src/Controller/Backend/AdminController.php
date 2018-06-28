@@ -2,7 +2,8 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Members;
+use App\Entity\Image;
+use App\Entity\Member;
 use App\Form\Admin\AdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,16 +22,25 @@ class AdminController extends Controller
     * 
     */
     public function admin(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, Security $security) {
-
+        
+        $member = new Member();
         // Pré-remplissage des champs du formulaire
         $user = $security->getUser();
-        
         $form = $this->createForm(AdminType::class, $user);
-        $form->handleRequest($request);
         
-        dump($user);
+        $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-
+            
+            // Gestion de l'image
+            $file = $member->getImageName();
+            dump($file);
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('images_directory'),
+                $fileName
+            );
+            $member->setImage($fileName);
+            
             $em = $this->getDoctrine()->getManager();
             
             $em->flush();

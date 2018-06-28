@@ -2,7 +2,7 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Members;
+use App\Entity\Member;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +21,13 @@ class TrombiController extends Controller
      */
     public function index(Request $request, EntityManagerInterface $em, Security $security)
     {
-        $member = new Members();
+        $member = new Member();
         $user = $security->getUser();
                    
         // Récupération des adresses dans la bdd
         $em = $this->getDoctrine()->getManager();
         
-        $query = $em->createQuery('SELECT u.username, u.lat, u.lng FROM App\Entity\Members u');
+        $query = $em->createQuery('SELECT u.username, u.lat, u.lng FROM App\Entity\Member u');
         $users = $query->getResult();
         
         return $this->render('Backend/trombi.html.twig', ['addresses' => $users, 'adress' => $user]);

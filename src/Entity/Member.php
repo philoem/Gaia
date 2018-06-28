@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Valid;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,16 +18,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
- * Members
+ * Member
  *
- * @ORM\Table(name="members")
+ * @ORM\Table(name="member")
  * @ORM\Entity
  * @UniqueEntity(fields="username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity(fields="mail", message="Cet email existe déjà")
- * @Vich\Uploadable
+ * 
+ * 
  * 
  */
-class Members implements UserInterface, \Serializable
+class Member implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -43,13 +43,13 @@ class Members implements UserInterface, \Serializable
     /**
      * 
      * @ORM\OneToMany(
-     *      targetEntity="App\Entity\Adverts",
-     *      mappedBy="members",
+     *      targetEntity="App\Entity\Advert",
+     *      mappedBy="member",
      *      orphanRemoval=true,
      *      cascade={"persist"}
      * )
      */
-    private $advert;
+    private $adverts;
 
     /**
      * @var string
@@ -137,28 +137,19 @@ class Members implements UserInterface, \Serializable
     private $lng;
 
     /**
-    * NOTE: This is not a mapped field of entity metadata, just a simple property.
     * 
-    * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+    * @Assert\Type(type="App\Entity\Image")
+    * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist"})
     * 
-    * @var File
     */
-    private $imageFile;
+    private $image;
 
     /**
-    * @ORM\Column(type="string", length=255, nullable=true)
-    *
-    * @var string
+    * @ORM\Column(name="imageName", type="string", length=255, nullable=true)
     */
     private $imageName;
 
-    /**
-    * @ORM\Column(type="integer", nullable=true)
-    *
-    * @var integer
-    */
-    private $imageSize;
-
+    
     /**
     * @ORM\Column(type="datetime", nullable=true)
     *
@@ -171,8 +162,9 @@ class Members implements UserInterface, \Serializable
      */
     public function __construct()
     {
-        $this->advert = new ArrayCollection();
+        $this->adverts = new ArrayCollection();
         $this->dateRegister = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->isActive = true;
     }
 
@@ -207,23 +199,39 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
     
-    public function getAdvert(): ?Collection
+    /**
+     * 
+     *
+     * @return Collection|null
+     */
+    public function getAdverts(): ?Collection
     {
-        return $this->advert;
+        return $this->adverts;
     }
 
-    public function addAdvert(?Adverts $adverts): void
+    public function addAdvert(?Advert $advert): self
     {
-        $adverts->setMembers($this);
-        if (!$this->advert->contains($adverts)) {
-            $this->advert->add($adverts);
+        $advert->setMember($this);
+        if (!$this->adverts->contains($advert)) {
+            $this->adverts[] = $advert;
+            $advert->setMember($this);
         }
+        return $this;
     }
 
-    public function removeAdvert(adverts $adverts): void
+    public function removeAdvert(Advert $advert): self
     {
-        $adverts->setMembers(null);
-        $this->advert->removeElement($adverts);
+        if ($this->adverts->contains($advert)) {
+            $this->adverts->removeElement($advert);
+            // set the owning side to null (unless already changed)
+            if ($advert->getMember() === $this) {
+                $advert->setMember(null);
+            }
+        }
+
+        return $this;
+        //$advert->setMember(null);
+        //$this->adverts->removeElement($advert);
     }
 
     /**
@@ -573,49 +581,28 @@ class Members implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-    * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-    * of 'UploadedFile' is injected into this setter to trigger the  update. If this
-    * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-    * must be able to accept an instance of 'File' as the bundle will inject one here
-    * during Doctrine hydration.
-    *
-    * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
-    */
-    public function setImageFile(?File $image = null): void
+    public function getImage()
     {
-        $this->imageFile = $image;
-
-        if (null !== $image) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
+        return $this->image;
     }
 
-    public function getImageFile(): ?File
+    public function setImage(UploadedFile $image = null)
     {
-        return $this->imageFile;
+        $this->image = $image;
+
+        return $this;
     }
 
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
+    public function getImageName()
     {
         return $this->imageName;
     }
-    
-    public function setImageSize(?int $imageSize): void
-    {
-        $this->imageSize = $imageSize;
-    }
 
-    public function getImageSize(): ?int
+    public function setImageName(UploadedFile $imageName = null)
     {
-        return $this->imageSize;
+        $this->imageName = $imageName;
+
+        return $this;
     }
         
 }

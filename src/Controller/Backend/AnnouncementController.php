@@ -2,7 +2,7 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Adverts;
+use App\Entity\Advert;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ class AnnouncementController extends Controller
     public function index(Request $request, EntityManagerInterface $em)
     {
         $adverts = $this->getDoctrine()
-            ->getRepository(Adverts::class)
+            ->getRepository(Advert::class)
             ->findAll();
 
         return $this->render('Backend/announcement/announcement.html.twig', ['adverts' => $adverts]);

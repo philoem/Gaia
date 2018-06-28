@@ -2,8 +2,8 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Adverts;
-use App\Entity\Members;
+use App\Entity\Advert;
+use App\Entity\Member;
 use App\Form\Admin\AdvertsType;
 use App\Repository\AdvertsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,11 +26,11 @@ class AdvertsController extends Controller
     {
         $user = $security->getUser();
         $adverts = $this->getDoctrine()
-            ->getRepository(Adverts::class)
+            ->getRepository(Advert::class)
             ->findBy([
-                'members' => $user->getId()
+                'member' => $user->getId()
             ]);
-        dump($user);
+        dump($adverts);
         return $this->render('Backend/adverts/index.html.twig', ['adverts' => $adverts]);
     }
 
@@ -39,7 +39,7 @@ class AdvertsController extends Controller
      */
     public function new(Request $request, Security $security): Response
     {
-        $advert = new Adverts();
+        $advert = new Advert();
         $user = $security->getUser();
                
         $form = $this->createForm(AdvertsType::class, $advert);
@@ -48,7 +48,7 @@ class AdvertsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             // Retourne l'id et le pseudo du membre
-            $advert->setMembers($user);
+            $advert->setMember($user);
             $advert->setUsernameMember($user->getUsername());
             $em->persist($advert);
             $em->flush();
@@ -65,20 +65,20 @@ class AdvertsController extends Controller
     /**
      * @Route("/{idAdvert}", name="adverts_show", methods="GET")
      */
-    public function show(EntityManagerInterface $em, Adverts $advert): Response
+    public function show(EntityManagerInterface $em, Advert $advert): Response
     {
         $userAdvert = $advert->getIdAdvert();
         $username = $advert->getUsernameMember();
-        dump($username);
+        dump($advert);
         return $this->render('Backend/adverts/show.html.twig', ['advert' => $advert, 'userAdvert' =>$userAdvert, 'username' => $username]);
     }
     
 
     /**
      * @Route("/{advert}/edit", name="adverts_edit", methods="GET|POST")
-     * @ParamConverter("advert", class="App\Entity\Adverts")
+     * @ParamConverter("advert", class="App\Entity\Advert")
      */
-    public function edit(Request $request, Adverts $advert): Response
+    public function edit(Request $request, Advert $advert): Response
     {
         $userAdvert = $advert->getIdAdvert();
         $username = $advert->getUsernameMember();
@@ -105,7 +105,7 @@ class AdvertsController extends Controller
     /**
      * @Route("/{idAdvert}", name="adverts_delete", methods="DELETE")
      */
-    public function delete(Request $request, Adverts $advert): Response
+    public function delete(Request $request, Advert $advert): Response
     {
         $username = $advert->getUsernameMember();
         if ($this->isCsrfTokenValid('delete'.$advert->getIdAdvert(), $request->request->get('_token'))) {

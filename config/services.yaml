@@ -3,7 +3,7 @@
 parameters:
     locale: 'fr'
     env(DATABASE_HOST): localhost
-    #images_directory: '%kernel.project_dir%/public/img'
+    images_directory: '%kernel.project_dir%/public/img'
    
 
 services:
@@ -30,13 +30,13 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
     
-
+    
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     #image_uploader:
     #    class: App\Entity\Image
     #    arguments: ['%images_directory%']
-    #App\Service\ImageUploader:
+    #App\Service\FileUploader:
     #    arguments:
     #        $targetDirectory: '%images_directory%'
 
@@ -44,7 +44,7 @@ services:
     #    tags:
     #        - { name: doctrine.event_listener, event: prePersist }
     #        - { name: doctrine.event_listener, event: preUpdate }
-    #         - { name: doctrine.event_listener, event: postLoad }
+    #        - { name: doctrine.event_listener, event: postLoad }
 
     #image_listener:
     #    class: App\EventListener\ImageUploadListener

@@ -1,9 +1,9 @@
 /**
- * Weather, API pour afficher la météo de notre ville 
+ * Weather, API pour afficher la météo de notre ville sur la page admin
  * 
  * 
  */
-
+// Tableau des différents temps que l'on rencontrera avec leurs petites icônes
 const icons  = {
     "Rain": "wi wi-day-rain",
     "Clouds": "wi wi-day-cloudy",
@@ -25,21 +25,21 @@ const icons  = {
     let town
     if (withIp) {
 
+        // Récup adresse ip
         const ip = await fetch('https://api.ipify.org?format=json')
             .then(result => result.json())
             .then(json => json.ip)
-
+        // Récup la ville avec l'adresse ip
         town = await fetch('http://api.ipstack.com/' + ip +'?access_key=dafc20a95432ed90332dc5befd774585')
             .then(result => result.json())
             .then(json => json.city)
     } else {
         town = document.querySelector('#town').textContent;
     }
+    // Récup les infos de la météo avec l'adresse ip
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${town}&APPID=aae6a97a81d3f58554d00f5292788a79&lang=fr&units=metric`)
         .then(result => result.json())
         .then(json => json)
-
-    console.log(weather)
 
     show (weather)
 }
@@ -64,7 +64,6 @@ function show (data) {
     document.querySelector('i.wi').className = icons[conditions]
     document.querySelector('#aside_weather').classList = conditions.toLowerCase()
 
-
 }
 /**
  * Affichage d'une autre ville possible
@@ -75,12 +74,11 @@ town.addEventListener('click', (e) => {
     town.contentEditable = true
 })
 town.addEventListener('keydown', (e) => {
-    if(e.keyCode ===13) {
+    if(e.keyCode === 13) {
         e.preventDefault()
         town.contentEditable = false
         main(false);
     }
 })
-
 
 main();

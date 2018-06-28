@@ -10,12 +10,12 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Adverts
+ * Advert
  *
- * @ORM\Table(name="adverts")
+ * @ORM\Table(name="advert")
  * @ORM\Entity
  */
-class Adverts
+class Advert
 {
     /**
      * @var int
@@ -50,10 +50,10 @@ class Adverts
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Members", inversedBy="advert")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Member", inversedBy="adverts")
      * @ORM\Column(nullable=false)
      */
-    private $members;
+    private $member;
 
     /**
      * @var \DateTime
@@ -90,7 +90,7 @@ class Adverts
      */
     public function __construct()
     {
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->member = new \Doctrine\Common\Collections\ArrayCollection();
         $this->dateAdverts = new \DateTime();
     }
 
@@ -191,14 +191,15 @@ class Adverts
         return $this;
     }
 
-    public function getMembers(): ?Members
+    public function getMember(): ?Member
     {
-        return $this->members;
+        return $this->member;
     }
 
-    public function setMembers(?Members $members)
+    public function setMember(?Member $member)
     {
-        $this->members = $members;
+        $this->member = $member;
+        return $this;
     }
 
     /**

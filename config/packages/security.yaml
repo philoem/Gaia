@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         projet:
-            entity: { class: App\Entity\Members, property: username }
+            entity: { class: App\Entity\Member, property: username }
         #in_memory:
         #    memory:
         #        users:
@@ -60,7 +60,7 @@ security:
         #    algorithm: bcrypt  
         #    cost: 12
             
-        App\Entity\Members: 
+        App\Entity\Member: 
             algorithm: bcrypt  
             cost: 12
             

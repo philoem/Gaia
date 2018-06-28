@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comments
+ * Comment
  *
- * @ORM\Table(name="comments", indexes={@ORM\Index(name="FK_comments_id_advert", columns={"id_advert"})})
+ * @ORM\Table(name="comment", indexes={@ORM\Index(name="FK_comment_id_advert", columns={"id_advert"})})
  * @ORM\Entity
  */
-class Comments
+class Comment
 {
     /**
      * @var int
@@ -36,11 +36,11 @@ class Comments
     private $commentary;
 
     /**
-     * @var \Adverts
+     * @var \Advert
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Adverts")
+     * @ORM\OneToOne(targetEntity="Advert")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_advert", referencedColumnName="id_advert")
      * })

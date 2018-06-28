@@ -2,7 +2,7 @@
 
 namespace App\Controller\Frontend;
 
-use App\Entity\Members;
+use App\Entity\Member;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ class RegisterController extends Controller
     */
     public function addAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
-        $member = new Members();
+        $member = new Member();
                              
         $form = $this->createForm(RegisterType::class, $member);
         

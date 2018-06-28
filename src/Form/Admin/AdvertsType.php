@@ -2,8 +2,7 @@
 
 namespace App\Form\Admin;
 
-use App\Entity\Adverts;
-use App\Form\Admin\UploadImageType;
+use App\Entity\Advert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +24,7 @@ class AdvertsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Adverts::class,
+            'data_class' => Advert::class,
         ]);
     }
 }
