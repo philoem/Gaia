@@ -54,9 +54,9 @@ for (let i = 0; i < address.length; i++) {
   
 }
 // Création du marker du membre actif
-let latMemberActive = document.getElementById('adress_lat').textContent
-let lngMemberActive = document.getElementById('adress_lng').textContent
-console.log(latMemberActive, lngMemberActive)
+let latMemberActive = document.querySelector('.adress_lat').textContent
+let lngMemberActive = document.querySelector('.adress_lng').textContent
+
   
 // Instanciation de la classe de l'icône violette pour indiquer le membre connecté parmi les autres membres
 let violetIcon = new LeafIcon2({iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png'})
@@ -68,8 +68,6 @@ let map = L.map('map', {
   touchZoom: 'center',
   center: [lat, lng]
 })
-
-
 
 // replace "toner" here with "terrain" or "watercolor"
 map.addLayer(new L.StamenTileLayer("terrain", {

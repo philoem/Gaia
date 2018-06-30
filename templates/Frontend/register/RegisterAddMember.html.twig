@@ -17,13 +17,11 @@
     {% endblock header %}
 
     <div class="container" >
-        <form class="form-horizontal" role="form" method="POST" action="{{ path('inscription') }}" id="form_register" name="form_register">
+        <form class="form-horizontal" method="POST" action="{{ path('inscription') }}" id="form_register" name="form_register">
             <div class="row justify-content-center">
                 <div class="form-group col-sm-6 col-lg-6" id="form_shadow_register">
                     <div class="col-sm-12 col-lg-12 ">
                         <h3 class="text-center">Formulaire d'inscription</h3>
-
-                        {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate':'novalidate'}}) }}
                   
                         <div class="form-group">
                             <div class="row">
@@ -87,12 +85,8 @@
                             </div>
                         </div>
                         {# Champs input pour y placer les lat et lng de l'adresse géocodée #}
-                        {{ form_widget(form.lat)}}
-                        {{ form_widget(form.lng)}}
-                        
-
-                        {# Fermeture de la balise <form> du formulaire HTML #}
-                        {{ form_end(form) }}
+                        {{ form_widget(form.lat, {'attr': {'hidden': true}})}}
+                        {{ form_widget(form.lng, {'attr': {'hidden': true}})}}
                         
                     </div>
                 </div>
@@ -111,12 +105,12 @@
                 {% endfor %}
             </div>
         </div>
+
+    </div>
         
-        {% block javascripts %}
-        {#<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js"></script>#}
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDScYkZVXEttgDmYjC7kHCcWdmu8kp6Q08&libraries=places"></script>
-        <script src="{{ asset('js/Geocoding.js') }}"></script>
-        {% endblock javascripts %}
-    
+{% block javascripts %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDScYkZVXEttgDmYjC7kHCcWdmu8kp6Q08&libraries=places"></script>
+<script src="{{ asset('js/Geocoding.js') }}"></script>
+{% endblock javascripts %}
 
 {% endblock body %}

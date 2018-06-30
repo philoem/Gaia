@@ -18,9 +18,8 @@
                 <div class="col-sm-12 col-lg-12">
                     <h3 class="text-center">Laissez-nous votre message, nous vous répondrons dans les plus brefs délais</h3>
                     <div class="form-group">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ path('contact') }}">
+                        <form class="form-horizontal" method="POST" action="{{ path('contact') }}">
 
-                            {{ form_start(form) }}
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -61,17 +60,13 @@
                                     
                                 </div>
                             </div>
+                            {{ form_rest(form) }}
                         </form>
-                    </div>
-                    {{ form_end(form) }}
-
-                                        
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
+   
         <div class="row justify-content-center">
             {% for message in app.flashes('notice') %}
                 <div class="flash-notice">

@@ -22,7 +22,7 @@ class AdvertsController extends Controller
     /**
      * @Route("/", name="adverts_index", methods="GET")
      */
-    public function index(Security $security): Response
+    public function index(Security $security, EntityManagerInterface $em): Response
     {
         $user = $security->getUser();
         $adverts = $this->getDoctrine()
@@ -30,7 +30,7 @@ class AdvertsController extends Controller
             ->findBy([
                 'member' => $user->getId()
             ]);
-        dump($adverts);
+        
         return $this->render('Backend/adverts/index.html.twig', ['adverts' => $adverts]);
     }
 
@@ -44,10 +44,10 @@ class AdvertsController extends Controller
                
         $form = $this->createForm(AdvertsType::class, $advert);
         $form->handleRequest($request);
-        dump($user->getId());
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            // Retourne l'id et le pseudo du membre
+           
             $advert->setMember($user);
             $advert->setUsernameMember($user->getUsername());
             $em->persist($advert);
@@ -69,7 +69,7 @@ class AdvertsController extends Controller
     {
         $userAdvert = $advert->getIdAdvert();
         $username = $advert->getUsernameMember();
-        dump($advert);
+        
         return $this->render('Backend/adverts/show.html.twig', ['advert' => $advert, 'userAdvert' =>$userAdvert, 'username' => $username]);
     }
     

@@ -32,8 +32,9 @@ class AdminController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             
             // Gestion de l'image
-            $file = $member->getImageName();
-            dump($file);
+            //$file = $form->getData()['imageName'];
+            dump($_FILES);
+            die();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
                 $this->getParameter('images_directory'),

@@ -48,6 +48,7 @@ class Member implements UserInterface, \Serializable
      *      orphanRemoval=true,
      *      cascade={"persist"}
      * )
+     * @ORM\JoinColumn(nullable=false)
      */
     private $adverts;
 
@@ -200,18 +201,18 @@ class Member implements UserInterface, \Serializable
     }
     
     /**
-     * 
      *
-     * @return Collection|null
+     * @return Collection|Advert[]
      */
-    public function getAdverts(): ?Collection
+    public function getAdverts(): Collection
     {
         return $this->adverts;
     }
+    
 
-    public function addAdvert(?Advert $advert): self
+    public function addAdvert(Advert $advert): self
     {
-        $advert->setMember($this);
+        //$advert->setMember($this);
         if (!$this->adverts->contains($advert)) {
             $this->adverts[] = $advert;
             $advert->setMember($this);

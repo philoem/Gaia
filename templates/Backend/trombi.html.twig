@@ -6,7 +6,6 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.css"/>
 {% endblock stylesheets %}
 
 {% block body %}
@@ -17,26 +16,27 @@
 
 {# Ici la carte #}
 <div class="container-fluid">
-    <div class="col align-self-center"></div>
+    <div class="col align-self-center">
         <h2 id="title_map" class="row justify-content-center">
             Membres actifs
         </h2>
     </div>
     <div id="map"></div>
-</div>
-{# Ici listing des membres #}
-<div id="addresses">
-    <ul>
-        {% for adresse in addresses %}
-        <li class="address"><span id="address_user">{{ adresse.username }}</span> <span id="address_lat">{{ adresse.lat }}</span>  <span id="address_lng">{{ adresse.lng }}</span></li>
-        {% endfor %}
-    </ul>
-</div>
-{# Ici le membre connecté #}
-<div id="addresse">
-    <ul>
-        <li class="adress"><span id="adress_user">{{ adress.username }}</span> <span id="adress_lat">{{ adress.lat }}</span>  <span id="adress_lng">{{ adress.lng }}</span></li>
-    </ul>
+
+    {# Ici listing des membres #}
+    <div id="addresses">
+        <ul>
+            {% for adresse in addresses %}
+            <li class="address"><span class="address_user">{{ adresse.username }}</span> <span class="address_lat">{{ adresse.lat }}</span>  <span class="address_lng">{{ adresse.lng }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {# Ici le membre connecté #}
+    <div id="addresse">
+        <ul>
+            <li class="adress"><span class="adress_user">{{ adress.username }}</span> <span class="adress_lat">{{ adress.lat }}</span>  <span class="adress_lng">{{ adress.lng }}</span></li>
+        </ul>
+    </div>
 </div>
     
 
@@ -44,17 +44,9 @@
 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
 integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
 crossorigin=""></script>
-<script type = "text/javascript" src = "http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>  
-{#<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js" async></script>#}
+<script type = "text/javascript" src = "http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script> 
 <script src="{{ asset('js/Map.js') }}"></script>
-{#<script>
-    window.addEventListener('load', () => {const mapMember = new Marker()});
-</script>#}
-{#<script>
-    window.addEventListener('load', () => {const map = new Map()});
-</script>#}
 {% endblock javascripts %}
 
 
-
-{% endblock %}
+{% endblock body %}

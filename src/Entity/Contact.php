@@ -56,6 +56,14 @@ class Contact
      */
     private $subject;
 
+    /**
+    * Constructor
+    */
+    public function __construct()
+    {
+        $this->datecontact = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

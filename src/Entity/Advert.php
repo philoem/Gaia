@@ -51,7 +51,7 @@ class Advert
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Member", inversedBy="adverts")
-     * @ORM\Column(nullable=false)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $member;
 
@@ -90,7 +90,7 @@ class Advert
      */
     public function __construct()
     {
-        $this->member = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->member = new ArrayCollection();
         $this->dateAdverts = new \DateTime();
     }
 

@@ -172,6 +172,18 @@ nav li:hover .submenu
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
     z-index: 10000;
 }
+#slogan, #icon_slogan
+{
+    display: none;
+}
+#icon_circle
+{
+    color: #016359;
+}
+#icon_hands_helping
+{
+    color: white;
+}
 
 /* Villes principales */
 #title_cities
@@ -426,11 +438,19 @@ i.wi
     font-size: 50%;
     color: white;
 }
+#euro_sign
+{
+    color: #6c6a6e;
+}
 
 /* RESPONSIVE  */
 /* Format Ipad */
-@media screen and (max-width: 768px)
+@media screen and (max-width: 768px) 
 {
+    body
+    {
+        overflow: hidden;
+    }
     #text_logo, #logo_name_text
     {
         display: none;
@@ -438,9 +458,12 @@ i.wi
     
     .title_gaia_pimped
     {
+        margin-top: 120%;
+        position: relative;
         display: flex;
         font-size: 2em;
         color: black;
+        border: 1px solid #505050;
     }
     .title_name_pimped
     {
@@ -449,6 +472,28 @@ i.wi
         color: black;
         border: 1px solid black;
         font-size: 1.8em;
+    }
+    #slogan
+    {
+        display: flex;
+        position: absolute;
+        width: 450%;
+        margin-left: -150%;
+        margin-top: -50%;
+    }
+    #title_slogan
+    {
+        margin-top: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #icon_slogan
+    {
+        display: flex;
+        position: absolute;
+        margin-top: 100%;
+        margin-left: 15%;
     }
     #slider
     {
@@ -463,9 +508,22 @@ i.wi
         height: 1300px;
         
     }
+   
     #cities
     {
-        margin-top: 30%;
+        position: relative;
+        margin-top: 50%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .list_cities
+    {
+        display: flex;
+        flex-direction: column;
+        margin-top: 25%;
+        align-items: center;
+        margin-left: -10%;
     }
     .title_name_pimped, .title_home_pimped
     {
@@ -490,18 +548,37 @@ i.wi
     #picture_avatar, #profil
     {
         margin-top: -1%;
-        
-        margin-bottom: 10%;
-        
-       
+        margin-bottom: 10%;       
     }
-    
-    
   
 }
 /* Format IphoneX */
 @media screen and (max-width: 375px)
 {
+    body
+    {
+        overflow: hidden;
+        margin-bottom: 150px;
+    }
+    header
+    {
+        
+    }
+    .title_home_pimped
+    {
+        margin-top: -30%;
+    }
+    #title_slogan
+    {
+        font-size: 100%;
+        width: 80%;
+        margin-left: 5%;
+        text-align: center;
+    }
+    #cities
+    {
+        margin-top: 100%;
+    }
     #weather
     {
         display: flex;

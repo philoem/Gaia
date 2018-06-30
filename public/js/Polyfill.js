@@ -1,3 +1,6 @@
+/**
+ * Polyfill pour gérer la méthode scrollTo sur tous les navigateurs du fichier portfolio.js
+ */
 //from: https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/after()/after().md
 (function (arr) {
     arr.forEach(function (item) {

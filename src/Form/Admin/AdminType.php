@@ -29,6 +29,8 @@ class AdminType extends AbstractType
             //    'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
             ->add('locations', TextType::class)
             ->add('imageName', FileType::class, ['label' => 'Sélectionnez une image pour votre profil'])
+            ->add('lat', TextType::class, ['required' => false])
+            ->add('lng', TextType::class, ['required' => false])
             
         ;
     }

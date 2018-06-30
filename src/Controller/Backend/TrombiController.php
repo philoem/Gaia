@@ -24,7 +24,6 @@ class TrombiController extends Controller
         $member = new Member();
         $user = $security->getUser();
                    
-        // Récupération des adresses dans la bdd
         $em = $this->getDoctrine()->getManager();
         
         $query = $em->createQuery('SELECT u.username, u.lat, u.lng FROM App\Entity\Member u');

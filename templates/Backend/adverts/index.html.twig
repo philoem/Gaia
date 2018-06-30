@@ -18,9 +18,7 @@
                 <th>Prix</th>
                 <th>Date de publication</th>
                 <th>Ville</th>
-                
                 <th>Image</th>
-               
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,7 +28,7 @@
                 <td>{{ advert.idAdvert }}</td>
                 <td>{{ advert.title }}</td>
                 <td>{{ advert.content }}</td>
-                <td>{{ advert.price }} <i class="fas fa-euro-sign fa-sm" style="color: #6c6a6e"></i></td>
+                <td>{{ advert.price }} <i class="fas fa-euro-sign fa-sm" id="euro_sign"></i></td>
                 <td>{{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</td>
                 <td>{{ advert.town|capitalize }}</td>
                 <td>{{ advert.picturesAdverts }}</td>
