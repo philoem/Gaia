@@ -33,8 +33,9 @@ class AdminController extends Controller
             
             // Gestion de l'image
             //$file = $form->getData()['imageName'];
-            dump($_FILES);
-            die();
+            $file = $user->getImageName();
+            dump($file);
+            //die();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
                 $this->getParameter('images_directory'),

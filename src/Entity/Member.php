@@ -111,7 +111,7 @@ class Member implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-     private $isActive;
+     private $isActive = true;
 
     /**
      * @var \DateTime
@@ -166,7 +166,7 @@ class Member implements UserInterface, \Serializable
         $this->adverts = new ArrayCollection();
         $this->dateRegister = new \DateTime();
         $this->updatedAt = new \DateTime();
-        $this->isActive = true;
+        //$this->isActive = true;
     }
 
     public function eraseCredentials(): void

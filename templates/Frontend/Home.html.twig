@@ -15,12 +15,14 @@
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="text-center" id="title_homepage_pimped">
                     <h1 class="title_name_pimped">Bienvenu "{{ app.user.username|title }}"</h1>
+                    
                 </div>
             {% else %}
             <div class="text-center" id="title_homepage_gaia_pimped">
                 <h1 class="title_gaia_pimped">GAIA</h1>
             </div>
             {% endif %}
+            <h5 class="Subtitle_home"><em>Site de particulier à particulier d'annonce de produit du jardin</em></h5>
             {# Sous-titre pour le responsive #}
             <div id="slogan">
                 <h4 id="title_slogan"><em>Le site d'échanges et de partages des amoureux des produits de la terre</em></h4 id="title_slogan">

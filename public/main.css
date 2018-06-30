@@ -4,6 +4,7 @@ body
     margin: 0;
     padding: 0;
 }
+
 /* Pour cacher les labels mais les laisser pour l'accessibilité */
 #form_register label, .label_login, #form_contact label
 {
@@ -70,16 +71,21 @@ nav li:hover .submenu
     z-index: 10000;
 }
 /* Logo */
+#text_logo
+{
+    margin-top: -3px;
+}
 #logo_name_text
 {
     margin-left: -15px;
     margin-top: -14px;
 }
+/* Logo */
 #logo
 {
     float: left;
     margin-left: -30px;
-    margin-top: 5px;
+    margin-top: 0px;
     
 }
 .logo_name
@@ -118,6 +124,13 @@ nav li:hover .submenu
     background-color: #bb86fc;
     color: white;
 }
+/* Pour faire apparaître les labels */
+#form_register label
+{
+    height: 23px;
+    width: auto;
+    position: relative;
+}
 
 /* PAGE CONTACT */
 /* Message de confirmation d'envoi du message du formulaire contact */
@@ -153,6 +166,8 @@ nav li:hover .submenu
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 4.5em;
+    text-shadow: 2px 2px 4px #000000;
+
 }
 .title_name_pimped
 {
@@ -162,6 +177,8 @@ nav li:hover .submenu
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+    text-shadow: 2px 2px 4px #000000;
+
 }
 .title_home_pimped
 {
@@ -171,6 +188,13 @@ nav li:hover .submenu
     top: 25%; left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
     z-index: 10000;
+}
+.Subtitle_home
+{
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px #000000;
 }
 #slogan, #icon_slogan
 {
@@ -269,7 +293,15 @@ nav li:hover .submenu
 /* Listing des membres actifs et du membre connecté */
 #addresses, #addresse 
 {
-    display: none;
+   display: none;
+}
+/*  Le pseudo dans les popups des marqueurs sur la carte */ 
+.name_popup
+{
+    color: black;
+    letter-spacing: 1.5px;
+    font-size: 150%;
+    text-align: center;
 }
 /* PAGE ANNOUNCEMENT  */
 .project
@@ -473,6 +505,10 @@ i.wi
         border: 1px solid black;
         font-size: 1.8em;
     }
+    .Subtitle_home
+    {
+        display: none;
+    }
     #slogan
     {
         display: flex;
@@ -560,10 +596,6 @@ i.wi
         overflow: hidden;
         margin-bottom: 150px;
     }
-    header
-    {
-        
-    }
     .title_home_pimped
     {
         margin-top: -30%;
@@ -574,6 +606,10 @@ i.wi
         width: 80%;
         margin-left: 5%;
         text-align: center;
+    }
+    .Subtitle_home
+    {
+        display: none;
     }
     #cities
     {

@@ -26,7 +26,7 @@ class TrombiController extends Controller
                    
         $em = $this->getDoctrine()->getManager();
         
-        $query = $em->createQuery('SELECT u.username, u.lat, u.lng FROM App\Entity\Member u');
+        $query = $em->createQuery("SELECT u.id, u.username, u.lat, u.lng, a.title, a.idAdvert FROM App\Entity\Member u JOIN App\Entity\Advert a WHERE  u.isActive = true AND a.member = u.id");
         $users = $query->getResult();
         
         return $this->render('Backend/trombi.html.twig', ['addresses' => $users, 'adress' => $user]);

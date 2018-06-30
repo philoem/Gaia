@@ -47,7 +47,7 @@
                             <div class="col-sm-12 col-lg-12">
                                 <h3 class="text-center">Votre profil</h3>
                                 <div class="form-group">
-                                    <form class="form-horizontal" method="POST" action="{{ path('admin_index') }}" novalidate="novalidate" onsubmit="return confirm('Etes-vous sûr de bien vouloir valider modifier vos données ?');">
+                                    {#<form class="form-horizontal" method="POST" action="{{ path('admin_index') }}" novalidate="novalidate" onsubmit="return confirm('Etes-vous sûr de bien vouloir valider modifier vos données ?');">#}
                                         {{ form_start(form)}}
                                         <div class="form-group">
                                             <div class="row justify-content-center">
@@ -94,6 +94,16 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        {# Checkbox pour savoir si l'utilisateur veut être localisé sur la carte des membres actifs #}
+                                        <div class="form-group">
+                                            <div class="row justify-content-center">
+                                                <div class="col-sm-10 col-lg-10">
+                                                {{ form_row(form.isActive) }}
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group col-sm-12">
                                             <div class="row col-sm-12  justify-content-center" >
                                                 
@@ -102,8 +112,8 @@
                                                 
                                             </div>
                                         </div>
-                                        {{ form_widget(form.imageName)}}
 
+                                        
                                         {# Champs input pour y placer les lat et lng de l'adresse géocodée #}
                                         {{ form_widget(form.lat, {'attr': {'hidden': true}})}}
                                         {{ form_widget(form.lng, {'attr': {'hidden': true}})}}
@@ -111,7 +121,7 @@
                                         {{ form_end(form) }}
                                        
                                        
-                                    </form>
+                                    {#</form>#}
                                 </div>
                             </div>
                         </div>

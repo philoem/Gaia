@@ -27,12 +27,12 @@
                             <div class="row">
                                 <div class="col col-sm-6">
                                     {{ form_label(form.firstname, 'Votre prénom :') }}
-                                    {{ form_widget(form.firstname, {'attr': {'placeholder': 'Votre prénom'}}) }}
+                                    {{ form_widget(form.firstname, {'attr': {'placeholder': '60 caractères max'}}) }}
                                 </div>
                            
                                 <div class="col col-sm-6">
                                     {{ form_label(form.lastname, 'Votre nom :') }}
-                                    {{ form_widget(form.lastname, {'attr': {'placeholder': 'Votre nom'}}) }}
+                                    {{ form_widget(form.lastname, {'attr': {'placeholder': '60 caractères max'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     {{ form_label(form.username, 'Votre pseudonyme :') }}
-                                    {{ form_widget(form.username, {'attr': {'placeholder': 'Votre pseudo'}}) }}
+                                    {{ form_widget(form.username, {'attr': {'placeholder': 'Ex: Philou'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     {{ form_label(form.mail, 'Votre email :') }}
-                                    {{ form_widget(form.mail, {'attr': {'placeholder': 'Votre email'}}) }}
+                                    {{ form_widget(form.mail, {'attr': {'placeholder': 'Ex: philippe@orange.fr'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -77,6 +77,8 @@
                                 </div>
                             </div>
                         </div>
+                        {# Checkbox pour savoir si l'utilisateur veut être localisé sur la carte des membres actifs #}
+                        {{ form_row(form.isActive) }}
                         
                         {#{{ form_row(form.image) }}#}
                         <div class="form-group">
@@ -87,6 +89,8 @@
                         {# Champs input pour y placer les lat et lng de l'adresse géocodée #}
                         {{ form_widget(form.lat, {'attr': {'hidden': true}})}}
                         {{ form_widget(form.lng, {'attr': {'hidden': true}})}}
+
+                        {{ form_rest(form) }}
                         
                     </div>
                 </div>

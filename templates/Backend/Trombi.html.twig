@@ -27,7 +27,7 @@
     <div id="addresses">
         <ul>
             {% for adresse in addresses %}
-            <li class="address"><span class="address_user">{{ adresse.username }}</span> <span class="address_lat">{{ adresse.lat }}</span>  <span class="address_lng">{{ adresse.lng }}</span></li>
+            <li class="address"><span class="address_user">{{ adresse.username }}</span> <span class="address_lat">{{ adresse.lat }}</span><span class="address_lng">{{ adresse.lng }}</span><span class="address_advert"><a href="{{ path('adverts_show', {'idAdvert': adresse.idAdvert}) }}">{{ adresse.title }}</a></span></li>
             {% endfor %}
         </ul>
     </div>
@@ -37,6 +37,7 @@
             <li class="adress"><span class="adress_user">{{ adress.username }}</span> <span class="adress_lat">{{ adress.lat }}</span>  <span class="adress_lng">{{ adress.lng }}</span></li>
         </ul>
     </div>
+    
 </div>
     
 

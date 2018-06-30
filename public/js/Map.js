@@ -45,11 +45,13 @@ for (let i = 0; i < address.length; i++) {
   lat = address[i].children[1].textContent
   lng = address[i].children[2].textContent
   let user = address[i].children[0].textContent
-
+  // Récupération des annonces des membres
+  let link = address[i].children[3].innerHTML
+ 
   // Instanciation de la classe des icônes vertes
   let greenIcon = new LeafIcon({iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png'})
   
-  let marker = new L.marker([lat, lng], {icon: greenIcon}).bindPopup(capitalize(user))
+  let marker = new L.marker([lat, lng], {icon: greenIcon}).bindPopup("<p class='name_popup'>" + capitalize(user) +'</p>' + '<p>Sa dernière annonce : '+ link +'</p>')
   markers.addLayer(marker)
   
 }
