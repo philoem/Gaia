@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Contact - {{ parent() }}
+{% endblock title %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
+    
+
+    <div class="container">
+        <div class="row justify-content-center" id="form_contact">
+            <div class="form-group col-sm-5" id="form_shadow_contact">
+                <div class="col-sm-12 col-lg-12">
+                    <h3 class="text-center">Laissez-nous votre message, nous vous répondrons dans les plus brefs délais</h3>
+                    <div class="form-group">
+                        <form class="form-horizontal" method="POST" action="{{ path('contact') }}">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.name, 'Votre nom :') }}
+                                        {{ form_widget(form.name, {'attr': {'placeholder': 'Votre nom'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.email, 'Votre email :') }}
+                                        {{ form_widget(form.email, {'attr': {'placeholder': 'Votre email'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.subject, "L'objet de votre mail :") }}
+                                        {{ form_widget(form.subject, {'attr': {'placeholder': 'Sujet'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.message, "Votre message :") }}
+                                        {{ form_widget(form.message, {'attr': {'placeholder': 'Tapez ici votre message...', 'rows': 10}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <div class="row col-sm-12  justify-content-center" >
+                                    
+                                    <button type="reset" class="btn btn-warning">Effacer</button>
+                                    <button type="submit" class="btn btn-success">Envoyer votre message</button>
+                                    
+                                </div>
+                            </div>
+                            {{ form_rest(form) }}
+                        </form>
+                    </div> 
+                </div>
+            </div>
+        </div>
+   
+        <div class="row justify-content-center">
+            {% for message in app.flashes('notice') %}
+                <div class="flash-notice">
+                    <h1>{{ message }}</h1>
+                    <div class="row justify-content-center">
+                        <a href="{{ path('home') }}" title="Retour à l'accueil" id="return_home">Retour à l'accueil</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}
+

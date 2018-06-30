@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Annonces - {{ parent() }}
+{% endblock title %}
+
+{% block body %}
+
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
+
+    <div class="container">
+        <h1>Annonces</h1>
+        <div class="portfolio">
+            {% for advert in adverts %}
+            
+            <div class="project" tabindex="0">
+                <img src="http://via.placeholder.com/350x350" alt="image annonce" class="project_image">{{ advert.picturesAdverts }}
+                <h2 class="project_image">{{ advert.title }}</h2>
+                <div class="project_description">Publication le {{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</div>
+                <div class="project_body">
+                    <h3>{{ advert.title }}</h3>
+                    <p>{{ advert.content }}</p>
+                    <p>{{ advert.price }} euros</p>
+                    <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert} ) }}">En savoir plus...</a>
+                </div>
+            </div>
+
+            {% else %}
+            
+            <h3>Pas d'annonces pour le moment, mais cela est provisoire !!</h3>
+
+            {% endfor %}
+        </div>
+    </div>
+        
+    {% block javascripts %}
+        <script src="{{ asset('js/Polyfill.js') }}"></script>
+        <script src="{{ asset('js/portfolio.js') }}"></script>
+    {% endblock javascripts %}
+
+{% endblock body %}

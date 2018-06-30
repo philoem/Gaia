@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         projet:
-            entity: { class: App\Entity\Members, property: username }
+            entity: { class: App\Entity\Member, property: username }
         #in_memory:
         #    memory:
         #        users:
@@ -60,16 +60,20 @@ security:
         #    algorithm: bcrypt  
         #    cost: 12
             
-        App\Entity\Members: 
+        App\Entity\Member: 
             algorithm: bcrypt  
             cost: 12
             
     role_hierarchy:
         ROLE_USER: ROLE_USER
         ROLE_ADMIN: [ROLE_ADMIN, ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_USER]
 
     access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/announcement, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/adverts, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/members, roles: ROLE_ADMIN }
