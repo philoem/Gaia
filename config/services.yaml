@@ -3,7 +3,8 @@
 parameters:
     locale: 'fr'
     env(DATABASE_HOST): localhost
-    images_directory: '%kernel.project_dir%/public/img'
+    images_directory: '%kernel.project_dir%/public/img/profil'
+    adverts_directory: '%kernel.project_dir%/public/img/advert'
    
 
 services:

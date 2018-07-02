@@ -42,7 +42,13 @@
             {% if advert.picturesAdverts %}
             <tr>
                 <th>Image</th>
-                <td>{{ advert.picturesAdverts }}</td>
+                {% if advert.picturesAdverts %}
+                <td>
+                    <img src="{{ asset('img/advert/' ~ advert.picturesAdverts) }}" alt="Ici la photo de l'annonce"  id="picture_advert">
+                </td>
+                {% else %}
+                <td><em>Pas de photos</em></td>
+                {% endif %}
             </tr>
             {% endif %}
         </tbody>

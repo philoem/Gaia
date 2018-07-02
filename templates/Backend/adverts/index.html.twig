@@ -31,7 +31,15 @@
                 <td>{{ advert.price }} <i class="fas fa-euro-sign fa-sm" id="euro_sign"></i></td>
                 <td>{{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</td>
                 <td>{{ advert.town|capitalize }}</td>
-                <td>{{ advert.picturesAdverts }}</td>
+                {% if advert.picturesAdverts %}
+                <td>
+                    <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce">
+                        <img src="{{ asset('img/advert/' ~ advert.picturesAdverts) }}" alt="Ici la photo de l'annonce"  id="picture_advert">
+                    </a>
+                </td>
+                {% else %}
+                <td><em>Pas de photos</em></td>
+                {% endif %}
                 <td>
                     <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce"><i class="far fa-eye fa-lg" id="icon_show"></i></a>
                     <a href="{{ path('adverts_edit', {'advert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg" id="icon_edit"></i></a>

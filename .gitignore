@@ -24,3 +24,5 @@ yarn-error.log
 
 *.list
 /img/
+/public/img/profil/
+/public/img/advert/

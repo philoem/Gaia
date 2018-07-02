@@ -80,13 +80,42 @@ nav li:hover .submenu
     margin-left: -15px;
     margin-top: -14px;
 }
-/* Logo */
 #logo
 {
     float: left;
     margin-left: -30px;
     margin-top: 0px;
-    
+}
+/* Astérix définition avec effet animation */
+#display_definition
+{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    color: #ffffff;
+    background-color: rgba(12, 179, 137, 0.795);
+    border-radius: 5px;
+    padding: 10px;
+    height: auto;
+    width: 260px;
+    text-align: center;
+    overflow-wrap: break-word;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px #360b58;
+    box-shadow: 3px 3px 12px rgb(1, 49, 29);
+    z-index: 100000;
+}
+#title_definition
+{
+    text-decoration: underline;
+}
+#text_logo:hover #display_definition
+{
+    opacity: 1;
+    top: 153%;
+    left: 15%;
+    transition: opacity 1.5s, top 1s;
 }
 .logo_name
 {
@@ -318,10 +347,12 @@ nav li:hover .submenu
     grid-auto-flow: row dense;
     
 }
-.project_image
+.project_images
 {
-    width: 100%;
-    height: auto;
+    width: 250px;
+    max-width: 250px;
+    height: 250px;
+    max-height: 250px;
 }
 .project > img
 {
@@ -425,16 +456,28 @@ i.wi
     margin-top: 25%;
     font-size: 2.5em;
 }
+.flash-notice
+{
+    position: relative;
+    margin-top: 5%;
+}
 /* Section gestion du profil */
 #picture_avatar
 {
     margin-top: -40%;
-}
-#picture_avatar
-{
     padding-top: 20%;
     margin-left: -5%;
     height: 20%;
+}
+#picture_profil
+{
+    box-shadow: 8px 8px 12px #aaa;
+    height: 350px;
+    width: 350px;
+}
+#title_picture_profil
+{
+    margin-top: 5%;
 }
 #profil
 {
@@ -474,6 +517,13 @@ i.wi
 {
     color: #6c6a6e;
 }
+/* Ici les images des annonces sur la page index */ 
+#picture_advert
+{
+    height: 50px;
+    width: 50px;
+}
+
 
 /* RESPONSIVE  */
 /* Format Ipad */

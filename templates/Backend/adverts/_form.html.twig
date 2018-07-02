@@ -1,12 +1,13 @@
 <div class="row justify-content-center">
     <div class="form-group col-sm-6 col-lg-6" id="form_shadow_register">
         <div class="col-sm-12 col-lg-12 ">
-            <form method="post" onsubmit="return confirm('Etes-vous sûr de vouloir ajouter cette annonce ?');">
-                
+            
+                {{ form_start(form, {'method': 'POST', 'attr': {'onsubmit': "return confirm('Etes-vous sûr de vouloir ajouter cette annonce ?')"}}) }}
                 <div class="form-group">
                     <div class="row">
                         <div class="col col-sm-12">
                             {{ form_widget(form) }}
+                            {{ form_row(form.picturesAdverts)}}
                         </div>
                     </div>
                 </div>
@@ -15,8 +16,8 @@
                         <button class="btn">{{ button_label|default('Enregistrement') }}</button>
                     </div>
                 </div>
-                
-            </form>
+                {{ form_end(form) }}
+            
         </div>
     </div>
 </div>

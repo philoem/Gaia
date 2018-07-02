@@ -37,7 +37,7 @@ class AdvertsController extends Controller
     /**
      * @Route("/new", name="adverts_new", methods="GET|POST")
      */
-    public function new(Request $request, Security $security): Response
+    public function new(Request $request, Security $security, EntityManagerInterface $em): Response
     {
         $advert = new Advert();
         $user = $security->getUser();
@@ -46,10 +46,20 @@ class AdvertsController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-           
+            
             $advert->setMember($user);
             $advert->setUsernameMember($user->getUsername());
+            
+            // Gestion de l'image
+            $file = $form['picturesAdverts']->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('adverts_directory'),
+                $fileName
+            );
+            $advert->setPicturesAdverts($fileName);
+            
+            $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();
 
@@ -88,6 +98,15 @@ class AdvertsController extends Controller
         
         if ($form->isSubmitted() && $form->isValid()) {
             $advert = $form->getData();
+
+            // Gestion de l'image
+            $file = $form['picturesAdverts']->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('adverts_directory'),
+                $fileName
+            );
+            $advert->setPicturesAdverts($fileName);
             
             $this->getDoctrine()->getManager()->flush();
             

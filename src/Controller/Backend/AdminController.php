@@ -26,22 +26,19 @@ class AdminController extends Controller
         $member = new Member();
         // Pré-remplissage des champs du formulaire
         $user = $security->getUser();
-        $form = $this->createForm(AdminType::class, $user);
         
+        $form = $this->createForm(AdminType::class, $user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             
             // Gestion de l'image
-            //$file = $form->getData()['imageName'];
-            $file = $user->getImageName();
-            dump($file);
-            //die();
+            $file = $form['imageName']->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
                 $this->getParameter('images_directory'),
                 $fileName
             );
-            $member->setImage($fileName);
+            $user->setImageName($fileName);
             
             $em = $this->getDoctrine()->getManager();
             
@@ -58,7 +55,7 @@ class AdminController extends Controller
         }
         
         $formView = $form->createView();
-        
+        dump($user->getImageName());
         return $this->render('Backend/admin/admin.html.twig', ['form'=>$formView, 'user' => $user]);
     }
         

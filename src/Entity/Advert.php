@@ -243,7 +243,7 @@ class Advert
     *
     * @return  self
     */ 
-    public function setPicturesAdverts($picturesAdverts)
+    public function setPicturesAdverts($picturesAdverts = null)
     {
         $this->picturesAdverts = $picturesAdverts;
 

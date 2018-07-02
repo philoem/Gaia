@@ -599,7 +599,7 @@ class Member implements UserInterface, \Serializable
         return $this->imageName;
     }
 
-    public function setImageName(UploadedFile $imageName = null)
+    public function setImageName($imageName = null)
     {
         $this->imageName = $imageName;
 

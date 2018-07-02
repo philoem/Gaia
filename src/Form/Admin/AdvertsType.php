@@ -17,7 +17,7 @@ class AdvertsType extends AbstractType
             ->add('content')
             ->add('price')
             ->add('town')
-            ->add('picturesAdverts', FileType::class, ['required' => false, 'label' => 'Sélectionnez une image pour votre annonce :'])
+            ->add('picturesAdverts', FileType::class, ['required' => false, 'label' => 'Sélectionnez une image pour votre annonce :', 'mapped' => false])
         ;
     }
 

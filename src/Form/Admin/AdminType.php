@@ -5,6 +5,7 @@ namespace App\Form\Admin;
 use App\Entity\Member;
 use App\Form\ImageType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -30,11 +31,12 @@ class AdminType extends AbstractType
             //    'invalid_message' => 'Mot de passe non conforme à celui taper avant'))
             ->add('locations', TextType::class)
             ->add('isActive', CheckboxType::class, ['label' => 'Apparaître sur la carte des membres actifs ?', 'required' => false])
-            ->add('imageName', FileType::class, ['label' => 'Sélectionnez une image pour votre profil', 'required' => false])
+            ->add('imageName', FileType::class, ['label' => 'Sélectionnez une image pour votre profil', 'required' => false, 'mapped' => false])
             ->add('lat', TextType::class, ['required' => false])
             ->add('lng', TextType::class, ['required' => false])
             
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
