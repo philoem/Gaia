@@ -19,7 +19,7 @@
                 {% if advert.picturesAdverts %}
                 <img src="{{ asset('img/advert/' ~ advert.picturesAdverts) }}" alt="image annonce" class="project_images">
                 {% else %}
-                <img src="http://via.placeholder.com/250x250" alt="Pas d'image d'annonce" class="project_image">
+                <img src="{{ asset('img/pas-de-photo.png')}}" alt="Pas d'image d'annonce" class="project_images">
                 {% endif %}
                 <h2 class="project_image">{{ advert.title }}</h2>
                 <div class="project_description">Publication le {{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</div>

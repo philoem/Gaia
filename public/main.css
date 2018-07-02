@@ -90,6 +90,7 @@ nav li:hover .submenu
 #display_definition
 {
     opacity: 0;
+    visibility: hidden;
     position: absolute;
     top: 0;
     left: 15%;
@@ -113,6 +114,7 @@ nav li:hover .submenu
 #text_logo:hover #display_definition
 {
     opacity: 1;
+    visibility: visible;
     top: 153%;
     left: 15%;
     transition: opacity 1.5s, top 1s;
@@ -523,6 +525,7 @@ i.wi
     height: 50px;
     width: 50px;
 }
+
 
 
 /* RESPONSIVE  */
