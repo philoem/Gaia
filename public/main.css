@@ -69,7 +69,6 @@ a.dropdown-item:hover
     margin-left: -14px;
     margin-top: 10px;
 }
-
 /* Astérix définition avec effet animation */
 #display_definition
 {
@@ -146,7 +145,6 @@ a.dropdown-item:hover
     width: auto;
     position: relative;
 }
-
 /* PAGE CONTACT */
 /* Message de confirmation d'envoi du message du formulaire contact */
 #return_home
@@ -162,14 +160,12 @@ a.dropdown-item:hover
     transition: color 0.3s linear;
     text-decoration-style: none;
     font-weight: bold;
-    
 }
 #return_home:active
 {
     font-size: larger;
     font-weight: bold;
 }
-
 /* HOMEPAGE  */
 /* Titre personnalisé */
 .title_gaia_pimped
@@ -183,7 +179,6 @@ a.dropdown-item:hover
     font-size: 4.5em;
     text-shadow: 2px 2px 4px #000000;
     z-index: 100;
-
 }
 .title_name_pimped
 {
@@ -194,7 +189,6 @@ a.dropdown-item:hover
     padding-top: 10px;
     padding-bottom: 10px;
     text-shadow: 2px 2px 4px #000000;
-
 }
 .title_home_pimped
 {
@@ -204,12 +198,13 @@ a.dropdown-item:hover
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
     z-index: 100;
 }
-.Subtitle_home
+.subtitle_home
 {
     color: white;
     text-transform: capitalize;
     letter-spacing: 1.5px;
     text-shadow: 2px 2px 4px #000000;
+    text-align: center;
 }
 #slogan, #icon_slogan
 {
@@ -565,7 +560,7 @@ i.wi
         border: 1px solid black;
         font-size: 1.8em;
     }
-    .Subtitle_home
+    .subtitle_home
     {
         display: none;
     }
@@ -604,9 +599,12 @@ i.wi
     #list_towns
     {
         height: 1300px;
-        
     }
-   
+    #list_cities_no_connected
+    {
+        text-align: center;
+        position: absolute;
+    }
     #cities
     {
         position: relative;
@@ -650,24 +648,48 @@ i.wi
     }
   
 }
-/* Format IphoneX */
-@media screen and (max-width: 375px)
+/* Format IphoneX, Samsung Note 3, S5, S7, S8 */
+@media screen and (max-width: 384px)
 {
     body
     {
         overflow: hidden;
-        margin-bottom: 150px;
+        margin-bottom: 80px;
     }
+    #title_homepage_pimped
+    {
+        position: relative;
+    }
+    
     .title_home_pimped
     {
-        margin-top: -30%;
+        margin-top: -50%;
+    }
+    .title_name_pimped
+    {
+        margin-top: 50%;
+    }
+    #slogan
+    {
+        top: 126%;
+        margin: -50%;
+        margin-top: -45%;
+        margin-left: 15%;
+        width: auto;
+        text-align: center;
     }
     #title_slogan
     {
+        float: none;
         font-size: 100%;
-        width: 80%;
-        margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
         text-align: center;
+    }
+    #icon_slogan
+    { 
+        margin: 70% 35%;
     }
     .Subtitle_home
     {
@@ -675,7 +697,16 @@ i.wi
     }
     #cities
     {
-        margin-top: 100%;
+        margin-top: 90%;
+    }
+    .list_cities
+    {
+        margin-top: 20%;
+    }
+    #list_cities_no_connected
+    {
+        text-align: center;
+        position: absolute;
     }
     #weather
     {
@@ -684,6 +715,16 @@ i.wi
         margin-top: 2%;
     }
 }
+/* Format Iphone 7, Iphone 6s */
+@media screen and (min-width: 385px) and (maw-width: 986px)
+{
+    #title_homepage_pimped
+    {
+        position: relative;
+        margin-top: 95%;
+    }
+}
+/* Format pour la page des annonces "announcement" */
 @media screen and (min-width: 768px)
 {
     .portfolio
