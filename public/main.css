@@ -1,10 +1,8 @@
-/*  HEADER */
 body
 {
     margin: 0;
     padding: 0;
 }
-
 /* Pour cacher les labels mais les laisser pour l'accessibilité */
 #form_register label, .label_login, #form_contact label
 {
@@ -17,63 +15,48 @@ body
     position: absolute;
     width: 1px;
 }
-
-.navbar
+/*  HEADER */
+nav
 {
     background-color: #016359;
     height: 65px;
 }
-
-nav > ul > li
+ul.navbar-nav
 {
-    float: left;
-    position: relative;
+    margin-right: 0;
 }
-.nav a
+nav ul li a
 {
     color: white;
     text-transform: capitalize;
     letter-spacing: 1.5px;
 }
-.nav a:hover
+nav ul li a:hover
 {
     color:  #bb86fc;
     transition: color 0.3s linear;
 }
-
-.nav a:active
+div.dropdown-menu.show
 {
-    font-size: larger;
-    font-weight: bold;
-}
-.submenu
-{
-    list-style-type: none;
-    display: none;
-    margin-left: -28px;
     background-color: #0e6a5c;
-    box-shadow: 8px 8px 12px #aaa;
-    width: 220%;
-    font-size: 0.9em;
-    padding-left: -10px;
+    z-index: 5000000;
 }
-nav > ul::after
+a.dropdown-item
 {
-    content: "";
-    display: block;
-    clear: both;
-    
+    color: white;
+    z-index: 5000000;
 }
-nav li:hover .submenu
+a.dropdown-item:hover
 {
-    display: inline-block;
-    position: absolute;
-    z-index: 10000;
+    color: #bb86fc;
+    z-index: 5000000;
 }
+
 /* Logo */
 #text_logo
 {
     margin-top: -3px;
+    margin-left: -30px;
 }
 #logo_name_text
 {
@@ -83,9 +66,10 @@ nav li:hover .submenu
 #logo
 {
     float: left;
-    margin-left: -30px;
-    margin-top: 0px;
+    margin-left: -14px;
+    margin-top: 10px;
 }
+
 /* Astérix définition avec effet animation */
 #display_definition
 {
@@ -198,6 +182,7 @@ nav li:hover .submenu
     padding-bottom: 10px;
     font-size: 4.5em;
     text-shadow: 2px 2px 4px #000000;
+    z-index: 100;
 
 }
 .title_name_pimped
@@ -214,11 +199,10 @@ nav li:hover .submenu
 .title_home_pimped
 {
     position: absolute;
-    
     letter-spacing: 1.5px;
-    top: 25%; left: 50%; /* à 50%/50% du parent référent */
+    top: 40%; left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
-    z-index: 10000;
+    z-index: 100;
 }
 .Subtitle_home
 {
@@ -519,24 +503,47 @@ i.wi
 {
     color: #6c6a6e;
 }
+#icon_delete
+{
+    color: rgb(228, 26, 26);
+}
 /* Ici les images des annonces sur la page index */ 
 #picture_advert
 {
     height: 50px;
     width: 50px;
 }
-
-
+/* Gestion du bouton "message" pour le formulaire  */
+#button_message
+{
+   margin-top: -4%;
+   display: flex;
+   justify-content: flex-end;
+}
+/* PAGE COMMENT  */
+/* Formulaire de message */ 
+#form_shadow_comment
+{
+    box-shadow: 8px 8px 12px #aaa;
+}
 
 /* RESPONSIVE  */
 /* Format Ipad */
-@media screen and (max-width: 768px) 
+@media screen and (max-width: 987px) 
 {
     body
     {
         overflow: hidden;
     }
-    #text_logo, #logo_name_text
+    ul.navbar-nav
+    {
+        background-color: #044e43;
+        margin-top: -5%;
+        text-align: center;
+        z-index: 1000000;
+        
+    }
+    #text_logo, #logo_name_text, #logo
     {
         display: none;
     }
@@ -576,6 +583,7 @@ i.wi
         display: flex;
         flex-direction: column;
         align-items: center;
+        z-index: 20;
     }
     #icon_slogan
     {
@@ -583,6 +591,7 @@ i.wi
         position: absolute;
         margin-top: 100%;
         margin-left: 15%;
+        z-index: 20;
     }
     #slider
     {

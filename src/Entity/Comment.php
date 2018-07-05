@@ -3,63 +3,62 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * Comment
- *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="FK_comment_id_advert", columns={"id_advert"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
 class Comment
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_comment", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idComment;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_comments", type="string", length=60, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $nameComments;
+    private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="commentary", type="string", length=255, nullable=false)
+     * @ORM\Column(type="text")
      */
     private $commentary;
 
     /**
-     * @var \Advert
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Advert")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_advert", referencedColumnName="id_advert")
-     * })
+     * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="comments")
+     * @ORM\JoinColumn(name="advert_id",nullable=false, referencedColumnName="id_advert")
      */
-    private $idAdvert;
+    private $adverts;
 
-    public function getIdComment(): ?int
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateComment;
+
+    /**
+    * Constructor
+    */
+    public function __construct()
     {
-        return $this->idComment;
+        $this->dateComment = new \DateTime();
     }
 
-    public function getNameComments(): ?string
+    public function getId()
     {
-        return $this->nameComments;
+        return $this->id;
     }
 
-    public function setNameComments(string $nameComments): self
+    public function getName(): ?string
     {
-        $this->nameComments = $nameComments;
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -76,17 +75,27 @@ class Comment
         return $this;
     }
 
-    public function getIdAdvert(): ?Adverts
+    public function getAdverts(): ?Advert
     {
-        return $this->idAdvert;
+        return $this->adverts;
     }
 
-    public function setIdAdvert(?Adverts $idAdvert): self
+    public function setAdverts(Advert $advert): self
     {
-        $this->idAdvert = $idAdvert;
+        $this->adverts = $advert;
 
         return $this;
     }
 
+    public function getDateComment(): ?\DateTimeInterface
+    {
+        return $this->dateComment;
+    }
 
+    public function setDateComment(\DateTimeInterface $dateComment): self
+    {
+        $this->dateComment = $dateComment;
+
+        return $this;
+    }
 }

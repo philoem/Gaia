@@ -9,52 +9,94 @@
 <div class="container">  
     <h1>Liste de vos annonces</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>N° de l'annonce</th>
-                <th>Titre</th>
-                <th>Descriptif</th>
-                <th>Prix</th>
-                <th>Date de publication</th>
-                <th>Ville</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for advert in adverts %}
-            <tr>
-                <td>{{ advert.idAdvert }}</td>
-                <td>{{ advert.title }}</td>
-                <td>{{ advert.content }}</td>
-                <td>{{ advert.price }} <i class="fas fa-euro-sign fa-sm" id="euro_sign"></i></td>
-                <td>{{ advert.dateAdverts ? advert.dateAdverts|date('d/m/Y H:i:s') : '' }}</td>
-                <td>{{ advert.town|capitalize }}</td>
-                {% if advert.picturesAdverts %}
-                <td>
-                    <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce">
-                        <img src="{{ asset('img/advert/' ~ advert.picturesAdverts) }}" alt="Ici la photo de l'annonce"  id="picture_advert">
-                    </a>
-                </td>
-                {% else %}
-                <td><em>Pas de photos</em></td>
-                {% endif %}
-                <td>
-                    <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce"><i class="far fa-eye fa-lg" id="icon_show"></i></a>
-                    <a href="{{ path('adverts_edit', {'advert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg" id="icon_edit"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Vous n'avez pas encore publié d'annnonces...</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>N° de l'annonce</th>
+                    <th>Titre</th>
+                    <th>Descriptif</th>
+                    <th>Prix</th>
+                    <th>Date de publication</th>
+                    <th>Ville</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for advert in adverts %}
+                <tr>
+                    <td>{{ advert.idAdvert }}</td>
+                    <td>{{ advert.title }}</td>
+                    <td>{{ advert.content }}</td>
+                    <td>{{ advert.price }} <i class="fas fa-euro-sign fa-sm" id="euro_sign"></i></td>
+                    <td>{{ advert.dateAdverts ? advert.dateAdverts|date_modify("+0 hours")|date('d/m/Y H:i:s') : '' }}</td>
+                    <td>{{ advert.town|capitalize }}</td>
+                    {% if advert.picturesAdverts %}
+                    <td>
+                        <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce">
+                            <img src="{{ asset('img/advert/' ~ advert.picturesAdverts) }}" alt="Ici la photo de l'annonce"  id="picture_advert">
+                        </a>
+                    </td>
+                    {% else %}
+                    <td><em>Pas de photos</em></td>
+                    {% endif %}
+                    <td>
+                        <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour accéder au détail de l'annonce"><i class="far fa-eye fa-lg" id="icon_show"></i></a>
+                        <a href="{{ path('adverts_edit', {'advert': advert.idAdvert}) }}" title="Cliquez sur l'icône pour modifier l'annonce"><i class="far fa-edit fa-lg" id="icon_edit"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Vous n'avez pas encore publié d'annnonces...</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <div>
         <a href="{{ path('adverts_new') }}"><span class="fa-layers fa-fw fa-3x" id="icon_new"><i class="fas fa-leaf" id="icon_file"></i><i class="fas fa-plus-circle fa-xs" id="icon_plus"></i></span>  Créer une nouvelle annonce</a>
     </div>
+    <h1>Liste de vos messages</h1>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom du membre</th>
+                    <th>Message</th>
+                    <th>Date du message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for comment in comments %}
+                    {# Ici n'afficher que les messages pour le membre connecté #}
+                    {% if comment.adverts.usernameMember == app.user.username %}
+                        <tr>
+                            <td>{{ comment.name }}</td>
+                            <td>{{ comment.commentary }}</td>
+                            <td>Le {{ comment.dateComment|date_modify("+0 hours")|date('d/m/Y à H:i')}}</td>
+                            <td>
+                                
+                                <a href="{{ path('comment', {'id': comment.id}) }}" title="Cliquez sur l'icône pour répondre au message"><i class="fas fa-reply fa-lg" id="icon_show"></i></a>
+                                <a href="{{ path('comment_delete', {'id': comment.id}) }}" title="Cliquez sur l'icône pour supprimer le message"><i class="fas fa-times-circle fa-lg" id="icon_delete"></i></a>
+                            
+                            </td>
+                        </tr>
+                    
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="7">Vous n'avez pas encore de message...</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
 </div>  
 {% endblock body %}

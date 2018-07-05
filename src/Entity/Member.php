@@ -166,7 +166,7 @@ class Member implements UserInterface, \Serializable
         $this->adverts = new ArrayCollection();
         $this->dateRegister = new \DateTime();
         $this->updatedAt = new \DateTime();
-        //$this->isActive = true;
+        
     }
 
     public function eraseCredentials(): void

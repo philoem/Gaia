@@ -7,7 +7,7 @@
 {% block body %}
 {% block header %} {{ parent() }} {% endblock header %}
 <div class="container">    
-<h1>Annonce</h1>
+    <h1>Annonce</h1>
 
     <table class="table">
         <tbody>
@@ -63,12 +63,13 @@
 
     {{ include('Backend/adverts/_delete_form.html.twig') }}
     {% endif %}
-    {#<div id="button_message">
-        <button type="button" class="btn btn-outline-success">Envoyer un message</button>
-    </div>
-    <div id="message">
-
-    </div>#}
     
-</div>
+    {# Ici gestion du bouton "message" et du formulaire pour envoyer un message au propriétaire de l'annonce #}
+    {% if username != app.user.username %}
+    <div id="button_message">
+        <a class="btn btn-outline-success" href="{{ path('comment', {'id': advert.idAdvert}) }}" role="button">Cliquez ici pour laisser un message</a>
+    </div>
+    {% endif %}
+    
+
 {% endblock body %}
