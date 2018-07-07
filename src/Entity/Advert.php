@@ -86,7 +86,7 @@ class Advert
     private $usernameMember;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="adverts", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="adverts", orphanRemoval=true, cascade={"persist"})
      * @ORM\JoinColumn
      */
     private $comments;
@@ -96,7 +96,7 @@ class Advert
      */
     public function __construct()
     {
-        $this->member = new ArrayCollection();
+        //$this->member = new ArrayCollection();
         $this->dateAdverts = new \DateTime();
         $this->comments = new ArrayCollection();
     }

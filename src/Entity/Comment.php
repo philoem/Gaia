@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -28,7 +29,7 @@ class Comment
     private $commentary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="comments", cascade={"persist"})
      * @ORM\JoinColumn(name="advert_id",nullable=false, referencedColumnName="id_advert")
      */
     private $adverts;
@@ -39,11 +40,18 @@ class Comment
     private $dateComment;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Comment")
+     * 
+     */
+    private $comment;
+
+    /**
     * Constructor
     */
     public function __construct()
     {
         $this->dateComment = new \DateTime();
+        //$this->adverts = new ArrayCollection();
     }
 
     public function getId()
@@ -98,4 +106,22 @@ class Comment
 
         return $this;
     }
+
+    public function addComment(Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+    public function getComment()
+    {
+        return $this->comment;
+    }
+    public function addCommentLinkedToAdvert(Comment $comment)
+    {
+        $this->addComment($comment);
+        $this->setAdverts($comment->getAdverts());
+    }
+
+
 }

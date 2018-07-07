@@ -21,7 +21,7 @@ class TrombiController extends Controller
      */
     public function index(Request $request, EntityManagerInterface $em, Security $security)
     {
-        $member = new Member();
+        
         $user = $security->getUser();
                    
         $em = $this->getDoctrine()->getManager();
@@ -29,7 +29,10 @@ class TrombiController extends Controller
         $query = $em->createQuery("SELECT u.id, u.username, u.lat, u.lng, a.title, a.idAdvert FROM App\Entity\Member u JOIN App\Entity\Advert a WHERE  u.isActive = true AND a.member = u.id");
         $users = $query->getResult();
         
-        return $this->render('Backend/trombi.html.twig', ['addresses' => $users, 'adress' => $user]);
+        return $this->render('Backend/trombi.html.twig', [
+            'addresses' => $users,
+            'adress'    => $user
+        ]);
        
     }
 }

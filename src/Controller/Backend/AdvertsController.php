@@ -25,9 +25,10 @@ class AdvertsController extends Controller
      * @Route("/", name="adverts_index", methods="GET")
      * 
      */
-    public function index(Security $security, EntityManagerInterface $em): Response
+    public function index(EntityManagerInterface $em): Response
     {
-        $user = $security->getUser();
+        //$user = $security->getUser();
+        $user = $this->getUser();
 
         $adverts = $this->getDoctrine()
             ->getRepository(Advert::class)
@@ -39,7 +40,11 @@ class AdvertsController extends Controller
         ->getRepository(Comment::class)
         ->findall();
         
-        return $this->render('Backend/adverts/index.html.twig', ['adverts' => $adverts, 'comments' => $commentList, 'user' => $user]);
+        return $this->render('Backend/adverts/index.html.twig', [
+            'adverts'   => $adverts,
+            'comments'  => $commentList,
+            'user'      => $user
+        ]);
     }
 
     /**
@@ -75,8 +80,8 @@ class AdvertsController extends Controller
         }
 
         return $this->render('Backend/adverts/new.html.twig', [
-            'advert' => $advert,
-            'form' => $form->createView(),
+            'advert'    => $advert,
+            'form'      => $form->createView(),
         ]);
     }
 
@@ -84,13 +89,17 @@ class AdvertsController extends Controller
      * @Route("/{idAdvert}", name="adverts_show", methods="GET")
      *
      */
-    public function show(EntityManagerInterface $em, Advert $advert, Request $request, Security $security): Response
+    public function show(Advert $advert): Response
     {
         $userAdvert = $advert->getIdAdvert();
         $username = $advert->getUsernameMember();
-        $user = $security->getUser();
+        $user = $this->getUser();
 
-        return $this->render('Backend/adverts/show.html.twig', ['advert' => $advert, 'userAdvert' =>$userAdvert, 'username' => $username, 'user' => $user,
+        return $this->render('Backend/adverts/show.html.twig', [
+            'advert'        => $advert,
+            'userAdvert'    =>$userAdvert,
+            'username'      => $username,
+            'user'          => $user,
         ]);
     }
     
@@ -101,8 +110,8 @@ class AdvertsController extends Controller
      */
     public function edit(Request $request, Advert $advert): Response
     {
-        $userAdvert = $advert->getIdAdvert();
-        $username = $advert->getUsernameMember();
+        //$userAdvert = $advert->getIdAdvert();
+        //$username = $advert->getUsernameMember();
 
         $form = $this->createForm(AdvertsType::class, $advert);
         $form->handleRequest($request);
@@ -125,10 +134,10 @@ class AdvertsController extends Controller
         }
 
         return $this->render('Backend/adverts/edit.html.twig', [
-            'advert' => $advert,
-            'form' => $form->createView(),
-            'userAdvert' =>$userAdvert,
-            'username' => $username
+            'advert'    => $advert,
+            'form'      => $form->createView(),
+            //'userAdvert' =>$userAdvert,
+            'username'  => $advert->getUsernameMember(),
         ]);
     }
 
@@ -137,25 +146,26 @@ class AdvertsController extends Controller
      */
     public function delete(Request $request, Advert $advert): Response
     {
-        $username = $advert->getUsernameMember();
+        
         if ($this->isCsrfTokenValid('delete'.$advert->getIdAdvert(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($advert);
             $em->flush();
         }
 
-        return $this->redirectToRoute('adverts_index', ['username' => $username]);
+        return $this->redirectToRoute('adverts_index', ['username' => $advert->getUsernameMember()]);
     }
 
     /**
-    * @Route("/comment/{id}", name="comment", methods="GET|POST", requirements={"id"="\d+"})
+    * @Route("/comment/advert/{id}", name="comment", methods="GET|POST", requirements={"id"="\d+"})
     * @ParamConverter("advert", class="App\Entity\Advert")
+    * 
     */
-    public function comment(EntityManagerInterface $em, Request $request, Advert $advert)
+    public function buttonComment(EntityManagerInterface $em, Request $request, Advert $advert)
     {
         $comment = new Comment();
         $username = $advert->getUsernameMember();
-
+        
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -173,14 +183,62 @@ class AdvertsController extends Controller
                 'Votre message a bien été envoyé !'
             );
             
-            return $this->render('Backend/comment/comment.html.twig', ['formComment' => $form->createView(), 'comment' => $comment, 'username' => $username,
-        ]);
+            return $this->render('Backend/comment/comment.html.twig', [
+                'formComment' => $form->createView(),
+                'comment'     => $comment,
+                'username'    => $username,
+            ]);
         }
         
-        return $this->render('Backend/comment/comment.html.twig', ['formComment' => $form->createView(), 'comment' => $comment, 'username' => $username,
+        return $this->render('Backend/comment/comment.html.twig', [
+            'formComment' => $form->createView(),
+            'comment'     => $comment,
+            'username'    => $username,
+            'advert'      => $advert,
         ]);
     }
 
+    /**
+    * @Route("/comment/{id}", name="comment_reply", methods="GET|POST", requirements={"id"="\d+"})
+    * @ParamConverter("comment", class="App\Entity\Comment")
+    * 
+    */
+    public function replyComment(EntityManagerInterface $em, Request $request, Comment $comment)
+    {
+        
+        $reply = new Comment();
+        $username = $comment->getName();
+
+        $form = $this->createForm(CommentType::class, $reply);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $reply->addCommentLinkedToAdvert($comment);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reply);
+            $em->flush();
+
+            /* Ici affichage d'un message confirmant l'enregistrement du message */
+            $this->addFlash(
+                'notice',
+                'Votre message a bien été envoyé !'
+            );
+            
+            return $this->render('Backend/comment/comment.html.twig', [
+                'formComment' => $form->createView(),
+                'comment'     => $comment,
+            ]);
+        }
+        
+        return $this->render('Backend/comment/comment.html.twig', [
+            'formComment' => $form->createView(),
+            'comment'     => $comment,
+            'username'    => $username,
+        ]);
+    }
+    
     /**
     * @Route("/comment/delete/{id}", name="comment_delete", requirements={"id"="\d+"})
     * @ParamConverter("comment", class="App\Entity\Comment")
@@ -194,6 +252,5 @@ class AdvertsController extends Controller
 
         return $this->redirectToRoute('adverts_index');
     }
-    
 
 }

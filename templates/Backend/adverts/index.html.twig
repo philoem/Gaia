@@ -81,12 +81,11 @@
                             <td>Le {{ comment.dateComment|date_modify("+0 hours")|date('d/m/Y à H:i')}}</td>
                             <td>
                                 
-                                <a href="{{ path('comment', {'id': comment.id}) }}" title="Cliquez sur l'icône pour répondre au message"><i class="fas fa-reply fa-lg" id="icon_show"></i></a>
-                                <a href="{{ path('comment_delete', {'id': comment.id}) }}" title="Cliquez sur l'icône pour supprimer le message"><i class="fas fa-times-circle fa-lg" id="icon_delete"></i></a>
-                            
+                                <a href="{{ path('comment_reply', {'id': comment.id}) }}" title="Cliquez sur l'icône pour répondre au message"><i class="fas fa-reply fa-lg" id="icon_show"></i></a>
+                                <a href="{{ path('comment_delete', {'id': comment.id}) }}" title="Cliquez sur l'icône pour supprimer le message"  data-toggle="modal" data-target="#myModal" class="lien_id"><i class="fas fa-times-circle fa-lg" id="icon_delete" ></i></a>
+                                                            
                             </td>
                         </tr>
-                    
                     {% endif %}
                 {% else %}
                     <tr>
@@ -95,8 +94,36 @@
                 {% endfor %}
             </tbody>
         </table>
+        
     </div>
+    {# Fenêtre modale Bootstrap pour confirmer la suppression du message #}
+    <div class="col-sm-12">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Confirmation suppression du message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Vous êtes sur le point de supprimer un message.</p>
+                        <p>Souhaitez-vous valider la suppression de ce message ?</p>
+                        <p>Attention: action irréversible</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Non, je sors</button>
+                        <a class="btn btn-danger" href="#" role="button" class="btn btn-danger" id="confirm">Oui, je confirme la suppression</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
-
-</div>  
+</div> 
+{% block javascripts %}
+<script src="{{ asset('js/Modal.js') }}"></script>
+{% endblock javascripts %}
 {% endblock body %}

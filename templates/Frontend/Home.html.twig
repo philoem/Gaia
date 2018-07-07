@@ -27,12 +27,14 @@
             <div id="slogan">
                 <h4 id="title_slogan"><em>Le site d'échanges et de partages des amoureux des produits de la terre</em></h4 id="title_slogan">
             </div>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div id="icon_slogan">
                 <span class="fa-stack fa-2x">
                     <i class="fas fa-circle fa-stack-2x" id="icon_circle"></i>
                     <i class="fas fa-hands-helping fa-stack-1x" id="icon_hands_helping"></i>
                 </span>
             </div>
+            {% endif %}
         </div>
         
 
