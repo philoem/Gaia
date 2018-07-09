@@ -27,7 +27,7 @@ class AdvertsController extends Controller
      */
     public function index(EntityManagerInterface $em): Response
     {
-        //$user = $security->getUser();
+        
         $user = $this->getUser();
 
         $adverts = $this->getDoctrine()
@@ -37,8 +37,8 @@ class AdvertsController extends Controller
             ]);
         
         $commentList = $this->getDoctrine()
-        ->getRepository(Comment::class)
-        ->findall();
+            ->getRepository(Comment::class)
+            ->findall();
         
         return $this->render('Backend/adverts/index.html.twig', [
             'adverts'   => $adverts,

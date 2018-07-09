@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * Member
  *
  * @ORM\Table(name="member")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\MembersRepository")
  * @UniqueEntity(fields="username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity(fields="mail", message="Cet email existe déjà")
  * 

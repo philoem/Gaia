@@ -129,5 +129,18 @@ class Contact
         return $this;
     }
 
+    public function sendMail(\Swift_Mailer $mailer)
+    {
+        
+        $mail = (new \Swift_Message('Contact GAIA'))
+                ->setSubject($this->getSubject())
+                ->setFrom($this->getEmail())
+                ->setTo('philoem24@gmail.com')
+                ->setBody($this->getMessage(), 'text/plain');
+
+        return $mailer->send($mail);
+
+
+    }
 
 }

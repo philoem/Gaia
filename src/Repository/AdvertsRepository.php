@@ -43,5 +43,12 @@ class AdvertsRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findAllTown()
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT a.town, a.idAdvert FROM App\Entity\Advert a")
+            ->getResult();
+    }
     
 }
