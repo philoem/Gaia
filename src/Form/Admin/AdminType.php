@@ -24,8 +24,14 @@ class AdminType extends AbstractType
             ->add('username', TextType::class)
             ->add('mail', EmailType::class)
             ->add('locations', TextType::class)
-            ->add('isActive', CheckboxType::class, ['label' => 'Apparaître sur la carte des membres actifs ?', 'required' => false])
-            ->add('imageName', FileType::class, ['label' => 'Sélectionnez une image pour votre profil', 'required' => false, 'mapped' => false])
+            ->add('isActive', CheckboxType::class, [
+                'label'     => 'Apparaître sur la carte des membres actifs ?',
+                'required'  => false])
+            ->add('imageName', FileType::class, [
+                'label'     => 'Sélectionnez une image pour votre profil',
+                'required'  => false,
+                'mapped'    => false
+                ])
             ->add('lat', TextType::class, ['required' => false])
             ->add('lng', TextType::class, ['required' => false])
             

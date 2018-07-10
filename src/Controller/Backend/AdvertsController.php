@@ -5,16 +5,16 @@ namespace App\Controller\Backend;
 use App\Entity\Advert;
 use App\Entity\Member;
 use App\Entity\Comment;
+use App\Service\ImageUploader;
 use App\Form\Admin\AdvertsType;
+use App\Form\Admin\CommentType;
 use App\Repository\AdvertsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use App\Form\Admin\CommentType;
 
 /**
  * @Route("/adverts")
@@ -50,10 +50,10 @@ class AdvertsController extends Controller
     /**
      * @Route("/new", name="adverts_new", methods="GET|POST")
      */
-    public function new(Request $request, Security $security, EntityManagerInterface $em): Response
+    public function new(Request $request, EntityManagerInterface $em, ImageUploader $imageUploader): Response
     {
         $advert = new Advert();
-        $user = $security->getUser();
+        $user = $this->getUser();
                
         $form = $this->createForm(AdvertsType::class, $advert);
         $form->handleRequest($request);
@@ -65,11 +65,7 @@ class AdvertsController extends Controller
             
             // Gestion de l'image
             $file = $form['picturesAdverts']->getData();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->getParameter('adverts_directory'),
-                $fileName
-            );
+            $fileName = $imageUploader->uploadAdvert($file);
             $advert->setPicturesAdverts($fileName);
             
             $em = $this->getDoctrine()->getManager();
@@ -108,26 +104,28 @@ class AdvertsController extends Controller
      * @Route("/{advert}/edit", name="adverts_edit", methods="GET|POST")
      * @ParamConverter("advert", class="App\Entity\Advert")
      */
-    public function edit(Request $request, Advert $advert): Response
+    public function edit(Request $request, Advert $advert, ImageUploader $imageUploader): Response
     {
-        //$userAdvert = $advert->getIdAdvert();
-        //$username = $advert->getUsernameMember();
 
         $form = $this->createForm(AdvertsType::class, $advert);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $advert = $form->getData();
 
-            // Gestion de l'image
-            $file = $form['picturesAdverts']->getData();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->getParameter('adverts_directory'),
-                $fileName
-            );
-            $advert->setPicturesAdverts($fileName);
+        // Ici récupération de l'image
+        $file = $form['picturesAdverts']->getData();
+
+        if ($form->isSubmitted() && $form->isValid()) {
             
+            // Gestion de l'image
+            if ($file === null) {
+                
+                $advert->setPicturesAdverts($advert->getPicturesAdverts());
+            
+            } elseif ($file !== null) {
+
+                $fileName = $imageUploader->uploadAdvert($file);
+                $advert->setPicturesAdverts($fileName);
+            }
+                        
             $this->getDoctrine()->getManager()->flush();
             
             return $this->redirectToRoute('adverts_index');
@@ -136,7 +134,6 @@ class AdvertsController extends Controller
         return $this->render('Backend/adverts/edit.html.twig', [
             'advert'    => $advert,
             'form'      => $form->createView(),
-            //'userAdvert' =>$userAdvert,
             'username'  => $advert->getUsernameMember(),
         ]);
     }

@@ -27,13 +27,17 @@ class RegisterType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('username', TextType::class)
             ->add('mail',EmailType::class)
-            ->add('password', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'     => array('label' => 'password'),
-                'second_options'    => array('label' => 'repeatPassword'),
-                'invalid_message'   => 'Mot de passe non conforme à celui taper avant'))
+            ->add('password', RepeatedType::class, [
+                'type'              => PasswordType::class,
+                'first_options'     => ['label' => 'password'],
+                'second_options'    => ['label' => 'repeatPassword'],
+                'invalid_message'   => 'Mot de passe non conforme à celui taper avant'
+                ])
             ->add('locations', TextType::class)
-            ->add('isActive', CheckboxType::class, ['label' => 'Apparaître sur la carte des membres actifs', 'required' => false])
+            ->add('isActive', CheckboxType::class, [
+                'label'     => 'Apparaître sur la carte des membres actifs',
+                'required'  => false
+                ])
             ->add('lat', TextType::class, ['required' => false])
             ->add('lng', TextType::class, ['required' => false])
         ;

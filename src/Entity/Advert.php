@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Advert
@@ -67,7 +68,7 @@ class Advert
     /**
      * @var string
      * @ORM\Column(name="picturesAdverts", type="string", nullable=true)
-     * 
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
      */
     private $picturesAdverts;
 

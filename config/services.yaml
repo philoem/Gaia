@@ -31,21 +31,19 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
     
+    App\Service\ImageUploader:
+        arguments:
+            $getTargetDirectoryProfil: '%images_directory%'
+            $getTargetDirectoryAdvert: '%adverts_directory%'
     
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    #image_uploader:
-    #    class: App\Entity\Image
-    #    arguments: ['%images_directory%']
-    #App\Service\FileUploader:
-    #    arguments:
-    #        $targetDirectory: '%images_directory%'
 
     #App\EventListener\ImageUploadListener:
+    #    class: App\EventListener\ImageUploadListener
     #    tags:
-    #        - { name: doctrine.event_listener, event: prePersist }
-    #        - { name: doctrine.event_listener, event: preUpdate }
-    #        - { name: doctrine.event_listener, event: postLoad }
+    #        - { name: doctrine.event_listener, event: prePersistAdvert }
+    #        - { name: doctrine.event_listener, event: preUpdateAdvert }
+    #        - { name: doctrine.event_listener, event: postLoadAdvert }
+            
 
     #image_listener:
     #    class: App\EventListener\ImageUploadListener

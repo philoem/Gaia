@@ -16,8 +16,14 @@ class CommentType extends AbstractType
     {
         $builder
             
-            ->add('name', TextType::class, ['label' => 'Votre nom :', 'required' => true])
-            ->add('commentary', TextareaType::class, ['label' => 'Votre message :', 'required' => true])
+            ->add('name', TextType::class, [
+                'label'     => 'Votre nom :',
+                'required'  => true
+                ])
+            ->add('commentary', TextareaType::class, [
+                'label'     => 'Votre message :',
+                'required'  => true
+                ])
                        
         ;
     }
