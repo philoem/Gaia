@@ -5,14 +5,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader
 {
-    private $getTargetDirectoryProfil;
+    private $targetDirectoryProfil;
 
-    private $getTargetDirectoryAdvert;
+    private $targetDirectoryAdvert;
 
-    public function __construct($getTargetDirectoryProfil, $getTargetDirectoryAdvert)
+    public function __construct($targetDirectoryProfil, $targetDirectoryAdvert)
     {
-        $this->getTargetDirectoryProfil = $getTargetDirectoryProfil;
-        $this->getTargetDirectoryAdvert = $getTargetDirectoryAdvert;
+        $this->targetDirectoryProfil = $targetDirectoryProfil;
+        $this->targetDirectoryAdvert = $targetDirectoryAdvert;
     }
 
     public function uploadProfil(UploadedFile $file = null)
@@ -29,7 +29,7 @@ class ImageUploader
 
     public function getTargetDirectoryProfil()
     {
-        return $this->getTargetDirectoryProfil;
+        return $this->targetDirectoryProfil;
     }
 
     public function uploadAdvert(UploadedFile $file = null)
@@ -47,7 +47,7 @@ class ImageUploader
 
     public function getTargetDirectoryAdvert()
     {
-        return $this->getTargetDirectoryAdvert;
+        return $this->targetDirectoryAdvert;
     }
     
 }

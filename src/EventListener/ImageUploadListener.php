@@ -11,30 +11,30 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploadListener
 {
-    private $uploaderAdvert;
+    private $uploader;
 
-    public function __construct(ImageUploader $uploaderAdvert)
+    public function __construct(ImageUploader $uploader)
     {
-        $this->uploaderAdvert = $uploaderAdvert;
+        $this->uploader = $uploader;
     }
 
-    public function prePersistAdvert(LifecycleEventArgs $args)
-    {
-        $entity = $args->getEntity();
-
-        $this->uploadFileAdvert($entity);
-        
-    }
-
-    public function preUpdateAdvert(PreUpdateEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
-        $this->uploadFileAdvert($entity);
+        $this->uploadFile($entity);
         
     }
 
-    private function uploadFileAdvert($entity)
+    public function preUpdate(PreUpdateEventArgs $args)
+    {
+        $entity = $args->getEntity();
+
+        $this->uploadFile($entity);
+        
+    }
+
+    private function uploadFile($entity)
     {
         // upload only works for Advert entities
         if (!$entity instanceof Advert) {
@@ -44,25 +44,11 @@ class ImageUploadListener
         $file = $entity->getPicturesAdverts();
 
         // only upload new files
-        if (!$file instanceof UploadedFile) {
-            return;
+        if ($file instanceof UploadedFile) {
+            $fileName = $this->uploader->uploadAdvert($file);
+            $entity->setPicturesAdverts($fileName);
         }
         
-
-        $fileName = $this->uploaderAdvert->uploadAdvert($file);
-        $entity->setPicturesAdverts($fileName);
-    }
-    public function postLoadAdvert(LifecycleEventArgs $args)
-    {
-        $entity = $args->getEntity();
-
-        if (!$entity instanceof Advert) {
-            return;
-        }
-
-        if ($fileName = $entity->getPicturesAdverts()) {
-            $entity->setPicturesAdverts(new File($this->uploader->getTargetDirectoryAdvert().'/'.$fileName));
-        }
     }
     
 }
