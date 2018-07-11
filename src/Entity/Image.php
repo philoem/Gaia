@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
@@ -40,12 +41,12 @@ class Image
         return $this->id;
     }
 
-    public function getUrl(): ?string
+    public function getUrl() 
     {
         return $this->url;
     }
 
-    public function setUrl(?string $url): self
+    public function setUrl(UploadedFile $url)
     {
         $this->url = $url;
 

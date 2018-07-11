@@ -77,3 +77,4 @@ security:
     - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/members, roles: ROLE_ADMIN }
+    - { path: ^/comment, roles: ROLE_ADMIN }

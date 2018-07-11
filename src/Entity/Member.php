@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Entity;
-
 use Serializable;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,13 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
-
 /**
  * Member
  *
  * @ORM\Table(name="member")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\MembersRepository")
  * @UniqueEntity(fields="username", message="Ce pseudonyme est déjà pris")
  * @UniqueEntity(fields="mail", message="Cet email existe déjà")
  * 
@@ -39,7 +35,6 @@ class Member implements UserInterface, \Serializable
      * 
      */
     private $id;
-
     /**
      * 
      * @ORM\OneToMany(
@@ -51,7 +46,6 @@ class Member implements UserInterface, \Serializable
      * @ORM\JoinColumn(nullable=false)
      */
     private $adverts;
-
     /**
      * @var string
      *
@@ -59,7 +53,6 @@ class Member implements UserInterface, \Serializable
      * @Assert\NotBlank(message="Le prénom est obligatoire !")
      */
     private $firstname;
-
     /**
      * @var string
      *
@@ -67,7 +60,6 @@ class Member implements UserInterface, \Serializable
      * @Assert\NotBlank(message="Le nom est obligatoire !")
      */
     private $lastname;
-
     /**
      * @var string
      *
@@ -77,7 +69,6 @@ class Member implements UserInterface, \Serializable
      * 
      */
     protected $username;
-
     /**
      * @var string
      *
@@ -86,7 +77,6 @@ class Member implements UserInterface, \Serializable
      * @Assert\Email(message="L'email '{{ value }}' n'est pas un format valide")
      */
     private $mail;
-
     /**
      * @var string
      *
@@ -101,18 +91,15 @@ class Member implements UserInterface, \Serializable
      * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
-
     /**
      * @ORM\Column(name="roles", type="array", nullable=true)
      * 
      */
     private $roles = [];
-
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-     private $isActive;
-
+     private $isActive = true;
     /**
      * @var \DateTime
      *
@@ -121,7 +108,6 @@ class Member implements UserInterface, \Serializable
      * @Assert\DateTime()
      */
     private $dateRegister;
-
     /**
     * @ORM\Column(name="locations", type="string", length=80, nullable=true)
     */
@@ -131,12 +117,10 @@ class Member implements UserInterface, \Serializable
     * @ORM\Column(name="lat", type="decimal", precision=10, scale=7,  nullable=true)
     */
     private $lat;
-
     /**
     * @ORM\Column(name="lng", type="decimal", precision=10, scale=7, nullable=true)
     */
     private $lng;
-
     /**
     * 
     * @Assert\Type(type="App\Entity\Image")
@@ -144,12 +128,11 @@ class Member implements UserInterface, \Serializable
     * 
     */
     private $image;
-
     /**
     * @ORM\Column(name="imageName", type="string", length=255, nullable=true)
+    * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
     */
     private $imageName;
-
     
     /**
     * @ORM\Column(type="datetime", nullable=true)
@@ -166,17 +149,14 @@ class Member implements UserInterface, \Serializable
         $this->adverts = new ArrayCollection();
         $this->dateRegister = new \DateTime();
         $this->updatedAt = new \DateTime();
-        $this->isActive = true;
+        
     }
-
     public function eraseCredentials(): void
     {
         //pas d'utilisation de 'plainpassword' donc pas besoin de 'eraseCreadentials()';
         // $this->plainPassword = null;
         
     }
-
-
     /**
      * Get the value of id
      *
@@ -196,7 +176,6 @@ class Member implements UserInterface, \Serializable
     public function setId(int $id)
     {
         $this->id = $id;
-
         return $this;
     }
     
@@ -209,7 +188,6 @@ class Member implements UserInterface, \Serializable
         return $this->adverts;
     }
     
-
     public function addAdvert(Advert $advert): self
     {
         //$advert->setMember($this);
@@ -219,7 +197,6 @@ class Member implements UserInterface, \Serializable
         }
         return $this;
     }
-
     public function removeAdvert(Advert $advert): self
     {
         if ($this->adverts->contains($advert)) {
@@ -229,12 +206,10 @@ class Member implements UserInterface, \Serializable
                 $advert->setMember(null);
             }
         }
-
         return $this;
         //$advert->setMember(null);
         //$this->adverts->removeElement($advert);
     }
-
     /**
      * Get the value of firstname
      *
@@ -244,7 +219,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->firstname;
     }
-
     /**
      * Set the value of firstname
      *
@@ -255,10 +229,8 @@ class Member implements UserInterface, \Serializable
     public function setFirstname(string $firstname)
     {
         $this->firstname = $firstname;
-
         return $this;
     }
-
     /**
      * Get the value of lastname
      *
@@ -268,7 +240,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->lastname;
     }
-
     /**
      * Set the value of lastname
      *
@@ -279,11 +250,9 @@ class Member implements UserInterface, \Serializable
     public function setLastname(string $lastname)
     {
         $this->lastname = $lastname;
-
         return $this;
     }
   
-
     /**
      * Get the value of mail
      *
@@ -293,7 +262,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->mail;
     }
-
     /**
      * Set the value of mail
      *
@@ -304,11 +272,9 @@ class Member implements UserInterface, \Serializable
     public function setMail(string $mail)
     {
         $this->mail = $mail;
-
         return $this;
     }
     
-
     /**
      * Get the value of dateRegister
      *
@@ -318,7 +284,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->dateRegister;
     }
-
     /**
      * Set the value of dateRegister
      *
@@ -329,10 +294,8 @@ class Member implements UserInterface, \Serializable
     public function setDateRegister(\DateTime $dateRegister)
     {
         $this->dateRegister = $dateRegister;
-
         return $this;
     }
-
     
     /**
      * Get the value of salt
@@ -341,7 +304,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->salt;
     }
-
     /**
      * Set the value of salt
      *
@@ -350,10 +312,8 @@ class Member implements UserInterface, \Serializable
     public function setSalt($salt)
     {
         $this->salt = $salt;
-
         return $this;
     }
-
       
     /**
      * Get the value of roles
@@ -365,10 +325,8 @@ class Member implements UserInterface, \Serializable
         if(empty($roles)){
             $roles[] = 'ROLE_USER';
         }
-
         return array_unique($roles);
     }
-
     /**
      * Set the value of roles
      *
@@ -377,10 +335,8 @@ class Member implements UserInterface, \Serializable
     public function setRoles($roles)
     {
         $this->roles = $roles;
-
         return $this;
     }
-
     /**
      * Get the value of isActive
      *
@@ -404,27 +360,22 @@ class Member implements UserInterface, \Serializable
  
          return $this;
      }
-
     public function isAccountNonExpired()
     {
         return true;
     }
-
     public function isAccountNonLocked()
     {
         return true;
     }
-
     public function isCredentialsNonExpired()
     {
         return true;
     }
-
     public function isEnabled()
     {
         return $this->isActive;
     }
-
     // serialize and unserialize must be updated - see below
     public function serialize()
     {
@@ -440,7 +391,6 @@ class Member implements UserInterface, \Serializable
             $this->locations,
             $this->lat,
             $this->lng,
-
         ));
     }
     public function unserialize($serialized)
@@ -459,8 +409,6 @@ class Member implements UserInterface, \Serializable
             $this->lng,
         ) = unserialize($serialized);
     }
-
-
     /**
      * Get the value of username
      *
@@ -470,7 +418,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->username;
     }
-
     /**
      * Set the value of username
      *
@@ -481,10 +428,8 @@ class Member implements UserInterface, \Serializable
     public function setUsername(string $username)
     {
         $this->username = $username;
-
         return $this;
     }
-
     
     /**
      * Get the value of password
@@ -495,7 +440,6 @@ class Member implements UserInterface, \Serializable
     {
         return $this->password;
     }
-
     /**
      * Set the value of password
      *
@@ -506,10 +450,8 @@ class Member implements UserInterface, \Serializable
     public function setPassword(string $password)
     {
         $this->password = $password;
-
         return $this;
     }
-
     /**
     * Get the value of locations
     *
@@ -530,10 +472,8 @@ class Member implements UserInterface, \Serializable
     public function setLocations(string $locations)
     {
         $this->locations = $locations;
-
         return $this;
     }
-
     /**
     * Get the value of lat
     *
@@ -554,10 +494,8 @@ class Member implements UserInterface, \Serializable
     public function setLat($lat)
     {
         $this->lat = $lat;
-
         return $this;
     }
-
     /**
     * Get the value of lng
     *
@@ -578,33 +516,25 @@ class Member implements UserInterface, \Serializable
     public function setLng($lng)
     {
         $this->lng = $lng;
-
         return $this;
     }
-
     public function getImage()
     {
         return $this->image;
     }
-
-    public function setImage(UploadedFile $image = null)
+    public function setImage($image = null)
     {
         $this->image = $image;
-
         return $this;
     }
-
     public function getImageName()
     {
         return $this->imageName;
     }
-
-    public function setImageName(UploadedFile $imageName = null)
+    public function setImageName($imageName)
     {
         $this->imageName = $imageName;
-
         return $this;
     }
         
 }
-

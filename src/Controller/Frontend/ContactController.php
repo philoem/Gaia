@@ -31,13 +31,7 @@ class ContactController extends Controller
             $em->flush();
 
             /* Ici envoi du message dans ma boîte mail */
-            $message = (new \Swift_Message('Contact GAIA'))
-                ->setSubject($contact->getSubject())
-                ->setFrom($contact->getEmail())
-                ->setTo('philoem24@gmail.com')
-                ->setBody($contact->getMessage());
-
-            $mailer->send($message);
+            $contact->sendMail($mailer);
 
             /* Ici affichage d'un message confirmant l'enregistrement du message */
             $this->addFlash(

@@ -7,7 +7,7 @@
 {% block body %}
 {% block header %} {{ parent() }} {% endblock header %}
 <div class="container">    
-<h1>Annonce</h1>
+    <h1>Annonce</h1>
 
     <table class="table">
         <tbody>
@@ -42,7 +42,13 @@
             {% if advert.picturesAdverts %}
             <tr>
                 <th>Image</th>
-                <td>{{ advert.picturesAdverts }}</td>
+                {% if advert.picturesAdverts %}
+                <td>
+                    <img src="{{ asset('img/advert/' ~ advert.picturesAdverts) }}" alt="Ici la photo de l'annonce"  id="picture_advert">
+                </td>
+                {% else %}
+                <td><em>Pas de photos</em></td>
+                {% endif %}
             </tr>
             {% endif %}
         </tbody>
@@ -58,5 +64,12 @@
     {{ include('Backend/adverts/_delete_form.html.twig') }}
     {% endif %}
     
-</div>
+    {# Ici gestion du bouton "message" et du formulaire pour envoyer un message au propriétaire de l'annonce #}
+    {% if username != app.user.username %}
+    <div id="button_message">
+        <a class="btn btn-outline-success" href="{{ path('comment', {'id': advert.idAdvert}) }}" role="button">Cliquez ici pour laisser un message</a>
+    </div>
+    {% endif %}
+    
+
 {% endblock body %}

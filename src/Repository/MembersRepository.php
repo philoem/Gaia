@@ -43,5 +43,12 @@ class MembersRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findAllMemberActive()
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT u.id, u.username, u.lat, u.lng, a.title, a.idAdvert FROM App\Entity\Member u JOIN App\Entity\Advert a WHERE  u.isActive = true AND a.member = u.id")
+            ->getResult();
+    }
     
 }

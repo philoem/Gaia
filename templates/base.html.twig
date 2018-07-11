@@ -13,7 +13,10 @@
         <link rel="icon" type="image/png" href="{{ asset('img/feuille2ico.ico') }}" >
         
         {% block stylesheets %}
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
             integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
@@ -24,87 +27,84 @@
 
     </head>
     {% endblock head %}
+    <body>
     {% block body %}
-        <body>
         
-        {% block header %}
-        <header>
-            <nav class="navbar navbar">
-            
-                <div class="col" id="logo_name_text">
-                    <div class="col">
-                        <p><img src="{{ asset('img/logo.png') }}" alt="image d'un tournesol" id="logo"></p>
-                    </div>
-                
-                    <div class="col" id="text_logo">
-                        <p class="logo_name"><strong class="nameGaia">GAIA</strong></p><p class="logo_name"><em> le site d'échanges et de partages des jardiniers</em></p>
-                    </div>
-                </div>
-                
-                {# Ici le menu  #}
-                
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('home') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Mon compte</a>
-                        
-                        <ul class="submenu">
-                            <li>
+            {% block header %}
+            <header>   
+                <nav class="navbar navbar-expand-md sticky-top">
+
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+                        <span class="navbar-toggler-icon"><img src="{{ asset('img/burger.png') }}" class="img-fluid" alt="Responsive image" id="burger"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="collapse_target">
+                        <a class="navbar-brand"><img src="{{ asset('img/logo.png') }}" alt="image d'un tournesol" id="logo"></a>
+                        <div class="col" id="text_logo">
+                            <p class="logo_name"><strong class="nameGaia">GAIA</strong></p>
+                            <p class="logo_name"><em> le site du locavorisme entre particuliers</em><span id="definition">*</span></p>
+                            <div id="display_definition">
+                                <p id="title_definition">*Ici la définition du locavorisme :</p>
+                                <p>Le locavorisme ou mouvement locavore est un mouvement prônant la consommation de nourriture produite dans un rayon de 100 à 250 kilomètres maximum autour de son domicile. On nomme locavore une personne qui adhère au locavorisme.</p>
+                                <p>Alors êtes-vous un <em>locavore</em>?</p>
+                            </div>
+                        </div>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('home') }}"><span>Accueil</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Mon compte
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown_target">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <a class="dropdown-item" href="{{ path('security_logout') }}" >Se déconnecter</a>
+                                    <div class="dropdown-divider"></div>
+                                    {% else %}
+                                    <a class="dropdown-item" href="{{ path('security_login') }}" >Se connecter</a>
+                                    <div class="dropdown-divider"></div>
+                                    {% endif %}
+                                    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <a class="dropdown-item" href="{{ path('inscription') }}" >Inscription</a>
+                                    <div class="dropdown-divider"></div>
+                                    {% endif %}
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <a class="dropdown-item" href="{{ path('admin_index') }}" >Mon profil</a>
+                                    {% else %}
+                                    <a class="dropdown-item" href="{{ path('security_login') }}">Mon profil</a>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">
+                                    Annonces
+                                <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown_target">
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <a class="dropdown-item" href="{{ path('adverts_index') }}" >Publier une annonce</a>
+                                    <div class="dropdown-divider"></div>
+                                    {% endif %}
+                                    <a class="dropdown-item" href="{{ path('announcement') }}" >Accéder aux annonces</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <a class="nav-link" href="{{ path('security_logout') }}" >Se déconnecter</a>
-                                {% else %}
-                                <a class="nav-link" href="{{ path('security_login') }}" >Se connecter</a>
+                                <a class="nav-link" href="{{ path('members') }}" >Membres</a>
                                 {% endif %}
                             </li>
-                            <li>
-                                <a class="nav-link" href="{{ path('inscription') }}" >Inscription</a>
-                            </li>
-                            <li>
-                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <a class="nav-link" href="{{ path('admin_index') }}" >Mon profil</a>
-                                {% else %}
-                                <a class="nav-link" href="{{ path('security_login') }}">Mon profil</a>
-                                {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('contact') }}" >Contact</a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" >Annonces</a>
-                        <ul class="submenu">
-                            <li>
-                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                                <a class="nav-link" href="{{ path('adverts_index') }}" >Publier une annonce</a>
-                                {% endif %}
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ path('announcement') }}" >Accéder aux annonces</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <a class="nav-link" href="{{ path('members') }}" >Membres</a>
-                        {% endif %}
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('contact') }}" >Contact</a>
-                    </li>
-                </ul>
-              
-            </nav>
-        </header>
-        {% endblock header %}
+                    </div>
+                </nav>
+            </header>
+            {% endblock header %}
 
-        {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-            
-        {% endblock javascripts %}
-
-        {% endblock body %}
-    </body>
+            {% endblock body %}
+        </body>
         
 </html>

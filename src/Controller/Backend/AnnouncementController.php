@@ -13,13 +13,13 @@ class AnnouncementController extends Controller
     /**
      * @Route("/announcement", name="announcement")
      */
-    public function index(Request $request, EntityManagerInterface $em)
+    public function index()
     {
-        $adverts = $this->getDoctrine()
+        return $this->render('Backend/announcement/announcement.html.twig', [
+            'adverts' => $this->getDoctrine()
             ->getRepository(Advert::class)
-            ->findAll();
-        
-
-        return $this->render('Backend/announcement/announcement.html.twig', ['adverts' => $adverts]);
+            ->findAll()
+        ]);
     }
+
 }

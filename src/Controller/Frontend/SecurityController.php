@@ -36,8 +36,8 @@ class SecurityController extends Controller
             'Frontend/login/login.html.twig',
             array(
                 'username' => $lastUsername,
-                'error'         => $error,
-                'form'  =>$formView2
+                'error'    => $error,
+                'form'     =>$formView2
             )
         );
      }

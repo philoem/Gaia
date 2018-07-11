@@ -8,12 +8,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Advert
  *
  * @ORM\Table(name="advert")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AdvertsRepository")
  */
 class Advert
 {
@@ -67,7 +68,7 @@ class Advert
     /**
      * @var string
      * @ORM\Column(name="picturesAdverts", type="string", nullable=true)
-     * 
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
      */
     private $picturesAdverts;
 
@@ -86,12 +87,19 @@ class Advert
     private $usernameMember;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="adverts", orphanRemoval=true, cascade={"persist"})
+     * @ORM\JoinColumn
+     */
+    private $comments;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->member = new ArrayCollection();
+        //$this->member = new ArrayCollection();
         $this->dateAdverts = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -243,7 +251,7 @@ class Advert
     *
     * @return  self
     */ 
-    public function setPicturesAdverts($picturesAdverts)
+    public function setPicturesAdverts($picturesAdverts = null)
     {
         $this->picturesAdverts = $picturesAdverts;
 
@@ -294,6 +302,37 @@ class Advert
     public function setUsernameMember($usernameMember)
     {
         $this->usernameMember = $usernameMember;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAdverts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAdverts() === $this) {
+                $comment->setAdverts(null);
+            }
+        }
 
         return $this;
     }
