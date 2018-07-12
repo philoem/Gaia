@@ -47,7 +47,7 @@ class AdvertsRepository extends ServiceEntityRepository
     public function findAllTown()
     {
         return $this->getEntityManager()
-            ->createQuery("SELECT a.town, a.idAdvert FROM App\Entity\Advert a")
+            ->createQuery("SELECT a.town, a.idAdvert, a.title FROM App\Entity\Advert a")
             ->getResult();
     }
     

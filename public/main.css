@@ -241,6 +241,10 @@ a.dropdown-item:hover
     overflow: hidden;
     text-overflow: ellipsis; 
 }
+.advert_title_home
+{
+    font-size: 92%;
+}
 
 /* Images, en fond d'écran, animées */ 
 #slider
