@@ -73,7 +73,7 @@
                         <ul class="list_cities">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             {% for advert in adverts %}
-                                <li><a class="nav-link" href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}">{{ advert.town }}</a></li>
+                                <li><a class="nav-link" href="{{ path('adverts_show', {'idAdvert': advert.idAdvert}) }}">{{ advert.town }} - <em class="advert_title_home">{{advert.title}}</em></a></li>
                             {% endfor %}
                             {% else %}
                                 <h5 class="col justify-content-center" id="list_cities_no_connected">Pour accéder aux dernières annonces veuillez vous <em><a href="{{ path('security_login') }}">connecter</em></a> ou vous <em><a href="{{ path('inscription') }}">inscrire</em></a></h5>
