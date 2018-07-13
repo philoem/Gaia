@@ -27,7 +27,9 @@
                     <h3>{{ advert.title }}</h3>
                     <p>{{ advert.content }}</p>
                     <p>{{ advert.price }} euros</p>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <a href="{{ path('adverts_show', {'idAdvert': advert.idAdvert} ) }}">En savoir plus...</a>
+                    {% endif %}
                 </div>
             </div>
 
