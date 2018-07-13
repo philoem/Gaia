@@ -22,7 +22,7 @@ class AdvertsType extends AbstractType
             ->add('town', TextType::class, ['label' => 'Et, la ville ici :'])
             ->add('picturesAdverts', FileType::class, [
                 'required'  => false,
-                'label'     => 'Sélectionnez une image pour votre annonce :',
+                'label'     => 'Sélectionnez une image pour votre annonce',
                 'mapped'    => false
                 ])
         ;
