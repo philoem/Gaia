@@ -531,23 +531,18 @@ i.wi
 /* Format Ipad */
 @media screen and (max-width: 987px) 
 {
-    body
-    {
-        overflow: hidden;
-    }
+    
     ul.navbar-nav
     {
         background-color: #044e43;
         margin-top: -5%;
         text-align: center;
         z-index: 1000000;
-        
     }
     #text_logo, #logo_name_text, #logo
     {
         display: none;
     }
-    
     .title_gaia_pimped
     {
         margin-top: 120%;
@@ -658,7 +653,6 @@ i.wi
 {
     body
     {
-        overflow: hidden;
         margin-bottom: 80px;
     }
     #title_homepage_pimped
