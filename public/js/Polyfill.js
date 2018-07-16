@@ -1,7 +1,7 @@
 /**
- * Polyfill pour gérer la méthode scrollTo sur tous les navigateurs du fichier portfolio.js
+ * Polyfill pour gérer la méthode ChildNode.after sur tous les navigateurs du fichier portfolio.js
  */
-//from: https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/after()/after().md
+//from: http://docs.w3cub.com/dom/childnode/after/
 (function (arr) {
     arr.forEach(function (item) {
       if (item.hasOwnProperty('after')) {
